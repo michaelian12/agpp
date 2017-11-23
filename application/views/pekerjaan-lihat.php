@@ -1,4 +1,4 @@
-<?php echo validation_errors(); ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -64,13 +64,13 @@
                         <p>Pengguna</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
@@ -134,63 +134,36 @@
                                 <h4 class="title">Data Proyek</h4>
                             </div>
                             <div class="content">
-                                <?php echo form_open('proyek-tambah'); ?>
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-9">
                                             <div class="form-group">
-                                                <label>No. SPP</label>
-                                                <input type="text" name="no_spp" class="form-control border-input" placeholder="01/SPP/NBM-AGPP/II/2017" required>
+                                                <label>Nama Pekerjaan</label>
+                                                <input type="text" name="nama_pekerjaan" class="form-control border-input" placeholder="01/SPP/NBM-AGPP/II/2017" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Nilai Kontrak (Rp.)</label>
-                                                <input type="text" name="nilai_kontrak" class="form-control border-input" placeholder="10.000.000" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Nama Proyek</label>
-                                                <input type="text" name="nama_proyek" class="form-control border-input" placeholder="Showroom Mitsubishi Medan" required>
+                                                <label>Bobot</label>
+                                                <input type="number" name="bobot" step="0.01" class="form-control border-input" placeholder="0,14" required>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Nama Klien</label>
-                                                <input type="text" name="nama_klien" class="form-control border-input" placeholder="PT. Nusantara Berlian Motor" required>
-                                            </div>
+                                        <div class="col-md-2">
+                                            
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tgl. Mulai</label>
-                                                <input type="date" name="tgl_mulai" class="form-control border-input" placeholder="15 Februari 2017" id="tgl_mulai" required>
-                                            </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tgl. Selesai</label>
-                                                <input type="date" name="tgl_selesai" class="form-control border-input" placeholder="30 Juli 2017" id="tgl_selesai" required>
-                                            </div>
+                                        <div class="col-md-4">
+                                            <button type="button" onclick="goBack()" class="btn btn-default btn-block btn-wd">Batal</button>
                                         </div>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
                                     </div>
 
                                     <div class="clearfix"></div>
                                 </form>
-                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -223,7 +196,7 @@
         });
     </script> -->
 
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function() {
             $("#tgl_mulai").datepicker();
             $("#tgl_selesai").datepicker();
@@ -238,15 +211,12 @@
                 }
             });
         });
-    </script> -->
+    </script>
     
+    <!--  Back Function  -->
     <script type="text/javascript">
-        if ( $('#tgl_mulai')[0].type != 'date' ) {
-            $('#tgl_mulai').datepicker();
-        }
-
-        if ( $('#tgl_selesai')[0].type != 'date' ) {
-            $('#tgl_selesai').datepicker();
+        function goBack() {
+            window.history.back();
         }
     </script>
 

@@ -28,6 +28,9 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url(); ?>/assets/css/themify-icons.css" rel="stylesheet">
+    
+    <!--  JavaScript  -->
+    <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
 </head>
 <body>

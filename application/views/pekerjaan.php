@@ -1,4 +1,3 @@
-<?php echo validation_errors(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,7 +28,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url(); ?>/assets/css/themify-icons.css" rel="stylesheet">
-    
+
     <!--  JavaScript  -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
@@ -64,14 +63,14 @@
                         <p>Pengguna</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
-                <li>
-                    <a href="pekerjaan">
+                <li class="active">
+                    <a href="#">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
                     </a>
@@ -108,14 +107,14 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="proyek">Proyek</a>
+                    <a class="navbar-brand" href="#">Pekerjaan</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-						<li>
+                        <li>
                             <a href="#">
-								<i class="ti-power-off"></i>
-								<p>Keluar</p>
+                                <i class="ti-power-off"></i>
+                                <p>Keluar</p>
                             </a>
                         </li>
                     </ul>
@@ -126,80 +125,57 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Data Proyek</h4>
+                                <h4 class="title">Proyek</h4>
+                                <p class="category">Pilih proyek untuk menampilkan daftar pekerjaan pada proyek</p>
                             </div>
                             <div class="content">
-                                <?php echo form_open('proyek-tambah'); ?>
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>No. SPP</label>
-                                                <input type="text" name="no_spp" class="form-control border-input" placeholder="01/SPP/NBM-AGPP/II/2017" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nilai Kontrak (Rp.)</label>
-                                                <input type="text" name="nilai_kontrak" class="form-control border-input" placeholder="10.000.000" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Nama Proyek</label>
-                                                <input type="text" name="nama_proyek" class="form-control border-input" placeholder="Showroom Mitsubishi Medan" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Nama Klien</label>
-                                                <input type="text" name="nama_klien" class="form-control border-input" placeholder="PT. Nusantara Berlian Motor" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tgl. Mulai</label>
-                                                <input type="date" name="tgl_mulai" class="form-control border-input" placeholder="15 Februari 2017" id="tgl_mulai" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tgl. Selesai</label>
-                                                <input type="date" name="tgl_selesai" class="form-control border-input" placeholder="30 Juli 2017" id="tgl_selesai" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-                                </form>
-                                <?php echo form_close(); ?>
+                                <select name="proyek" class="form-control border-input" id="proyek">
+                                    <option disabled selected> -- Pilih Proyek -- </option>
+                                    <?php 
+                                        foreach ($proyek as $proyek_item) { ?>
+                                            <option value="<?php echo $proyek_item['id_proyek']; ?>"><?php echo $proyek_item['nama_proyek']; ?></option>
+                                        <?php }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <h4 class="title">Daftar Pekerjaan</h4>
+                                        <p class="category">Kelola data pekerjaan pada proyek</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="pekerjaan-tambah" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Pekerjaan</a>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
 
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-striped" id="pekerjaan">
+                                    <thead>
+                                        <th>Nama Pekerjaan</th>
+                                    	<th>Bobot</th>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
 
         <footer class="footer">
             <div class="container-fluid">
@@ -212,42 +188,30 @@
     </div>
 </div>
 
-
 </body>
 
-    <!-- <script type="text/javascript">
-        $(function () {
-            $('#tgl_mulai').datepicker({
-                locale: 'id'
-            });
-        });
-    </script> -->
-
-    <!-- <script type="text/javascript">
-        $(document).ready(function() {
-            $("#tgl_mulai").datepicker();
-            $("#tgl_selesai").datepicker();
-            $("button").click(function() {
-                var selected = $("#dropdown option:selected").text();
-                var tgl_mulai = $("#tgl_mulai").val();
-                var tgl_selesai = $("#tgl_selesai").val();
-                if (tgl_mulai === "" || tgl_selesai === "") {
-                    alert("Please select tgl_mulai and tgl_selesai dates.");
-                } else {
-                    confirm("Would you like to go to " + selected + " on " + tgl_mulai + " and return on " + tgl_selesai + "?");
+    <!--  AJAX Table Dependent  -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#proyek").change(function () {
+                var id_proyek = $(this).val();
+                if (id_proyek !== null || id_proyek !== "") {
+                    $.ajax({
+                        url: "<?php echo base_url() ?>pekerjaan/get_pekerjaan",
+                        type: "POST",
+                        data: {'id_proyek' : id_proyek},
+                        dataType: 'json',
+                        success: function(data){
+                            $('#pekerjaan tbody').empty();
+                            $('#pekerjaan tbody').append(data);
+                        },
+                        error: function(){
+                            console.log('error');
+                        }
+                    });
                 }
             });
         });
-    </script> -->
-    
-    <script type="text/javascript">
-        if ( $('#tgl_mulai')[0].type != 'date' ) {
-            $('#tgl_mulai').datepicker();
-        }
-
-        if ( $('#tgl_selesai')[0].type != 'date' ) {
-            $('#tgl_selesai').datepicker();
-        }
     </script>
 
     <!--   Core JS Files   -->
@@ -271,5 +235,6 @@
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="<?php echo base_url(); ?>/assets/js/demo.js"></script>
+
 
 </html>

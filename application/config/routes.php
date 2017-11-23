@@ -60,6 +60,11 @@ $route['proyek-tambah'] = 'proyek/tambah';
 $route['proyek-lihat/(:any)'] = 'proyek/ubah/$1';
 $route['proyek-hapus/(:any)'] = 'proyek/hapus/$1';
 
+$route['pekerjaan'] = 'pekerjaan';
+$route['pekerjaan-tambah'] = 'pekerjaan/tambah';
+$route['pekerjaan-lihat/(:any)'] = 'pekerjaan/ubah/$1';
+$route['pekerjaan-hapus/(:any)'] = 'pekerjaan/hapus/$1';
+
 $route['default_controller'] = 'welcome';
 $route['(:any)'] = 'welcome/index/$1';
 

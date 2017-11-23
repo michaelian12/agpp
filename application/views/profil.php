@@ -28,6 +28,9 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url(); ?>/assets/css/themify-icons.css" rel="stylesheet">
+    
+    <!--  JavaScript  -->
+    <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -64,6 +67,12 @@
                     <a href="proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="pekerjaan">
+                        <i class="ti-list"></i>
+                        <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
@@ -116,10 +125,10 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-2">
+                    <div class="col-md-2">
                         
                     </div>
-                    <div class="col-lg-8 col-md-8">
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Data Profil</h4>

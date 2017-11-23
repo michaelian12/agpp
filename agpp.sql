@@ -14,16 +14,26 @@ create table pengguna
 	status enum('Aktif', 'Nonaktif')
 );
 
+insert into pengguna values
+(1, 'Budianto Azis', 'Direktur', 'budianto.azis@agpp.com', 'agpp', 'Aktif'),
+(2, 'Agus Permana', 'Manajer Proyek', 'agus.permana@agpp.com', 'agpp', 'Aktif'),
+(3, 'Agus Purnama', 'Site Manager', 'agus.purnama@agpp.com', 'agpp', 'Aktif');
+
 create table proyek
 (
 	id_proyek int primary key unique auto_increment,
 	no_spp varchar(50),
 	nama_proyek varchar(100),
 	nama_klien varchar(100),
-	nilai_kontrak int,
+	nilai_kontrak bigint,
 	tgl_mulai date,
 	tgl_selesai date
 );
+
+insert into proyek values
+(1, '01/SPP/AGPP-NM/V/2010', 'Pelaksanaan Bangunan Mazda Showroom di Jl. Suryopranoto, Jakarta', 'PT. Nusantara Mazda', '6500000000', '2010-05-19', '2010-12-19'),
+(2, '01/SPP/EGC-AGPP/PORSCHE/III/2014', 'Pelaksanaan Pekerjaan Struktur, Arsitektur, dan Mechanical Electrical Porsche Centre Jakarta', 'PT. Eurokars Artha Utama', '32670000000', '2014-03-26', '2015-03-25'),
+(3, '01/SPP/NBM-AGPP/MITSUBISHI/II/2017', 'Pelaksanaan Pekerjaan Showroom, Service Reception, Service Bay, Service Store, Car Wash and Exterior', 'PT. Nusantara Berlian Motor', '10780000000', '2017-02-15', '2017-07-30');
 
 create table risiko
 (

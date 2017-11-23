@@ -28,6 +28,9 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url(); ?>/assets/css/themify-icons.css" rel="stylesheet">
+    
+    <!--  JavaScript  -->
+    <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -64,6 +67,12 @@
                     <a href="proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="pekerjaan">
+                        <i class="ti-list"></i>
+                        <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li class="active">
@@ -118,19 +127,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="content">
-                                <a href="risiko-tambah" class="btn btn-info btn-fill btn-wd">+ Risiko</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
                             <div class="header">
-                                <h4 class="title">Daftar Risiko</h4>
-                                <p class="category">Kelola data proyek</p>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <h4 class="title">Daftar Risiko</h4>
+                                        <p class="category">Kelola data risiko</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <a href="risiko-tambah" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Risiko</a>
+                                    </div>
+                                </div>
+                                <br>
                             </div>
 
                             <div class="content table-responsive table-full-width">

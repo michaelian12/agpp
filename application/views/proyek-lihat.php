@@ -29,6 +29,9 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url(); ?>/assets/css/themify-icons.css" rel="stylesheet">
+    
+    <!--  JavaScript  -->
+    <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -65,6 +68,12 @@
                     <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="../pekerjaan">
+                        <i class="ti-list"></i>
+                        <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
@@ -117,9 +126,9 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-2">
+                    <div class="col-md-2">
                     </div>
-                    <div class="col-lg-8 col-md-8">
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Data Proyek</h4>
@@ -181,14 +190,11 @@
                                         <div class="col-md-2">
                                             
                                         </div>
-                                        <div class="col-md-3">
-                                            <button type="submit" class="btn btn-info btn-fill btn-wd">Perbaharui</button>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
                                         </div>
-                                        <div class="col-md-2">
-                                            
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-default btn-block btn-wd">Batal</button>
+                                        <div class="col-md-4">
+                                            <button type="button" onclick="goBack()" class="btn btn-default btn-block btn-wd">Batal</button>
                                         </div>
                                     </div>
                                     
@@ -218,7 +224,14 @@
 
 
 </body>
-
+    
+    <!--  Back Function  -->
+    <script type="text/javascript">
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
