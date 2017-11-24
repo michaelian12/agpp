@@ -77,6 +77,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="identifikasi-risiko">
+                        <i class="ti-search"></i>
+                        <p>Identifikasi Risiko</p>
+                    </a>
+                </li>
+                <li>
                     <a href="risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
@@ -136,14 +142,13 @@
                                         <h4 class="title">Data Pekerjaan</h4>
                                     </div>
                                     <div class="col-md-3">
-                                        <!-- <a href="pekerjaan-tambah" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Entri</a> -->
                                         <button type="button" class="btn btn-default btn-wd" style="float: right;" id="tambah_entri">+ Entri</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="content">
                                 <?php echo form_open('pekerjaan-tambah'); ?>
-                                <form>
+                                <form name="tambah_pekerjaan" id="tambah_pekerjaan">
                                     <div class="content table-responsive table-full-width">
                                         <table class="table table-striped" id="dynamic_field">
                                             <col width="65%">
@@ -155,34 +160,13 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="nama_pekerjaan" class="form-control border-input" placeholder="Land Scrapping" required></td>
-                                                    <td><input type="number" name="bobot" step="0.001" class="form-control border-input" placeholder="0,014" required></td>
+                                                    <td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td>
+                                                    <td><input type="number" name="bobot[]" step="0.001" class="form-control border-input" placeholder="0,014" required></td>
                                                     <td></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                
-                                    <!-- <div class="row" id="entri">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nama Pekerjaan</label>
-                                                <input type="text" name="nama_pekerjaan" class="form-control border-input" placeholder="Land Scrapping" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Bobot</label>
-                                                <input type="number" name="bobot" step="0.001" class="form-control border-input" placeholder="0,014" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>as</label>
-                                                <button type="button" class="btn btn-info btn-fill btn-wd">Tambah</button>
-                                            </div>
-                                        </div>
-                                    </div> -->
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
@@ -215,26 +199,22 @@
 
 </body>    
 
+    <!--  Dynamic Dependent Table  -->
     <script type="text/javascript">
         $(document).ready(function(){
             var i = 1;
             $('#tambah_entri').click(function(){
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="nama_pekerjaan" class="form-control border-input" placeholder="Land Scrapping" required></td><td><input type="number" name="bobot" step="0.001" class="form-control border-input" placeholder="0,014" required></td><td><a type="button" id="'+i+'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td><td><input type="number" name="bobot[]" step="0.001" class="form-control border-input" placeholder="0,014" required></td><td><a type="button" id="'+i+'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>');
             });
 
             $(document).on('click', '.btn_remove', function(){
                 var button_id = $(this).attr("id");
                 $('#row'+button_id+'').remove();
             });
-
-            // $('#tambah_entri').click(function(){
-            //     $('#entri').append('<div class="row"><div class="col-md-6"><div class="form-group"><input type="text" name="nama_pekerjaan" class="form-control border-input" placeholder="Land Scrapping" required></div></div><div class="col-md-3"><div class="form-group"><input type="number" name="bobot" step="0.001" class="form-control border-input" placeholder="0,014" required></div></div><div class="col-md-3"><div class="form-group"><button type="button" class="btn btn-info btn-fill btn-wd" id="hapus_entri">-</button></div></div></div>');
-            // });
-
-            
         });
     </script>
+
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>

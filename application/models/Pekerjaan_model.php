@@ -24,31 +24,33 @@ class Pekerjaan_model extends CI_Model {
 		return $query->row_array();
 	}
 
-	public function set_pengguna()
+	public function set_pekerjaan()
 	{
-		$data =  array(
-			'nama_pengguna' => $this->input->post('nama_pengguna'),
-			'jabatan' => $this->input->post('jabatan'),
-			'email' => $this->input->post('email'),
-			'kata_sandi' => $this->input->post('kata_sandi'),
-			'status' => $this->input->post('status')
-		);
+		$nama_pekerjaan = $this->input->post('nama_pekerjaan');
+		$bobot = $this->input->post('bobot');
+		// $data = array();
 
-		return $this->db->insert('pengguna', $data);
+		for ($i = 0; $i < count($this->input->post('nama_pekerjaan')); $i++) { 
+			$data =  array(
+				'nama_pekerjaan' => $nama_pekerjaan[$i],
+				'bobot' => $bobot[$i],
+				'id_proyek' => '3'
+			);
+			$this->db->insert('pekerjaan', $data);
+		}
+
+		// return $this->db->insert('pekerjaan', $data);
 	}
 
-	public function update_pengguna($id)
+	public function update_pekerjaan($id)
 	{
 		$data =  array(
-			'nama_pengguna' => $this->input->post('nama_pengguna'),
-			'jabatan' => $this->input->post('jabatan'),
-			'email' => $this->input->post('email'),
-			'kata_sandi' => $this->input->post('kata_sandi'),
-			'status' => $this->input->post('status')
+			'nama_pekerjaan' => $this->input->post('nama_pekerjaan'),
+			'bobot' => $this->input->post('bobot')
 		);
 
-		$this->db->where('id_pengguna', $id);
-		return $this->db->update('pengguna', $data);
+		$this->db->where('id_pekerjaan', $id);
+		return $this->db->update('pekerjaan', $data);
 	}
 
 	public function delete_pekerjaan($id)

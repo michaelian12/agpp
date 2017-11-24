@@ -35,12 +35,8 @@ class Pekerjaan extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		// $this->form_validation->set_rules('no_spp', 'No. SPP', 'required');
-		// $this->form_validation->set_rules('nilai_kontrak', 'Nilai Kontrak', 'required');
-		// $this->form_validation->set_rules('nama_proyek', 'Nama Proyek', 'required');
-		// $this->form_validation->set_rules('nama_klien', 'Nama Klien', 'required');
-		// $this->form_validation->set_rules('tgl_mulai', 'Tanggal Mulai', 'required');
-		// $this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai', 'required');
+		$this->form_validation->set_rules('nama_pekerjaan[]', 'Nama Pekerjaan', 'required');
+		$this->form_validation->set_rules('bobot[]', 'Bobot', 'required');
 
 	
 		if ($this->form_validation->run() === FALSE)
@@ -52,28 +48,24 @@ class Pekerjaan extends CI_Controller {
 		}		
 	}
 
-	// public function ubah($id)
-	// {
-	// 	$this->load->helper('form');
-	// 	$this->load->library('form_validation');
+	public function ubah($id)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 
-	// 	$this->form_validation->set_rules('no_spp', 'No. SPP', 'required');
-	// 	$this->form_validation->set_rules('nilai_kontrak', 'Nilai Kontrak', 'required');
-	// 	$this->form_validation->set_rules('nama_proyek', 'Nama Proyek', 'required');
-	// 	$this->form_validation->set_rules('nama_klien', 'Nama Klien', 'required');
-	// 	$this->form_validation->set_rules('tgl_mulai', 'Tanggal Mulai', 'required');
-	// 	$this->form_validation->set_rules('tgl_selesai', 'Tanggal Selesai', 'required');
+		$this->form_validation->set_rules('nama_pekerjaan', 'Nama Pekerjaan', 'required');
+		$this->form_validation->set_rules('bobot', 'Bobot', 'required');
 
 	
-	// 	if ($this->form_validation->run() === FALSE)
-	// 	{
-	// 		$data['proyek_item'] = $this->proyek_model->get_proyek($id);
-	// 		$this->load->view('proyek-lihat', $data);
-	// 	} else {
-	// 		$this->proyek_model->update_proyek($id);
-	// 		redirect('proyek');	
-	// 	}		
-	// }
+		if ($this->form_validation->run() === FALSE)
+		{
+			$data['pekerjaan_item'] = $this->pekerjaan_model->get_pekerjaan($id);
+			$this->load->view('pekerjaan-lihat', $data);
+		} else {
+			$this->pekerjaan_model->update_pekerjaan($id);
+			redirect('pekerjaan');	
+		}		
+	}
 
 	public function hapus($id)
 	{

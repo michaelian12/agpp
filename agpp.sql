@@ -48,7 +48,7 @@ create table risiko
 
 create table pekerjaan
 (
-	id_pekerjaan int primary key unique,
+	id_pekerjaan int primary key unique auto_increment,
 	nama_pekerjaan varchar(100),
 	bobot float,
 	id_proyek int,

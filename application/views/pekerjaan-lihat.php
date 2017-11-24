@@ -1,4 +1,4 @@
-
+<?php echo validation_errors(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -77,6 +77,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="identifikasi-risiko">
+                        <i class="ti-search"></i>
+                        <p>Identifikasi Risiko</p>
+                    </a>
+                </li>
+                <li>
                     <a href="risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
@@ -134,18 +140,19 @@
                                 <h4 class="title">Data Proyek</h4>
                             </div>
                             <div class="content">
+                                <?php echo form_open('pekerjaan-lihat/'.$pekerjaan_item['id_pekerjaan']); ?>
                                 <form>
                                     <div class="row">
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <label>Nama Pekerjaan</label>
-                                                <input type="text" name="nama_pekerjaan" class="form-control border-input" placeholder="01/SPP/NBM-AGPP/II/2017" required>
+                                                <input type="text" name="nama_pekerjaan" class="form-control border-input" placeholder="Land Scrapping" value="<?php echo $pekerjaan_item['nama_pekerjaan']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Bobot</label>
-                                                <input type="number" name="bobot" step="0.01" class="form-control border-input" placeholder="0,14" required>
+                                                <input type="number" name="bobot" step="0.001" class="form-control border-input" placeholder="0,014" value="<?php echo $pekerjaan_item['bobot']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -164,6 +171,7 @@
 
                                     <div class="clearfix"></div>
                                 </form>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -187,31 +195,6 @@
 
 
 </body>
-
-    <!-- <script type="text/javascript">
-        $(function () {
-            $('#tgl_mulai').datepicker({
-                locale: 'id'
-            });
-        });
-    </script> -->
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#tgl_mulai").datepicker();
-            $("#tgl_selesai").datepicker();
-            $("button").click(function() {
-                var selected = $("#dropdown option:selected").text();
-                var tgl_mulai = $("#tgl_mulai").val();
-                var tgl_selesai = $("#tgl_selesai").val();
-                if (tgl_mulai === "" || tgl_selesai === "") {
-                    alert("Please select tgl_mulai and tgl_selesai dates.");
-                } else {
-                    confirm("Would you like to go to " + selected + " on " + tgl_mulai + " and return on " + tgl_selesai + "?");
-                }
-            });
-        });
-    </script>
     
     <!--  Back Function  -->
     <script type="text/javascript">

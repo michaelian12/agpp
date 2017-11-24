@@ -76,6 +76,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="identifikasi-risiko">
+                        <i class="ti-search"></i>
+                        <p>Identifikasi Risiko</p>
+                    </a>
+                </li>
+                <li>
                     <a href="risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>

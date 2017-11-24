@@ -75,6 +75,12 @@
                         <p>Pekerjaan</p>
                     </a>
                 </li>
+                <li>
+                    <a href="identifikasi-risiko">
+                        <i class="ti-search"></i>
+                        <p>Identifikasi Risiko</p>
+                    </a>
+                </li>
                 <li class="active">
                     <a href="#">
                         <i class="ti-alert"></i>

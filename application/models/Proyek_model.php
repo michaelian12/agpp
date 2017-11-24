@@ -27,7 +27,7 @@ class Proyek_model extends CI_Model {
 			'tgl_mulai' => $this->input->post('tgl_mulai'),
 			'tgl_selesai' => $this->input->post('tgl_selesai')
 		);
-
+		
 		return $this->db->insert('proyek', $data);
 	}
 
