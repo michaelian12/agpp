@@ -6,10 +6,15 @@ class Pekerjaan_model extends CI_Model {
 		$this->load->database();
 	}
 
-	public function get_proyek()
+	public function get_proyek($id = FALSE)
 	{
-		$query = $this->db->get('proyek');
-		return $query->result_array();
+		if ($id === FALSE) {
+			$query = $this->db->get('proyek');
+			return $query->result_array();
+		} else {
+			$query = $this->db->get_where('proyek', array('id_proyek' => $id));
+			return $query->row_array();
+		}
 	}
 
 	public function get_pekerjaan_query($id)
@@ -28,12 +33,13 @@ class Pekerjaan_model extends CI_Model {
 	{
 		$nama_pekerjaan = $this->input->post('nama_pekerjaan');
 		$bobot = $this->input->post('bobot');
+		$id_proyek = $this->input->post('id_proyek');
 
 		for ($i = 0; $i < count($this->input->post('nama_pekerjaan')); $i++) { 
 			$data =  array(
 				'nama_pekerjaan' => $nama_pekerjaan[$i],
 				'bobot' => $bobot[$i],
-				'id_proyek' => '3'
+				'id_proyek' => $id_proyek
 			);
 			$this->db->insert('pekerjaan', $data);
 		}

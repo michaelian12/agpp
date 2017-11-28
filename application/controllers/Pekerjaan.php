@@ -24,13 +24,13 @@ class Pekerjaan extends CI_Controller {
 		if (count($pekerjaan) > 0) {
 			$table_row = '';
 			foreach ($pekerjaan as $pekerjaan_item) {
-				$table_row .= '<tr><td>'.$pekerjaan_item["nama_pekerjaan"].'</td><td>'.$pekerjaan_item["bobot"].'</td><td><a href="pekerjaan-lihat/'.$pekerjaan_item["id_pekerjaan"].'"><i class="ti-eye"></i></a></td><td><a href="pekerjaan-hapus/'.$pekerjaan_item["id_pekerjaan"].'"><i class="ti-trash"></i></a></td></tr>';
+				$table_row .= '<tr><td>'.$pekerjaan_item["nama_pekerjaan"].'</td><td>'.$pekerjaan_item["bobot"].'</td><td><a href="pekerjaan-lihat/'.$pekerjaan_item["id_pekerjaan"].'"><i class="ti-eye"></i></a></td><td><a href="pekerjaan-hapus/'.$pekerjaan_item["id_pekerjaan"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
 			}
 			echo json_encode($table_row);
 		}
 	}
 
-	public function tambah()
+	public function tambah($id)
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -41,7 +41,8 @@ class Pekerjaan extends CI_Controller {
 	
 		if ($this->form_validation->run() === FALSE)
 		{
-			$this->load->view('pekerjaan-tambah');
+			$data['proyek_item'] = $this->pekerjaan_model->get_proyek($id);
+			$this->load->view('pekerjaan-tambah', $data);
 		} else {
 			$this->pekerjaan_model->set_pekerjaan();
 			redirect('pekerjaan');
@@ -63,7 +64,7 @@ class Pekerjaan extends CI_Controller {
 			$this->load->view('pekerjaan-lihat', $data);
 		} else {
 			$this->pekerjaan_model->update_pekerjaan($id);
-			redirect('pekerjaan');	
+			redirect('pekerjaan');
 		}		
 	}
 

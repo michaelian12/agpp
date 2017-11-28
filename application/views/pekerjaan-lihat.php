@@ -53,43 +53,43 @@
 
             <ul class="nav">
                 <li>
-                    <a href="profil">
+                    <a href="../profil">
                         <i class="ti-user"></i>
                         <p>Profil</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengguna">
+                    <a href="../pengguna">
                         <i class="ti-id-badge"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
                 <li>
-                    <a href="proyek">
+                    <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="pekerjaan">
+                    <a href="../pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="identifikasi-risiko">
+                    <a href="../identifikasi-risiko">
                         <i class="ti-search"></i>
                         <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="risiko">
+                    <a href="../risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="mitigasi">
+                    <a href="../mitigasi">
                         <i class="ti-shield"></i>
                         <p>Mitigasi</p>
                     </a>
@@ -152,7 +152,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Bobot</label>
-                                                <input type="number" name="bobot" step="0.001" class="form-control border-input" placeholder="0,014" value="<?php echo $pekerjaan_item['bobot']; ?>" required>
+                                                <input type="number" name="bobot" step="0.001" min="0" max="1" class="form-control border-input" placeholder="0,014" value="<?php echo $pekerjaan_item['bobot']; ?>" required>
                                             </div>
                                         </div>
                                     </div>

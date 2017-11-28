@@ -156,7 +156,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Lengkap</label>
-                                                <input type="text" pattern="[A-Za-z]" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $pengguna_item['nama_pengguna']; ?>" required>
+                                                <input type="text" pattern="[A-Za-z]{1,}" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $pengguna_item['nama_pengguna']; ?>" required>
                                             </div>
                                         </div>
                                     </div>

@@ -42,7 +42,6 @@ class Pengguna extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('kata_sandi', 'Kata Sandi', 'required');
 		$this->form_validation->set_rules('nama_pengguna', 'Nama Lengkap', 'required');
 
 	

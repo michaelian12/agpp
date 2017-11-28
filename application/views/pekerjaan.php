@@ -161,7 +161,7 @@
                                         <p class="category">Kelola data pekerjaan pada proyek</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <a href="pekerjaan-tambah" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Pekerjaan</a>
+                                        <a id="tambah_pekerjaan" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Pekerjaan</a>
                                     </div>
                                 </div>
                                 <br>
@@ -196,11 +196,32 @@
 
 </body>
 
+    <!--  Check if project has been selected  -->
+    <script type="text/javascript">
+        $('#tambah_pekerjaan').click(function(){
+            if ($(this).attr('href') === undefined) {
+                $.notify({
+                    icon: 'ti-info-alt',
+                    message: "Pilih proyek untuk melanjutkan"
+
+                },{
+                    type: 'warning',
+                    timer: 200
+                });
+
+                return false;
+            }
+        });
+    </script>
+
     <!--  AJAX Table Dependent  -->
     <script type="text/javascript">
         $(document).ready(function () {
             $("#proyek").change(function () {
+                // clear table
                 $('#pekerjaan tbody').empty();
+
+                // get jobs data
                 var id_proyek = $(this).val();
                 if (id_proyek !== null || id_proyek !== "") {
                     $.ajax({
@@ -216,6 +237,12 @@
                         }
                     });
                 }
+
+                // set href link
+                var original_link = "pekerjaan-tambah";
+                $('#tambah_pekerjaan').attr('href', original_link);                
+                var new_href = $('#tambah_pekerjaan').attr('href') + '/' + id_proyek;
+                $('#tambah_pekerjaan').attr('href', new_href);
             });
         });
     </script>

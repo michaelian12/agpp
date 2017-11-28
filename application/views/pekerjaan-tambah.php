@@ -53,49 +53,49 @@
 
             <ul class="nav">
                 <li>
-                    <a href="profil">
+                    <a href="../profil">
                         <i class="ti-user"></i>
                         <p>Profil</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengguna">
+                    <a href="../pengguna">
                         <i class="ti-id-badge"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
                 <li>
-                    <a href="proyek">
+                    <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="pekerjaan">
+                    <a href="../pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="identifikasi-risiko">
+                    <a href="../identifikasi-risiko">
                         <i class="ti-search"></i>
                         <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="risiko">
+                    <a href="../risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="mitigasi">
+                    <a href="../mitigasi">
                         <i class="ti-shield"></i>
                         <p>Mitigasi</p>
                     </a>
                 </li>
                 <li>
-                    <a href="laporan">
+                    <a href="../laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
@@ -137,6 +137,37 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
+                                <h4 class="title">Proyek</h4>
+                            </div>
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>No.SPP</label>
+                                            <input type="text" name="nama_proyek" class="form-control border-input" value="<?php echo $proyek_item['no_spp']; ?>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Nama Proyek</label>
+                                            <input type="text" name="nama_proyek" class="form-control border-input" value="<?php echo $proyek_item['nama_proyek']; ?>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h4 class="title">Data Pekerjaan</h4>
@@ -147,8 +178,9 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <?php echo form_open('pekerjaan-tambah'); ?>
+                                <?php echo form_open('pekerjaan-tambah/'.$proyek_item['id_proyek']); ?>
                                 <form name="tambah_pekerjaan" id="tambah_pekerjaan">
+                                    <input type='hidden' name='id_proyek' value='<?php echo $proyek_item['id_proyek']; ?>'/>
                                     <div class="content table-responsive table-full-width">
                                         <table class="table table-striped" id="dynamic_field">
                                             <col width="65%">
@@ -161,7 +193,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td>
-                                                    <td><input type="number" name="bobot[]" step="0.001" class="form-control border-input" placeholder="0,014" required></td>
+                                                    <td><input type="number" name="bobot[]" step="0.001" min="0" max="1" class="form-control border-input" placeholder="0,014" required></td>
                                                     <td></td>
                                                 </tr>
                                             </tbody>
@@ -205,7 +237,7 @@
             var i = 1;
             $('#tambah_entri').click(function(){
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td><td><input type="number" name="bobot[]" step="0.001" class="form-control border-input" placeholder="0,014" required></td><td><a type="button" id="'+i+'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td><td><input type="number" name="bobot[]" step="0.001" min="0" max="1" class="form-control border-input" placeholder="0,014" required></td><td><a type="button" id="'+i+'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>');
             });
 
             $(document).on('click', '.btn_remove', function(){
