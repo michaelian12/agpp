@@ -200,6 +200,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#proyek").change(function () {
+                $('#pekerjaan tbody').empty();
                 var id_proyek = $(this).val();
                 if (id_proyek !== null || id_proyek !== "") {
                     $.ajax({
@@ -208,7 +209,6 @@
                         data: {'id_proyek' : id_proyek},
                         dataType: 'json',
                         success: function(data){
-                            $('#pekerjaan tbody').empty();
                             $('#pekerjaan tbody').append(data);
                         },
                         error: function(){

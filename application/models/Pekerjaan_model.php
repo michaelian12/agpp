@@ -28,7 +28,6 @@ class Pekerjaan_model extends CI_Model {
 	{
 		$nama_pekerjaan = $this->input->post('nama_pekerjaan');
 		$bobot = $this->input->post('bobot');
-		// $data = array();
 
 		for ($i = 0; $i < count($this->input->post('nama_pekerjaan')); $i++) { 
 			$data =  array(
@@ -38,8 +37,6 @@ class Pekerjaan_model extends CI_Model {
 			);
 			$this->db->insert('pekerjaan', $data);
 		}
-
-		// return $this->db->insert('pekerjaan', $data);
 	}
 
 	public function update_pekerjaan($id)

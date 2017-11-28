@@ -12,9 +12,11 @@
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
     <!-- Bootstrap core CSS     -->
     <link href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--  JQuery UI CSS  -->
+    <link href="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
     <link href="<?php echo base_url(); ?>/assets/css/animate.min.css" rel="stylesheet"/>
@@ -32,6 +34,15 @@
     
     <!--  JavaScript  -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    
+    <!--  Hide Input Number Spin Button   -->
+    <style type="text/css">
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
 
 </head>
 <body>
@@ -152,7 +163,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nilai Kontrak (Rp.)</label>
-                                                <input type="text" name="nilai_kontrak" class="form-control border-input" placeholder="10.000.000" required>
+                                                <input type="number" min="0" pattern="[0-9]" name="nilai_kontrak" id="nilai_kontrak" class="form-control border-input" placeholder="10.000.000" required>
                                             </div>
                                         </div>
                                     </div>
@@ -179,13 +190,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Tgl. Mulai</label>
-                                                <input type="date" name="tgl_mulai" class="form-control border-input" placeholder="15 Februari 2017" id="tgl_mulai" required>
+                                                <input type="text" id="tgl_mulai" name="tgl_mulai" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Tgl. Selesai</label>
-                                                <input type="date" name="tgl_selesai" class="form-control border-input" placeholder="30 Juli 2017" id="tgl_selesai" required>
+                                                <input type="text" id="tgl_selesai" name="tgl_selesai" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required>
                                             </div>
                                         </div>
                                     </div>
@@ -221,44 +232,61 @@
 
 </body>
 
-    <!-- <script type="text/javascript">
-        $(function () {
-            $('#tgl_mulai').datepicker({
-                locale: 'id'
-            });
-        });
-    </script> -->
+    <!--  Date Validation  -->
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-    <!-- <script type="text/javascript">
-        $(document).ready(function() {
-            $("#tgl_mulai").datepicker();
-            $("#tgl_selesai").datepicker();
-            $("button").click(function() {
-                var selected = $("#dropdown option:selected").text();
-                var tgl_mulai = $("#tgl_mulai").val();
-                var tgl_selesai = $("#tgl_selesai").val();
-                if (tgl_mulai === "" || tgl_selesai === "") {
-                    alert("Please select tgl_mulai and tgl_selesai dates.");
-                } else {
-                    confirm("Would you like to go to " + selected + " on " + tgl_mulai + " and return on " + tgl_selesai + "?");
+            $("#tgl_mulai").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat : 'yy-mm-dd',
+                minDate: 0,
+                onSelect: function (date) {
+                    var dt2 = $('#tgl_selesai');
+                    var startDate = $(this).datepicker('getDate');
+                    var minDate = $(this).datepicker('getDate');
+                    dt2.datepicker('option', 'minDate', minDate);
                 }
             });
-        });
-    </script> -->
-    
-    <script type="text/javascript">
-        if ( $('#tgl_mulai')[0].type != 'date' ) {
-            $('#tgl_mulai').datepicker();
-        }
-
-        if ( $('#tgl_selesai')[0].type != 'date' ) {
-            $('#tgl_selesai').datepicker();
-        }
+            $('#tgl_selesai').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat : 'yy-mm-dd'
+            });
+        });        
     </script>
+
+    <!--  Number Validation Format  -->
+    <!-- <script type="text/javascript">
+        // Select your input element.
+        var number = document.getElementById('nilai_kontrak');
+
+        number.onkeydown = function(e) {
+            if(!((e.keyCode > 95 && e.keyCode < 106)
+              || (e.keyCode > 47 && e.keyCode < 58) 
+              || e.keyCode == 8)) {
+                demo.initChartist();
+
+                $.notify({
+                    icon: 'ti-info-alt',
+                    message: "Please match the requested format."
+
+                },{
+                    type: 'warning',
+                    timer: 4000
+                });
+
+                return false;
+            }
+            
+        }
+    </script> -->
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/external/jquery/jquery.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap-checkbox-radio.js"></script>

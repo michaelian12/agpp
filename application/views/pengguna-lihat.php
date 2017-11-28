@@ -144,16 +144,10 @@
                                 <?php echo form_open('pengguna-lihat/'.$pengguna_item['id_pengguna']); ?>
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email</label>
                                                 <input type="email" name="email" class="form-control border-input" placeholder="username@email.com" value="<?php echo $pengguna_item['email']; ?>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Kata Sandi</label>
-                                                <input type="password" name="kata_sandi" class="form-control border-input" placeholder="********" value="<?php echo $pengguna_item['kata_sandi']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -162,7 +156,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Lengkap</label>
-                                                <input type="text" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $pengguna_item['nama_pengguna']; ?>" required>
+                                                <input type="text" pattern="[A-Za-z]" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $pengguna_item['nama_pengguna']; ?>" required>
                                             </div>
                                         </div>
                                     </div>

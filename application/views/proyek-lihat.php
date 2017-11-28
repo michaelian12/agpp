@@ -16,6 +16,9 @@
     <!-- Bootstrap core CSS     -->
     <link href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css" rel="stylesheet" />
 
+    <!--  JQuery UI CSS  -->
+    <link href="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
+
     <!-- Animation library for notifications   -->
     <link href="<?php echo base_url(); ?>/assets/css/animate.min.css" rel="stylesheet"/>
 
@@ -32,6 +35,15 @@
     
     <!--  JavaScript  -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+
+    <!--  Hide Input Number Spin Button   -->
+    <style type="text/css">
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
 
 </head>
 <body>
@@ -154,7 +166,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nilai Kontrak (Rp.)</label>
-                                                <input type="text" name="nilai_kontrak" class="form-control border-input" placeholder="10.000.000" value="<?php echo $proyek_item['nilai_kontrak']; ?>" required>
+                                                <input type="number" min="0" name="nilai_kontrak" class="form-control border-input" placeholder="10.000.000" value="<?php echo $proyek_item['nilai_kontrak']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -181,13 +193,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Tgl. Mulai</label>
-                                                <input type="date" name="tgl_mulai" class="form-control border-input" placeholder="15 Februari 2017" value="<?php echo $proyek_item['tgl_mulai']; ?>" required>
+                                                <input type="text" id="tgl_mulai" name="tgl_mulai" class="form-control border-input" placeholder="2017-11-28" value="<?php echo $proyek_item['tgl_mulai']; ?>" onkeydown="return false" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Tgl. Selesai</label>
-                                                <input type="date" name="tgl_selesai" class="form-control border-input" placeholder="30 Juli 2017" value="<?php echo $proyek_item['tgl_selesai']; ?>" required>
+                                                <input type="text" id="tgl_selesai" name="tgl_selesai" class="form-control border-input" placeholder="2017-11-28" value="<?php echo $proyek_item['tgl_selesai']; ?>" onkeydown="return false" required>
                                             </div>
                                         </div>
                                     </div>
@@ -237,10 +249,51 @@
             window.history.back();
         }
     </script>
+
+    <!--  Date Validation  -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#tgl_mulai").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat : 'yy-mm-dd',
+                minDate: 0,
+                onSelect: function (date) {
+                    var dt2 = $('#tgl_selesai');
+                    var startDate = $(this).datepicker('getDate');
+                    var minDate = $(this).datepicker('getDate');
+                    dt2.datepicker('option', 'minDate', minDate);
+                }
+            });
+            $('#tgl_selesai').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
+
+    <!--  Prevent Minus Number  -->
+    <!-- <script type="text/javascript">
+        // Select your input element.
+        var number = document.getElementById('nilai_kontrak');
+
+        // Listen for input event on numInput.
+        number.onkeydown = function(e) {
+            if(!((e.keyCode > 95 && e.keyCode < 106)
+              || (e.keyCode > 47 && e.keyCode < 58) 
+              || e.keyCode == 8)) {
+                return false;
+            }
+        }
+    </script> -->
     
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/external/jquery/jquery.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap-checkbox-radio.js"></script>
