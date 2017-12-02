@@ -1,3 +1,4 @@
+<?php echo validation_errors(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -88,8 +89,8 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-3"></div>
-                    <div class="col-lg-8 col-md-6">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="content">
                                 <form>
@@ -97,7 +98,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email</label>
-                                                <input type="email" class="form-control border-input" placeholder="username@email.com">
+                                                <input type="email" name="email" class="form-control border-input" placeholder="username@email.com" required>
                                             </div>
                                         </div>
                                     </div>

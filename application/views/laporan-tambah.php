@@ -1,3 +1,4 @@
+<?php echo validation_errors(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,49 +53,49 @@
 
             <ul class="nav">
                 <li>
-                    <a href="profil">
+                    <a href="../profil">
                         <i class="ti-user"></i>
                         <p>Profil</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengguna">
+                    <a href="../pengguna">
                         <i class="ti-id-badge"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
                 <li>
-                    <a href="proyek">
+                    <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pekerjaan">
+                    <a href="../pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="identifikasi-risiko">
+                    <a href="../identifikasi-risiko">
                         <i class="ti-search"></i>
                         <p>Identifikasi Risiko</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="#">
+                <li>
+                    <a href="../risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="mitigasi">
+                    <a href="../mitigasi">
                         <i class="ti-shield"></i>
                         <p>Mitigasi</p>
                     </a>
                 </li>
-                <li>
-                    <a href="laporan">
+                <li class="active">
+                    <a href="../laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
@@ -113,14 +114,14 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Risiko</a>
+                    <a class="navbar-brand" href="proyek">Laporan</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="keluar">
-                                <i class="ti-power-off"></i>
-                                <p>Keluar</p>
+						<li>
+                            <a href=".../keluar">
+								<i class="ti-power-off"></i>
+								<p>Keluar</p>
                             </a>
                         </li>
                     </ul>
@@ -131,100 +132,98 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="header">
+                                <h4 class="title">Proyek</h4>
+                            </div>
+                            <div class="content">
                                 <div class="row">
-                                    <div class="col-md-5">
-                                        <h4 class="title">Daftar Risiko</h4>
-                                        <p class="category">Kelola data risiko</p>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <a href="risiko-tambah" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Risiko</a>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>No.SPP</label>
+                                            <input type="text" name="nama_proyek" class="form-control border-input" value="<?php echo $proyek_item['no_spp']; ?>" readonly>
+                                        </div>
                                     </div>
                                 </div>
-                                <br>
-                            </div>
 
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <th>Risiko</th>
-                                    	<th>Penyebab</th>
-                                    	<th>S</th>
-                                    	<th>O</th>
-                                    	<th>D</th>
-                                        <th>RPN</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        	<td>Dakota Rice</td>
-                                            <td>Niger</td>
-                                        	<td>3</td>
-                                        	<td>4</td>
-                                        	<td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Minerva Hooper</td>
-                                        	<td>Curaçao</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Sage Rodriguez</td>
-                                        	<td>Netherlands</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Philip Chaney</td>
-                                        	<td>Korea, South</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Doris Greene</td>
-                                        	<td>Malawi</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Mason Porter</td>
-                                        	<td>Chile</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Nama Proyek</label>
+                                            <input type="text" name="nama_proyek" class="form-control border-input" value="<?php echo $proyek_item['nama_proyek']; ?>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="title">Data Laporan</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <?php echo form_open('laporan-tambah/'.$proyek_item['id_proyek']); ?>
+                                <form name="tambah_pekerjaan" id="tambah_pekerjaan">
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped" id="dynamic_field">
+                                            <col width="60%">
+                                            <col width="20%">
+                                            <col width="20%">
+                                            <thead>
+                                                <th>Nama Pekerjaan</th>
+                                                <th>Bobot</th>
+                                                <th>Kemajuan</th>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($pekerjaan as $pekerjaan_item) { ?>
+                                                <tr>
+                                                    <td><?php echo $pekerjaan_item['nama_pekerjaan'] ?><input type='hidden' name='id_pekerjaan[]' value='<?php echo $pekerjaan_item['id_pekerjaan']; ?>'/></td>
+                                                    <td><?php echo $pekerjaan_item['bobot'] ?></td>
+                                                    <td><input type="number" name="kemajuan[]" step="0.001" min="0" max="<?php echo $pekerjaan_item['bobot'] ?>" class="form-control border-input" placeholder="0,014" required></td>
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Kendala</label>
+                                                <textarea name="ket_kendala" class="form-control border-input" placeholder="Kendala yang terjadi saat pelaksanaan" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </form>
+                                <?php echo form_close(); ?>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </div>
+
 
         <footer class="footer">
             <div class="container-fluid">
@@ -237,7 +236,8 @@
     </div>
 </div>
 
-</body>
+
+</body>   
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -260,6 +260,5 @@
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="<?php echo base_url(); ?>/assets/js/demo.js"></script>
-
 
 </html>

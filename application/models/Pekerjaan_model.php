@@ -53,12 +53,12 @@ class Pekerjaan_model extends CI_Model {
 		);
 
 		$this->db->where('id_pekerjaan', $id);
-		return $this->db->update('pekerjaan', $data);
+		$this->db->update('pekerjaan', $data);
 	}
 
 	public function delete_pekerjaan($id)
 	{
-		return $this->db->delete('pekerjaan', array('id_pekerjaan'=>$id));
+		$this->db->delete('pekerjaan', array('id_pekerjaan'=>$id));
 	}
 }
 ?>

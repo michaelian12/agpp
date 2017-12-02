@@ -1,3 +1,4 @@
+<?php echo validation_errors(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,7 +29,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url(); ?>/assets/css/themify-icons.css" rel="stylesheet">
-
+    
     <!--  JavaScript  -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
@@ -52,49 +53,49 @@
 
             <ul class="nav">
                 <li>
-                    <a href="profil">
+                    <a href="../../profil">
                         <i class="ti-user"></i>
                         <p>Profil</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengguna">
+                    <a href="../../pengguna">
                         <i class="ti-id-badge"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
                 <li>
-                    <a href="proyek">
+                    <a href="../../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="#">
+                <li>
+                    <a href="../../pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="identifikasi-risiko">
+                    <a href="../../identifikasi-risiko">
                         <i class="ti-search"></i>
                         <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="risiko">
+                    <a href="../../risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="mitigasi">
+                    <a href="../../mitigasi">
                         <i class="ti-shield"></i>
                         <p>Mitigasi</p>
                     </a>
                 </li>
-                <li>
-                    <a href="laporan">
+                <li class="active">
+                    <a href="../../laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
@@ -113,14 +114,14 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Pekerjaan</a>
+                    <a class="navbar-brand" href="proyek">Laporan</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="keluar">
-                                <i class="ti-power-off"></i>
-                                <p>Keluar</p>
+						<li>
+                            <a href="../.../keluar">
+								<i class="ti-power-off"></i>
+								<p>Keluar</p>
                             </a>
                         </li>
                     </ul>
@@ -131,57 +132,107 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Proyek</h4>
-                                <p class="category">Pilih proyek untuk menampilkan daftar pekerjaan pada proyek</p>
                             </div>
                             <div class="content">
-                                <select name="proyek" class="form-control border-input" id="proyek">
-                                    <option disabled selected> -- Pilih Proyek -- </option>
-                                    <?php 
-                                        foreach ($proyek as $proyek_item) { ?>
-                                            <option value="<?php echo $proyek_item['id_proyek']; ?>"><?php echo $proyek_item['nama_proyek']; ?></option>
-                                        <?php }
-                                    ?>
-                                </select>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>No.SPP</label>
+                                            <input type="text" name="no_spp" class="form-control border-input" value="<?php echo $proyek_item['no_spp']; ?>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Nama Proyek</label>
+                                            <input type="text" name="nama_proyek" class="form-control border-input" value="<?php echo $proyek_item['nama_proyek']; ?>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="header">
                                 <div class="row">
-                                    <div class="col-md-9">
-                                        <h4 class="title">Daftar Pekerjaan</h4>
-                                        <p class="category">Kelola data pekerjaan pada proyek</p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a id="tambah_pekerjaan" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Pekerjaan</a>
+                                    <div class="col-md-12">
+                                        <h4 class="title">Data Laporan Pekerjaan</h4>
                                     </div>
                                 </div>
-                                <br>
                             </div>
+                            <div class="content">
+                                <?php echo form_open('laporan-lihat'); ?>
+                                <form name="tambah_pekerjaan" id="tambah_pekerjaan">
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped" id="dynamic_field">
+                                            <col width="60%">
+                                            <col width="20%">
+                                            <col width="20%">
+                                            <thead>
+                                                <th>Nama Pekerjaan</th>
+                                                <th>Bobot</th>
+                                                <th>Kemajuan</th>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($laporan_pekerjaan as $laporan_pekerjaan_item) { ?>
+                                                <tr>
+                                                    <td><?php echo $laporan_pekerjaan_item['nama_pekerjaan'] ?><input type='hidden' name='id_laporan_pekerjaan[]' value='<?php echo $laporan_pekerjaan_item['id_laporan_pekerjaan']; ?>'/></td>
+                                                    <td><?php echo $laporan_pekerjaan_item['bobot'] ?></td>
+                                                    <td><input type="number" name="kemajuan[]" step="0.001" min="0" max="<?php echo $laporan_pekerjaan_item['bobot'] ?>" class="form-control border-input" placeholder="0,014" value="<?php echo $laporan_pekerjaan_item['kemajuan'] ?>" required></td>
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-striped" id="pekerjaan">
-                                    <thead>
-                                        <th>Nama Pekerjaan</th>
-                                    	<th>Bobot</th>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Kendala</label>
+                                                <input type='hidden' name='id_laporan_kendala' value='<?php echo $laporan_kendala_item['id_laporan_kendala']; ?>'/>
+                                                <textarea name="ket_kendala" class="form-control border-input" placeholder="Kendala yang terjadi saat pelaksanaan"><?php echo $laporan_kendala_item['ket_kendala']; ?></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="button" onclick="goBack()" class="btn btn-default btn-block btn-wd">Batal</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </form>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
+
 
         <footer class="footer">
             <div class="container-fluid">
@@ -194,57 +245,14 @@
     </div>
 </div>
 
+
 </body>
 
-    <!--  Check if project has been selected  -->
+    <!--  Back Function  -->
     <script type="text/javascript">
-        $('#tambah_pekerjaan').click(function(){
-            if ($(this).attr('href') === undefined) {
-                $.notify({
-                    icon: 'ti-info-alt',
-                    message: "Pilih proyek untuk melanjutkan"
-
-                },{
-                    type: 'warning',
-                    timer: 200
-                });
-
-                return false;
-            }
-        });
-    </script>
-
-    <!--  AJAX Table Dependent  -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#proyek").change(function () {
-                // clear table
-                $('#pekerjaan tbody').empty();
-
-                // get jobs data
-                var id_proyek = $(this).val();
-                if (id_proyek !== null || id_proyek !== "") {
-                    $.ajax({
-                        url: "<?php echo base_url() ?>pekerjaan/get_pekerjaan",
-                        type: "POST",
-                        data: {'id_proyek' : id_proyek},
-                        dataType: 'json',
-                        success: function(data){
-                            $('#pekerjaan tbody').append(data);
-                        },
-                        error: function(){
-                            console.log('error');
-                        }
-                    });
-                }
-
-                // set href link
-                var original_link = "pekerjaan-tambah";
-                $('#tambah_pekerjaan').attr('href', original_link);                
-                var new_href = $('#tambah_pekerjaan').attr('href') + '/' + id_proyek;
-                $('#tambah_pekerjaan').attr('href', new_href);
-            });
-        });
+        function goBack() {
+            window.history.back();
+        }
     </script>
 
     <!--   Core JS Files   -->
@@ -268,6 +276,5 @@
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="<?php echo base_url(); ?>/assets/js/demo.js"></script>
-
 
 </html>

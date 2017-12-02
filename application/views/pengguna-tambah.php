@@ -119,7 +119,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a href="#">
+                            <a href="keluar">
 								<i class="ti-power-off"></i>
 								<p>Keluar</p>
                             </a>
@@ -153,7 +153,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Kata Sandi</label>
-                                                <input type="password" name="kata_sandi" class="form-control border-input" placeholder="********" required>
+                                                <input type="password" name="kata_sandi" title="Three or more characters" class="form-control border-input" placeholder="********" required>
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
                                             <div class="form-group">
                                                 <label>Jabatan</label>
                                                 <select name="jabatan" class="form-control border-input">
-                                                    <option value="Direktur">Direktur</option>
+                                                    <option value="Admin" selected>Admin</option>
                                                     <option value="Manajer Proyek">Manajer Proyek</option>
                                                     <option value="Site Manager">Site Manager</option>
                                                 </select>
@@ -182,7 +182,7 @@
                                             <div class="form-group">
                                                 <label>Status</label>
                                                 <select name="status" class="form-control border-input">
-                                                    <option value="Aktif">Aktif</option>
+                                                    <option value="Aktif" selected>Aktif</option>
                                                     <option value="Nonaktif">Nonaktif</option>
                                                 </select>
                                             </div>

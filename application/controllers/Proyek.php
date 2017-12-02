@@ -7,6 +7,7 @@ class Proyek extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('proyek_model');
+		$this->load->library('session');
 		$this->load->helper('url_helper');
 	}
 
@@ -68,3 +69,4 @@ class Proyek extends CI_Controller {
 		redirect('proyek');
 	}
 }
+?>

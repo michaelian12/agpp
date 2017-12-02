@@ -28,7 +28,7 @@ class Proyek_model extends CI_Model {
 			'tgl_selesai' => $this->input->post('tgl_selesai')
 		);
 		
-		return $this->db->insert('proyek', $data);
+		$this->db->insert('proyek', $data);
 	}
 
 	public function update_proyek($id)
@@ -43,12 +43,12 @@ class Proyek_model extends CI_Model {
 		);
 
 		$this->db->where('id_proyek', $id);
-		return $this->db->update('proyek', $data);
+		$this->db->update('proyek', $data);
 	}
 
 	public function delete_proyek($id)
 	{
-		return $this->db->delete('proyek', array('id_proyek'=>$id));
+		$this->db->delete('proyek', array('id_proyek'=>$id));
 	}
 }
 ?>

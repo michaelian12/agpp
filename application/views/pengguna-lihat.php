@@ -119,7 +119,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a href="#">
+                            <a href="../keluar">
 								<i class="ti-power-off"></i>
 								<p>Keluar</p>
                             </a>
@@ -156,7 +156,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Lengkap</label>
-                                                <input type="text" pattern="[A-Za-z]{1,}" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $pengguna_item['nama_pengguna']; ?>" required>
+                                                <input type="text" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $pengguna_item['nama_pengguna']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -166,8 +166,8 @@
                                             <div class="form-group">
                                                 <label>Jabatan</label>
                                                 <select name="jabatan" class="form-control border-input">
-                                                    <option value="Direktur"
-                                                    <?php if ($pengguna_item['jabatan'] == 'Direktur') {
+                                                    <option value="Admin"
+                                                    <?php if ($pengguna_item['jabatan'] == 'Admin') {
                                                         echo 'selected="selected"';    
                                                     }?>
                                                     >Direktur</option>

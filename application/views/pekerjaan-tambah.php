@@ -119,7 +119,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a href="#">
+                            <a href=".../keluar">
 								<i class="ti-power-off"></i>
 								<p>Keluar</p>
                             </a>
@@ -144,7 +144,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>No.SPP</label>
-                                            <input type="text" name="nama_proyek" class="form-control border-input" value="<?php echo $proyek_item['no_spp']; ?>" readonly>
+                                            <input type="text" name="no_spp" class="form-control border-input" value="<?php echo $proyek_item['no_spp']; ?>" readonly>
                                         </div>
                                     </div>
                                 </div>

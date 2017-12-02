@@ -1,3 +1,8 @@
+<?php  
+// check if session is not empty
+if (!empty($this->session->userdata('id_pengguna'))) {
+    echo validation_errors();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -57,6 +62,7 @@
                         <p>Profil</p>
                     </a>
                 </li>
+                <?php if ($this->session->userdata('jabatan') == 'Admin') { ?>
                 <li>
                     <a href="pengguna">
                         <i class="ti-id-badge"></i>
@@ -75,6 +81,7 @@
                         <p>Pekerjaan</p>
                     </a>
                 </li>
+                <?php } elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') { ?>
                 <li>
                     <a href="identifikasi-risiko">
                         <i class="ti-search"></i>
@@ -93,12 +100,14 @@
                         <p>Mitigasi</p>
                     </a>
                 </li>
+                <?php } elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') { ?>
                 <li>
                     <a href="laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
                 </li>
+                <?php } ?>
             </ul>
     	</div>
     </div>
@@ -118,7 +127,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a href="#">
+                            <a href="keluar">
 								<i class="ti-power-off"></i>
 								<p>Keluar</p>
                             </a>
@@ -140,18 +149,19 @@
                                 <h4 class="title">Data Profil</h4>
                             </div>
                             <div class="content">
+                                <?php echo form_open('profil'); ?>
                                 <form>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email</label>
-                                                <input type="email" class="form-control border-input" placeholder="username@email.com">
+                                                <input type="email" name="email" class="form-control border-input" placeholder="username@email.com" value="<?php echo $profil['email']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Kata Sandi</label>
-                                                <input type="password" class="form-control border-input" placeholder="********">
+                                                <input type="password" name="kata_sandi" pattern=".{3,}" title="Three or more characters" class="form-control border-input" placeholder="********" value="<?php echo $profil['kata_sandi']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -160,22 +170,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Lengkap</label>
-                                                <input type="text" class="form-control border-input" placeholder="Company">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Jabatan</label>
-                                                <input type="text" class="form-control border-input" placeholder="Direktur, Manajer Proyek, Site Manager">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <input type="text" class="form-control border-input" placeholder="Aktif/Tidak Aktif">
+                                                <input type="text" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $profil['nama_pengguna']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -184,19 +179,17 @@
                                         <div class="col-md-2">
                                             
                                         </div>
-                                        <div class="col-md-3">
-                                            <button type="submit" class="btn btn-info btn-fill btn-wd">Perbaharui</button>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
                                         </div>
-                                        <div class="col-md-2">
-                                            
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-default btn-block btn-wd">Batal</button>
+                                        <div class="col-md-4">
+                                            <button type="button" onclick="goBack()" class="btn btn-default btn-block btn-wd">Batal</button>
                                         </div>
                                     </div>
                                     
                                     <div class="clearfix"></div>
                                 </form>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -221,6 +214,13 @@
 
 </body>
 
+    <!--  Back Function  -->
+    <script type="text/javascript">
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
@@ -244,3 +244,6 @@
 	<script src="<?php echo base_url(); ?>/assets/js/demo.js"></script>
 
 </html>
+<?php } else {
+    redirect('masuk');
+} ?>

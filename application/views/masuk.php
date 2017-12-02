@@ -1,3 +1,4 @@
+<?php echo validation_errors(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -58,7 +59,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="lupa-kata-sandi">
+                    <a href="lupa">
                         <i class="ti-key"></i>
                         <p>Lupa Kata Sandi</p>
                     </a>
@@ -89,16 +90,29 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-3"></div>
-                    <div class="col-lg-8 col-md-6">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="content">
-                                <form>
+                                <?php echo form_open('masuk'); ?>
+                                <form method="post" action="<?php echo base_url(); ?>">
+                                    <?php if ($error = $this->session->flashdata('error')) { ?>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
+                                                <div class="alert alert-dismissible alert-danger">
+                                                    <?php echo $error;?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            
+                                            <div class="form-group">
                                                 <label for="exampleInputEmail1">Email</label>
-                                                <input type="email" class="form-control border-input" placeholder="username@email.com">
+                                                <input type="email" name="email" class="form-control border-input" placeholder="username@email.com" required>
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +121,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Kata Sandi</label>
-                                                <input type="text" class="form-control border-input" placeholder="********">
+                                                <input type="password" name="kata_sandi" class="form-control border-input" placeholder="********" required>
                                             </div>
                                         </div>
                                     </div>
@@ -124,6 +138,7 @@
 
                                     <div class="clearfix"></div>
                                 </form>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>

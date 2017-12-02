@@ -95,7 +95,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="laporan">
+                    <a href="../laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
@@ -119,7 +119,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a href="#">
+                            <a href="../keluar">
 								<i class="ti-power-off"></i>
 								<p>Keluar</p>
                             </a>

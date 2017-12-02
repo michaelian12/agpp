@@ -8,14 +8,14 @@ create table pengguna
 (
 	id_pengguna int primary key unique auto_increment,
 	nama_pengguna varchar(100),
-	jabatan enum('Direktur', 'Manajer Proyek', 'Site Manager'),
+	jabatan enum('Admin', 'Manajer Proyek', 'Site Manager'),
 	email varchar(50),
 	kata_sandi varchar(50),
 	status enum('Aktif', 'Nonaktif')
 );
 
 insert into pengguna values
-(1, 'Budianto Azis', 'Direktur', 'budianto.azis@agpp.com', 'agpp', 'Aktif'),
+(1, 'Budianto Azis', 'Admin', 'budianto.azis@agpp.com', 'agpp', 'Aktif'),
 (2, 'Agus Permana', 'Manajer Proyek', 'agus.permana@agpp.com', 'agpp', 'Aktif'),
 (3, 'Agus Purnama', 'Site Manager', 'agus.purnama@agpp.com', 'agpp', 'Aktif');
 
@@ -89,13 +89,11 @@ create table laporan_pekerjaan
 	foreign key(id_pekerjaan) references pekerjaan(id_pekerjaan)
 );
 
-create table laporan_risiko
+create table laporan_kendala
 (
-	id_laporan_risiko int primary key unique,
-	nama_risiko varchar(300),
-	nama_efek varchar(300),
-	nama_penyebab varchar(300),
-	tgl_laporan_risiko date,
+	id_laporan_kendala int primary key unique,
+	ket_kendala varchar(300),
+	tgl_laporan_kendala date,
 	id_proyek int,
 	foreign key(id_proyek) references proyek(id_proyek)
 );

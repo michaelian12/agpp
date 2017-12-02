@@ -7,6 +7,7 @@ class Pekerjaan extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('pekerjaan_model');
+		$this->load->library('session');
 		$this->load->helper('url_helper');
 	}
 
@@ -74,3 +75,4 @@ class Pekerjaan extends CI_Controller {
 		redirect('pekerjaan');
 	}
 }
+?>
