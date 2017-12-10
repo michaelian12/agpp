@@ -1,3 +1,4 @@
+<?php echo validation_errors(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -140,105 +141,122 @@
                             </div>
                             
                             <div class="content">
+                                <?php echo form_open('risiko-tambah'); ?>
                                 <form>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Nama Risiko</label>
-                                                <input type="text" class="form-control border-input" placeholder="Pengiriman material terlambat">
-                                            </div>
-                                        </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped">
+                                            <col width="50%">
+                                            <col width="27%">
+                                            <col width="23%">
+                                            <thead>
+                                                <th>Risiko</th>
+                                                <th>Tingkat Keparahan</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" required></td>
+                                                    <td><select name="nilai_s" class="form-control border-input" required>
+                                                        <option disabled selected> -- Nilai Keparahan -- </option>
+                                                        <option value="10">(10) - Berbahaya (tanpa peringatan)</option>
+                                                        <option value="9">(9) - Berbahaya (dengan peringatan)</option>
+                                                        <option value="8">(8) - Sangat tinggi</option>
+                                                        <option value="7">(7) - Tinggi</option>
+                                                        <option value="6">(6) - Sedang</option>
+                                                        <option value="5">(5) - Rendah</option>
+                                                        <option value="4">(4) - Sangat rendah</option>
+                                                        <option value="3">(3) - Sangat rendah</option>
+                                                        <option value="2">(2) - Kecil</option>
+                                                        <option value="1">(1) - Sangat kecil</option>
+                                                    </select></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <!-- Efek dari risiko -->
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Efek</label>
-                                                <input type="text" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>S (1-10)</label>
-                                                <input type="text" class="form-control border-input" placeholder="6">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            
-                                        </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped" id="tabel_efek">
+                                            <col width="77%">
+                                            <col width="23%">
+                                            <thead>
+                                                <th>Efek</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" required></td>
+                                                    <td><button type="button" class="btn btn-default btn-wd" style="float: right;" id="tambah_efek">+ Efek</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <!-- Penyebab dari risiko -->
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Penyebab</label>
-                                                <input type="text" class="form-control border-input" placeholder="Jadwal produksi tidak sesuai dengan jadwal proyek">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>O (1-10)</label>
-                                                <input type="text" class="form-control border-input" placeholder="3">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="Kendaraan pengirim mengalami kecelakaan">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="3">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="Aturan red line untuk material import">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="2">
-                                            </div>
-                                        </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped" id="tabel_penyebab">
+                                            <col width="50%">
+                                            <col width="27%">
+                                            <col width="23%">
+                                            <thead>
+                                                <th>Penyebab</th>
+                                                <th>Tingkat Kejadian</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" required></td>
+                                                    <td><select name="nilai_o[]" class="form-control border-input" required>
+                                                        <option disabled selected> -- Nilai Kejadian -- </option>
+                                                        <option value="10">(10) - >= 1 dalam 2 kejadian</option>
+                                                        <option value="9">(9) - 1 dalam 3 kejadian</option>
+                                                        <option value="8">(8) - 1 dalam 8 kejadian</option>
+                                                        <option value="7">(7) - 1 dalam 20 kejadian</option>
+                                                        <option value="6">(6) - 1 dalam 80 kejadian</option>
+                                                        <option value="5">(5) - 1 dalam 400 kejadian</option>
+                                                        <option value="4">(4) - 1 dalam 2000 kejadian</option>
+                                                        <option value="3">(3) - 1 dalam 15000 kejadian</option>
+                                                        <option value="2">(2) - 1 dalam 150000 kejadian</option>
+                                                        <option value="1">(1) - <= 1 dalam 1500000 kejadian</option>
+                                                    </select></td>
+                                                    <td><button type="button" class="btn btn-default btn-wd" style="float: right;" id="tambah_penyebab">+ Penyebab</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <!-- Kontrol dari risiko -->
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Kontrol</label>
-                                                <input type="text" class="form-control border-input" placeholder="Hasil laporan">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>D (1-10)</label>
-                                                <input type="text" class="form-control border-input" placeholder="8">
-                                            </div>
-                                        </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped">
+                                            <col width="50%">
+                                            <col width="27%">
+                                            <col width="23%">
+                                            <thead>
+                                                <th>Kontrol</th>
+                                                <th>Tingkat Deteksi</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="nama_kontrol" class="form-control border-input" placeholder="Hasil laporan" required></td>
+                                                    <td><select name="nilai_d" class="form-control border-input" required>
+                                                        <option disabled selected> -- Nilai Deteksi -- </option>
+                                                        <option value="10">(10) - Mutlak tidak pasti</option>
+                                                        <option value="9">(9) - Sangat Jauh</option>
+                                                        <option value="8">(8) - Jauh</option>
+                                                        <option value="7">(7) - Sangat Rendah</option>
+                                                        <option value="6">(6) - Rendah</option>
+                                                        <option value="5">(5) - Sedang</option>
+                                                        <option value="4">(4) - Cukup Tinggi</option>
+                                                        <option value="3">(3) - Tinggi</option>
+                                                        <option value="2">(2) - Sangat Tinggi</option>
+                                                        <option value="1">(1) - Hampir Pasti</option>
+                                                    </select></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <div class="text-center">
@@ -247,6 +265,7 @@
                                     
                                     <div class="clearfix"></div>
                                 </form>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -270,6 +289,38 @@
 
 
 </body>
+
+    <!--  Add Entries for Efect Table  -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var i = 1;
+            $('#tambah_efek').click(function(){
+                i++;
+                $('#tabel_efek').append('<tr id="row_efek'+i+'"><td><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" required></td><td><a type="button" id="'+i+'" class="remove_efek"><i class="ti-trash"></i></a></td></tr>');
+            });
+
+            $(document).on('click', '.remove_efek', function(){
+                var button_id = $(this).attr("id");
+                $('#row_efek'+button_id+'').remove();
+            });
+        });
+    </script>
+
+    <!--  Add Entries for Cause Table  -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var i = 1;
+            $('#tambah_penyebab').click(function(){
+                i++;
+                $('#tabel_penyebab').append('<tr id="row_penyebab'+i+'"><td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" required></td><td><select name="nilai_o[]" class="form-control border-input" required><option disabled selected> -- Nilai Kejadian -- </option><option value="10">(10) - >= 1 dalam 2 kejadian</option><option value="9">(9) - 1 dalam 3 kejadian</option><option value="8">(8) - 1 dalam 8 kejadian</option><option value="7">(7) - 1 dalam 20 kejadian</option><option value="6">(6) - 1 dalam 80 kejadian</option><option value="5">(5) - 1 dalam 400 kejadian</option><option value="4">(4) - 1 dalam 2000 kejadian</option><option value="3">(3) - 1 dalam 15000 kejadian</option><option value="2">(2) - 1 dalam 150000 kejadian</option><option value="1">(1) - <= 1 dalam 1500000 kejadian</option></select></td><td><a type="button" id="'+i+'" class="remove_penyebab"><i class="ti-trash"></i></a></td></tr>');
+            });
+
+            $(document).on('click', '.remove_penyebab', function(){
+                var button_id = $(this).attr("id");
+                $('#row_penyebab'+button_id+'').remove();
+            });
+        });
+    </script>
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>

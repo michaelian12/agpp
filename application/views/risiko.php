@@ -157,66 +157,24 @@
                                         <th>RPN</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        	<td>Dakota Rice</td>
-                                            <td>Niger</td>
-                                        	<td>3</td>
-                                        	<td>4</td>
-                                        	<td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Minerva Hooper</td>
-                                        	<td>Curaçao</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Sage Rodriguez</td>
-                                        	<td>Netherlands</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Philip Chaney</td>
-                                        	<td>Korea, South</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Doris Greene</td>
-                                        	<td>Malawi</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        	<td>Mason Porter</td>
-                                        	<td>Chile</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>36</td>
-                                            <td><a href="risiko-lihat"><i class="ti-eye"></i></a></td>
-                                            <td><a href=""><i class="ti-trash"></i></a></td>
-                                        </tr>
+                                        <?php 
+                                            foreach ($risiko as $risiko_item) { 
+                                                foreach ($penyebab as $penyebab_item) { 
+                                                    if ($penyebab_item['id_risiko'] == $risiko_item['id_risiko']) {?>
+                                                        <tr>
+                                                            <td><?php echo $risiko_item['nama_risiko']; ?></td>
+                                                            <td><?php echo $penyebab_item['nama_penyebab']; ?></td>
+                                                            <td><?php echo $risiko_item['nilai_s']; ?></td>
+                                                            <td><?php echo $penyebab_item['nilai_o']; ?></td>
+                                                            <td><?php echo $risiko_item['nilai_d']; ?></td>
+                                                            <td><?php echo ($risiko_item['nilai_s'] * $penyebab_item['nilai_o'] * $risiko_item['nilai_d']); ?></td>
+                                                            <td><a href="risiko-lihat/<?php echo $risiko_item['id_risiko']?>"><i class="ti-eye"></i></a></td>
+                                                            <td><a href="risiko-hapus/<?php echo $risiko_item['id_risiko']?>"><i class="ti-trash"></i></a></td>
+                                                        </tr>
+                                            <?php }
+                                                }
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

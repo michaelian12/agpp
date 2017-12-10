@@ -171,7 +171,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Jabatan</label>
-                                                <select name="jabatan" class="form-control border-input">
+                                                <select name="jabatan" class="form-control border-input" required>
                                                     <option value="Admin" selected>Admin</option>
                                                     <option value="Manajer Proyek">Manajer Proyek</option>
                                                     <option value="Site Manager">Site Manager</option>
@@ -181,7 +181,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Status</label>
-                                                <select name="status" class="form-control border-input">
+                                                <select name="status" class="form-control border-input" required>
                                                     <option value="Aktif" selected>Aktif</option>
                                                     <option value="Nonaktif">Nonaktif</option>
                                                 </select>

@@ -77,14 +77,35 @@ class Authentication extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|xss_clean');
 
 		if ($this->form_validation->run() === FALSE)
 		{
 			$this->load->view('lupa');
 		} else {
-			$this->masuk_model->masuk();
-			redirect('pengguna');	
+			$data = $this->authentication_model->get_email();
+
+			// check if the account exists
+			if (!empty($data)) {
+				$this->load->library('email');
+
+				$this->email->set_mailtype('html');
+				$this->email->from($this->config->iten('bot_mail'), 'Anantagraha Primaperkasa');
+				$this->email->to($data['email']);
+				$this->email->subject('Setel Ulang Kata Sandi di Sistem Informasi Manajemen Risiko Proyek Anantagraha Primaperkasa');
+
+				$message = '<!DOCTYPE html PUBLIC>';
+
+				$this->email->message($message);
+				$this->email->send();
+
+
+				$this->authentication_model->reset_kata_sandi();
+				// redirect('pengguna'); redirect ke tulisan cek email
+			} else { // account doesn't exists
+				// redirect('pengguna'); redirect ke tulisan akun tidak ditemukan
+			}
+
 		}
 	}
 

@@ -70,6 +70,11 @@ $route['pekerjaan-tambah/(:any)'] = 'pekerjaan/tambah/$1';
 $route['pekerjaan-lihat/(:any)'] = 'pekerjaan/ubah/$1';
 $route['pekerjaan-hapus/(:any)'] = 'pekerjaan/hapus/$1';
 
+$route['risiko'] = 'risiko';
+$route['risiko-tambah'] = 'risiko/tambah';
+$route['risiko-lihat/(:any)'] = 'risiko/ubah/$1';
+$route['risiko-hapus/(:any)'] = 'risiko/hapus/$1';
+
 $route['laporan'] = 'laporan';
 $route['laporan-tambah/(:any)'] = 'laporan/tambah/$1';
 $route['laporan-lihat'] = 'laporan/ubah';

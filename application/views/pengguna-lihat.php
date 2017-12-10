@@ -165,7 +165,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Jabatan</label>
-                                                <select name="jabatan" class="form-control border-input">
+                                                <select name="jabatan" class="form-control border-input" required>
                                                     <option value="Admin"
                                                     <?php if ($pengguna_item['jabatan'] == 'Admin') {
                                                         echo 'selected="selected"';    
@@ -187,7 +187,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Status</label>
-                                                <select name="status" class="form-control border-input">
+                                                <select name="status" class="form-control border-input" required>
                                                     <option value="Aktif"
                                                     <?php if ($pengguna_item['status'] == 'Aktif') {
                                                         echo 'selected="selected"';    

@@ -39,7 +39,7 @@ class Laporan extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('kemajuan[]', 'Kemajuan', 'required');
-		// $this->form_validation->set_rules('ket_kendala', 'Kendala', 'required');
+		$this->form_validation->set_rules('ket_kendala', 'Kendala', 'required');
 
 	
 		if ($this->form_validation->run() === FALSE)

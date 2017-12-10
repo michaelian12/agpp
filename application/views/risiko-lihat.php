@@ -1,3 +1,4 @@
+<?php echo validation_errors(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,49 +53,49 @@
 
             <ul class="nav">
                 <li>
-                    <a href="profil">
+                    <a href="../profil">
                         <i class="ti-user"></i>
                         <p>Profil</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengguna">
+                    <a href="../pengguna">
                         <i class="ti-id-badge"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
                 <li>
-                    <a href="proyek">
+                    <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pekerjaan">
+                    <a href="../pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="identifikasi-risiko">
+                    <a href="../identifikasi-risiko">
                         <i class="ti-search"></i>
                         <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="risiko">
+                    <a href="../risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="mitigasi">
+                    <a href="../mitigasi">
                         <i class="ti-shield"></i>
                         <p>Mitigasi</p>
                     </a>
                 </li>
                 <li>
-                    <a href="laporan">
+                    <a href="../laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
@@ -118,7 +119,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a href="keluar">
+                            <a href="../keluar">
 								<i class="ti-power-off"></i>
 								<p>Keluar</p>
                             </a>
@@ -140,100 +141,313 @@
                             </div>
                             
                             <div class="content">
+                                <?php echo form_open('risiko-lihat/'.$risiko_item['id_risiko']); ?>
                                 <form>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Nama Risiko</label>
-                                                <input type="text" class="form-control border-input" placeholder="Pengiriman material terlambat">
-                                            </div>
-                                        </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped">
+                                            <col width="50%">
+                                            <col width="27%">
+                                            <col width="23%">
+                                            <thead>
+                                                <th>Risiko</th>
+                                                <th>Tingkat Keparahan</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" value="<?php echo $risiko_item['nama_risiko']; ?>" required></td>
+                                                    <td><select name="nilai_s" class="form-control border-input" required>
+                                                        <option disabled> -- Nilai Keparahan -- </option>
+                                                        <option value="10"
+                                                        <?php if ($risiko_item['nilai_s'] == 10) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(10) - Berbahaya (tanpa peringatan)</option>
+                                                        <option value="9"
+                                                        <?php if ($risiko_item['nilai_s'] == 9) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(9) - Berbahaya (dengan peringatan)</option>
+                                                        <option value="8"
+                                                        <?php if ($risiko_item['nilai_s'] == 8) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(8) - Sangat tinggi</option>
+                                                        <option value="7"
+                                                        <?php if ($risiko_item['nilai_s'] == 7) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(7) - Tinggi</option>
+                                                        <option value="6"
+                                                        <?php if ($risiko_item['nilai_s'] == 6) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(6) - Sedang</option>
+                                                        <option value="5"
+                                                        <?php if ($risiko_item['nilai_s'] == 5) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(5) - Rendah</option>
+                                                        <option value="4"
+                                                        <?php if ($risiko_item['nilai_s'] == 4) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(4) - Sangat rendah</option>
+                                                        <option value="3"
+                                                        <?php if ($risiko_item['nilai_s'] == 3) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(3) - Sangat rendah</option>
+                                                        <option value="2"
+                                                        <?php if ($risiko_item['nilai_s'] == 2) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(2) - Kecil</option>
+                                                        <option value="1"
+                                                        <?php if ($risiko_item['nilai_s'] == 1) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(1) - Sangat kecil</option>
+                                                    </select></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <!-- Efek dari risiko -->
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Efek</label>
-                                                <input type="text" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>S (1-10)</label>
-                                                <input type="text" class="form-control border-input" placeholder="6">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="">
-                                            </div>
-                                        </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped" id="tabel_efek">
+                                            <col width="77%">
+                                            <col width="23%">
+                                            <thead>
+                                                <th>Efek</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                <?php for ($i=0; $i < count($efek); $i++) { 
+                                                    if ($i == 0) { ?>
+                                                        <tr>
+                                                            <td><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" value="<?php echo $efek[$i]['nama_efek'] ?>" required></td>
+                                                            <td><button type="button" class="btn btn-default btn-wd" style="float: right;" id="tambah_efek">+ Efek</button></td>
+                                                        </tr>
+                                                    <?php } else { ?>
+                                                        <tr>
+                                                            <td><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" value="<?php echo $efek[$i]['nama_efek'] ?>" required></td>
+                                                            <td><a href="risiko-hapus/<?php echo $risiko_item['id_risiko']?>"><i class="ti-trash"></i></a></td>
+                                                        </tr>
+                                                <?php }
+                                                } ?>
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <!-- Penyebab dari risiko -->
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Penyebab</label>
-                                                <input type="text" class="form-control border-input" placeholder="Jadwal produksi tidak sesuai dengan jadwal proyek">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>O (1-10)</label>
-                                                <input type="text" class="form-control border-input" placeholder="3">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="Kendaraan pengirim mengalami kecelakaan">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="3">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="Aturan red line untuk material import">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control border-input" placeholder="2">
-                                            </div>
-                                        </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped" id="tabel_penyebab">
+                                            <col width="50%">
+                                            <col width="27%">
+                                            <col width="23%">
+                                            <thead>
+                                                <th>Penyebab</th>
+                                                <th>Tingkat Kejadian</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                <?php for ($i=0; $i < count($penyebab); $i++) { 
+                                                    if ($i == 0) { ?>
+                                                        <tr>
+                                                            <td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" value="<?php echo $penyebab[$i]['nama_penyebab']; ?>" required></td>
+                                                            <td><select name="nilai_o[]" class="form-control border-input" required>
+                                                                <option disabled> -- Nilai Kejadian -- </option>
+                                                                <option value="10"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 10) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(10) - >= 1 dalam 2 kejadian</option>
+                                                                <option value="9"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 9) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(9) - 1 dalam 3 kejadian</option>
+                                                                <option value="8"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 8) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(8) - 1 dalam 8 kejadian</option>
+                                                                <option value="7"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 7) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(7) - 1 dalam 20 kejadian</option>
+                                                                <option value="6"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 6) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(6) - 1 dalam 80 kejadian</option>
+                                                                <option value="5"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 5) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(5) - 1 dalam 400 kejadian</option>
+                                                                <option value="4"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 4) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(4) - 1 dalam 2000 kejadian</option>
+                                                                <option value="3"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 3) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(3) - 1 dalam 15000 kejadian</option>
+                                                                <option value="2"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 2) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(2) - 1 dalam 150000 kejadian</option>
+                                                                <option value="1"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 1) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(1) - <= 1 dalam 1500000 kejadian</option>
+                                                            </select></td>
+                                                            <td><button type="button" class="btn btn-default btn-wd" style="float: right;" id="tambah_penyebab">+ Penyebab</button></td>
+                                                        </tr>
+                                                    <?php } else { ?>
+                                                        <tr>
+                                                            <td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" value="<?php echo $penyebab[$i]['nama_penyebab']; ?>" required></td>
+                                                            <td><select name="nilai_o[]" class="form-control border-input" required>
+                                                                <option disabled> -- Nilai Kejadian -- </option>
+                                                                <option value="10"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 10) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(10) - >= 1 dalam 2 kejadian</option>
+                                                                <option value="9"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 9) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(9) - 1 dalam 3 kejadian</option>
+                                                                <option value="8"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 8) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(8) - 1 dalam 8 kejadian</option>
+                                                                <option value="7"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 7) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(7) - 1 dalam 20 kejadian</option>
+                                                                <option value="6"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 6) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(6) - 1 dalam 80 kejadian</option>
+                                                                <option value="5"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 5) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(5) - 1 dalam 400 kejadian</option>
+                                                                <option value="4"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 4) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(4) - 1 dalam 2000 kejadian</option>
+                                                                <option value="3"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 3) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(3) - 1 dalam 15000 kejadian</option>
+                                                                <option value="2"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 2) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(2) - 1 dalam 150000 kejadian</option>
+                                                                <option value="1"
+                                                                <?php if ($penyebab[$i]['nilai_o'] == 1) {
+                                                                    echo 'selected="selected"';    
+                                                                }?>
+                                                                >(1) - <= 1 dalam 1500000 kejadian</option>
+                                                            </select></td>
+                                                            <td></td>
+                                                        </tr>
+                                                <?php }
+                                                } ?>
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <!-- Kontrol dari risiko -->
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Kontrol</label>
-                                                <input type="text" class="form-control border-input" placeholder="Hasil laporan">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>D (1-10)</label>
-                                                <input type="text" class="form-control border-input" placeholder="8">
-                                            </div>
-                                        </div>
+                                    <div class="content table-responsive table-full-width">
+                                        <table class="table table-striped">
+                                            <col width="50%">
+                                            <col width="27%">
+                                            <col width="23%">
+                                            <thead>
+                                                <th>Kontrol</th>
+                                                <th>Tingkat Deteksi</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="nama_kontrol" class="form-control border-input" placeholder="Hasil laporan" value="<?php echo $risiko_item['nama_kontrol']; ?>" required></td>
+                                                    <td><select name="nilai_d" class="form-control border-input" required>
+                                                        <option disabled> -- Nilai Deteksi -- </option>
+                                                        <option value="10"
+                                                        <?php if ($risiko_item['nilai_d'] == 10) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(10) - Mutlak tidak pasti</option>
+                                                        <option value="9"
+                                                        <?php if ($risiko_item['nilai_d'] == 9) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(9) - Sangat Jauh</option>
+                                                        <option value="8"
+                                                        <?php if ($risiko_item['nilai_d'] == 8) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(8) - Jauh</option>
+                                                        <option value="7"
+                                                        <?php if ($risiko_item['nilai_d'] == 7) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(7) - Sangat Rendah</option>
+                                                        <option value="6"
+                                                        <?php if ($risiko_item['nilai_d'] == 6) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(6) - Rendah</option>
+                                                        <option value="5"
+                                                        <?php if ($risiko_item['nilai_d'] == 5) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(5) - Sedang</option>
+                                                        <option value="4"
+                                                        <?php if ($risiko_item['nilai_d'] == 4) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(4) - Cukup Tinggi</option>
+                                                        <option value="3"
+                                                        <?php if ($risiko_item['nilai_d'] == 3) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(3) - Tinggi</option>
+                                                        <option value="2"
+                                                        <?php if ($risiko_item['nilai_d'] == 2) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(2) - Sangat Tinggi</option>
+                                                        <option value="1"
+                                                        <?php if ($risiko_item['nilai_d'] == 1) {
+                                                            echo 'selected="selected"';    
+                                                        }?>
+                                                        >(1) - Hampir Pasti</option>
+                                                    </select></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <div class="row">
@@ -250,6 +464,7 @@
                                     
                                     <div class="clearfix"></div>
                                 </form>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -273,14 +488,46 @@
 
 
 </body>
-    
+
+    <!--  Add Entries for Efect Table  -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var i = 1;
+            $('#tambah_efek').click(function(){
+                i++;
+                $('#tabel_efek').append('<tr id="row_efek'+i+'"><td><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" required></td><td><a type="button" id="'+i+'" class="remove_efek"><i class="ti-trash"></i></a></td></tr>');
+            });
+
+            $(document).on('click', '.remove_efek', function(){
+                var button_id = $(this).attr("id");
+                $('#row_efek'+button_id+'').remove();
+            });
+        });
+    </script>
+
+    <!--  Add Entries for Cause Table  -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var i = 1;
+            $('#tambah_penyebab').click(function(){
+                i++;
+                $('#tabel_penyebab').append('<tr id="row_penyebab'+i+'"><td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" required></td><td><select name="nilai_o[]" class="form-control border-input" required><option disabled selected> -- Nilai Kejadian -- </option><option value="10">(10) - >= 1 dalam 2 kejadian</option><option value="9">(9) - 1 dalam 3 kejadian</option><option value="8">(8) - 1 dalam 8 kejadian</option><option value="7">(7) - 1 dalam 20 kejadian</option><option value="6">(6) - 1 dalam 80 kejadian</option><option value="5">(5) - 1 dalam 400 kejadian</option><option value="4">(4) - 1 dalam 2000 kejadian</option><option value="3">(3) - 1 dalam 15000 kejadian</option><option value="2">(2) - 1 dalam 150000 kejadian</option><option value="1">(1) - <= 1 dalam 1500000 kejadian</option></select></td><td><a type="button" id="'+i+'" class="remove_penyebab"><i class="ti-trash"></i></a></td></tr>');
+            });
+
+            $(document).on('click', '.remove_penyebab', function(){
+                var button_id = $(this).attr("id");
+                $('#row_penyebab'+button_id+'').remove();
+            });
+        });
+    </script>
+
     <!--  Back Function  -->
     <script type="text/javascript">
         function goBack() {
             window.history.back();
         }
     </script>
-    
+
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>

@@ -128,7 +128,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p style="float: right;"><strong><a href="lupa-kata-sandi" class="blue-text">Lupa kata sandi?</a></strong></p>
+                                            <p style="float: right;"><strong><a href="lupa" class="blue-text">Lupa kata sandi?</a></strong></p>
                                         </div>
                                     </div>
 
