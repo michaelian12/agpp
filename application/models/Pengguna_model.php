@@ -6,17 +6,7 @@ class Pengguna_model extends CI_Model {
 		$this->load->database();
 	}
 
-	public function get_pengguna($id = FALSE)
-	{
-		if ($id === FALSE) {
-			$query = $this->db->get('pengguna');
-			return $query->result_array();
-		} else {
-			$query = $this->db->get_where('pengguna', array('id_pengguna' => $id));
-			return $query->row_array();
-		}
-	}
-
+	// Create
 	public function set_pengguna()
 	{
 		$data =  array(
@@ -30,6 +20,19 @@ class Pengguna_model extends CI_Model {
 		$this->db->insert('pengguna', $data);
 	}
 
+	// Read
+	public function get_pengguna($id = FALSE)
+	{
+		if ($id === FALSE) {
+			$query = $this->db->get('pengguna');
+			return $query->result_array();
+		} else {
+			$query = $this->db->get_where('pengguna', array('id_pengguna' => $id));
+			return $query->row_array();
+		}
+	}
+
+	// Update
 	public function update_pengguna($id)
 	{
 		$data =  array(
@@ -43,6 +46,7 @@ class Pengguna_model extends CI_Model {
 		$this->db->update('pengguna', $data);
 	}
 
+	// Delete
 	public function delete_pengguna($id)
 	{
 		$this->db->delete('pengguna', array('id_pengguna'=>$id));

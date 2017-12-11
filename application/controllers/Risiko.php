@@ -11,14 +11,7 @@ class Risiko extends CI_Controller {
 		$this->load->helper('url_helper');
 	}
 
-	public function index()
-	{
-		$data['risiko'] = $this->risiko_model->get_risiko();
-		$data['penyebab'] = $this->risiko_model->get_penyebab();
-
-		$this->load->view('risiko', $data);
-	}
-
+	// Create
 	public function tambah()
 	{
 		$this->load->helper('form');
@@ -44,6 +37,15 @@ class Risiko extends CI_Controller {
 		}		
 	}
 
+	// Read
+	public function index()
+	{
+		$data['risiko'] = $this->risiko_model->get_risiko_query();
+
+		$this->load->view('risiko', $data);
+	}
+
+	// Update
 	public function ubah($id)
 	{
 		$this->load->helper('form');
@@ -70,6 +72,7 @@ class Risiko extends CI_Controller {
 		}		
 	}
 
+	// Delete
 	public function hapus($id)
 	{
 		$this->risiko_model->delete_risiko($id);

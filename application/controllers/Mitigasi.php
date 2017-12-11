@@ -11,13 +11,7 @@ class Mitigasi extends CI_Controller {
 		$this->load->helper('url_helper');
 	}
 
-	public function index()
-	{
-		$data['mitigasi'] = $this->mitigasi_model->get_mitigasi_query();
-
-		$this->load->view('mitigasi', $data);
-	}
-
+	// Create
 	public function tambah()
 	{
 		$this->load->helper('form');
@@ -50,6 +44,15 @@ class Mitigasi extends CI_Controller {
 		}
 	}
 
+	// Read
+	public function index()
+	{
+		$data['mitigasi'] = $this->mitigasi_model->get_mitigasi_query();
+
+		$this->load->view('mitigasi', $data);
+	}
+
+	// Update
 	public function ubah($id)
 	{
 		$this->load->helper('form');
@@ -68,6 +71,7 @@ class Mitigasi extends CI_Controller {
 		}		
 	}
 
+	// Delete
 	public function hapus($id)
 	{
 		$this->mitigasi_model->delete_mitigasi($id);

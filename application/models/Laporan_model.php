@@ -6,27 +6,10 @@ class Laporan_model extends CI_Model {
 		$this->load->database();
 	}
 
-	public function get_proyek($id = FALSE)
-	{
-		if ($id === FALSE) {
-			$query = $this->db->get('proyek');
-			return $query->result_array();
-		} else {
-			$query = $this->db->get_where('proyek', array('id_proyek' => $id));
-			return $query->row_array();
-		}
-	}
-
+	// Create
 	public function get_pekerjaan_query($id)
 	{
 		$query = $this->db->get_where('pekerjaan', array('id_proyek' => $id));
-		return $query->result_array();
-	}
-
-	public function get_laporan_query($id)
-	{
-		$sql = 'select pro.id_proyek, lap.tgl_laporan_pekerjaan from proyek pro join pekerjaan pek on pro.id_proyek=pek.id_proyek join laporan_pekerjaan lap on pek.id_pekerjaan=lap.id_pekerjaan group by pro.id_proyek, lap.tgl_laporan_pekerjaan having pro.id_proyek = '.$id;
-		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
 
@@ -55,6 +38,26 @@ class Laporan_model extends CI_Model {
 		$this->db->insert('laporan_kendala', $data);
 	}
 
+	// Read
+	public function get_proyek($id = FALSE)
+	{
+		if ($id === FALSE) {
+			$query = $this->db->get('proyek');
+			return $query->result_array();
+		} else {
+			$query = $this->db->get_where('proyek', array('id_proyek' => $id));
+			return $query->row_array();
+		}
+	}
+
+	public function get_laporan_query($id)
+	{
+		$sql = 'select pro.id_proyek, lap.tgl_laporan_pekerjaan from proyek pro join pekerjaan pek on pro.id_proyek=pek.id_proyek join laporan_pekerjaan lap on pek.id_pekerjaan=lap.id_pekerjaan group by pro.id_proyek, lap.tgl_laporan_pekerjaan having pro.id_proyek = '.$id;
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
+	// Update
 	public function get_laporan_pekerjaan($id, $tgl)
 	{
 		$sql = 'select pro.id_proyek, lap.id_laporan_pekerjaan, pek.nama_pekerjaan, pek.bobot, lap.kemajuan, lap.tgl_laporan_pekerjaan from proyek pro join pekerjaan pek on pro.id_proyek=pek.id_proyek join laporan_pekerjaan lap on pek.id_pekerjaan=lap.id_pekerjaan having (pro.id_proyek = '.$id.' and lap.tgl_laporan_pekerjaan = "'.$tgl.'")';
@@ -90,6 +93,7 @@ class Laporan_model extends CI_Model {
 		$this->db->update('laporan_kendala', $data);
 	}
 
+	// Delete
 	public function delete_laporan($id, $tgl)
 	{
 		// delete laporan pekerjaan

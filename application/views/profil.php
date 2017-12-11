@@ -154,7 +154,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Email</label>
+                                                <label>Email</label>
                                                 <input type="email" name="email" class="form-control border-input" placeholder="username@email.com" value="<?php echo $profil['email']; ?>" required>
                                             </div>
                                         </div>

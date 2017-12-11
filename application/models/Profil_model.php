@@ -6,6 +6,7 @@ class Profil_model extends CI_Model {
 		$this->load->database();
 	}
 
+	// Update
 	public function get_profil($id)
 	{
 		$query = $this->db->get_where('pengguna', array('id_pengguna' => $id));
@@ -17,7 +18,8 @@ class Profil_model extends CI_Model {
 		$data =  array(
 			'nama_pengguna' => $this->input->post('nama_pengguna'),
 			'email' => $this->input->post('email'),
-			'kata_sandi' => $this->encryptIt($this->input->post('kata_sandi'))
+			'kata_sandi' => $this->input->post('kata_sandi')
+			// 'kata_sandi' => $this->encryptIt($this->input->post('kata_sandi'))
 		);
 
 		$this->db->where('id_pengguna', $id);

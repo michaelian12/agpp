@@ -11,13 +11,7 @@ class Pengguna extends CI_Controller {
 		$this->load->helper('url_helper');
 	}
 
-	public function index()
-	{
-		$data['pengguna'] = $this->pengguna_model->get_pengguna();
-
-		$this->load->view('pengguna', $data);
-	}
-
+	// Create
 	public function tambah()
 	{
 		$this->load->helper('form');
@@ -37,6 +31,15 @@ class Pengguna extends CI_Controller {
 		}		
 	}
 
+	// Read
+	public function index()
+	{
+		$data['pengguna'] = $this->pengguna_model->get_pengguna();
+
+		$this->load->view('pengguna', $data);
+	}
+
+	// Update
 	public function ubah($id)
 	{
 		$this->load->helper('form');
@@ -56,6 +59,7 @@ class Pengguna extends CI_Controller {
 		}		
 	}
 
+	// Delete
 	public function hapus($id)
 	{
 		$this->pengguna_model->delete_pengguna($id);

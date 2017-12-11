@@ -11,13 +11,7 @@ class Proyek extends CI_Controller {
 		$this->load->helper('url_helper');
 	}
 
-	public function index()
-	{
-		$data['proyek'] = $this->proyek_model->get_proyek();
-
-		$this->load->view('proyek', $data);
-	}
-
+	// Create
 	public function tambah()
 	{
 		$this->load->helper('form');
@@ -40,6 +34,15 @@ class Proyek extends CI_Controller {
 		}		
 	}
 
+	// Read
+	public function index()
+	{
+		$data['proyek'] = $this->proyek_model->get_proyek();
+
+		$this->load->view('proyek', $data);
+	}
+
+	// Update
 	public function ubah($id)
 	{
 		$this->load->helper('form');
@@ -63,6 +66,7 @@ class Proyek extends CI_Controller {
 		}		
 	}
 
+	// Delete
 	public function hapus($id)
 	{
 		$this->proyek_model->delete_proyek($id);

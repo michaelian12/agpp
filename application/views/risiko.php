@@ -158,23 +158,18 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            foreach ($risiko as $risiko_item) { 
-                                                foreach ($penyebab as $penyebab_item) { 
-                                                    if ($penyebab_item['id_risiko'] == $risiko_item['id_risiko']) {?>
-                                                        <tr>
-                                                            <td><?php echo $risiko_item['nama_risiko']; ?></td>
-                                                            <td><?php echo $penyebab_item['nama_penyebab']; ?></td>
-                                                            <td><?php echo $risiko_item['nilai_s']; ?></td>
-                                                            <td><?php echo $penyebab_item['nilai_o']; ?></td>
-                                                            <td><?php echo $risiko_item['nilai_d']; ?></td>
-                                                            <td><?php echo ($risiko_item['nilai_s'] * $penyebab_item['nilai_o'] * $risiko_item['nilai_d']); ?></td>
-                                                            <td><a href="risiko-lihat/<?php echo $risiko_item['id_risiko']?>"><i class="ti-eye"></i></a></td>
-                                                            <td><a href="risiko-hapus/<?php echo $risiko_item['id_risiko']?>"><i class="ti-trash"></i></a></td>
-                                                        </tr>
-                                            <?php }
-                                                }
-                                            }
-                                        ?>
+                                            foreach ($risiko as $risiko_item) { ?>
+                                                <tr>
+                                                    <td><?php echo $risiko_item['nama_risiko']; ?></td>
+                                                    <td><?php echo $risiko_item['nama_penyebab']; ?></td>
+                                                    <td><?php echo $risiko_item['nilai_s']; ?></td>
+                                                    <td><?php echo $risiko_item['nilai_o']; ?></td>
+                                                    <td><?php echo $risiko_item['nilai_d']; ?></td>
+                                                    <td><?php echo ($risiko_item['nilai_s'] * $risiko_item['nilai_o'] * $risiko_item['nilai_d']); ?></td>
+                                                    <td><a href="risiko-lihat/<?php echo $risiko_item['id_risiko']?>"><i class="ti-eye"></i></a></td>
+                                                    <td><a href="risiko-hapus/<?php echo $risiko_item['id_risiko']?>"><i class="ti-trash"></i></a></td>
+                                                </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -11,6 +11,27 @@ class Pekerjaan extends CI_Controller {
 		$this->load->helper('url_helper');
 	}
 
+	// Create
+	public function tambah($id)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('nama_pekerjaan[]', 'Nama Pekerjaan', 'required');
+		$this->form_validation->set_rules('bobot[]', 'Bobot', 'required');
+
+	
+		if ($this->form_validation->run() === FALSE)
+		{
+			$data['proyek_item'] = $this->pekerjaan_model->get_proyek($id);
+			$this->load->view('pekerjaan-tambah', $data);
+		} else {
+			$this->pekerjaan_model->set_pekerjaan();
+			redirect('pekerjaan');
+		}		
+	}
+
+	// Read
 	public function index()
 	{
 		$data['proyek'] = $this->pekerjaan_model->get_proyek();
@@ -31,25 +52,7 @@ class Pekerjaan extends CI_Controller {
 		}
 	}
 
-	public function tambah($id)
-	{
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('nama_pekerjaan[]', 'Nama Pekerjaan', 'required');
-		$this->form_validation->set_rules('bobot[]', 'Bobot', 'required');
-
-	
-		if ($this->form_validation->run() === FALSE)
-		{
-			$data['proyek_item'] = $this->pekerjaan_model->get_proyek($id);
-			$this->load->view('pekerjaan-tambah', $data);
-		} else {
-			$this->pekerjaan_model->set_pekerjaan();
-			redirect('pekerjaan');
-		}		
-	}
-
+	// Update
 	public function ubah($id)
 	{
 		$this->load->helper('form');
@@ -69,6 +72,7 @@ class Pekerjaan extends CI_Controller {
 		}		
 	}
 
+	// Delete
 	public function hapus($id)
 	{
 		$this->pekerjaan_model->delete_pekerjaan($id);

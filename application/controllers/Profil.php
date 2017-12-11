@@ -11,6 +11,7 @@ class Profil extends CI_Controller {
 		$this->load->helper('url_helper');
 	}
 
+	// Update
 	public function index()
 	{
 		$id = $this->session->userdata('id_pengguna');
@@ -30,31 +31,6 @@ class Profil extends CI_Controller {
 			$this->profil_model->update_profil($id);
 			redirect('profil');
 		}		
-	}
-
-	public function ubah($id)
-	{
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('nama_pengguna', 'Nama Lengkap', 'required');
-
-	
-		if ($this->form_validation->run() === FALSE)
-		{
-			$data['pengguna_item'] = $this->pengguna_model->get_pengguna($id);
-			$this->load->view('pengguna-lihat', $data);
-		} else {
-			$this->pengguna_model->update_pengguna($id);
-			redirect('pengguna');	
-		}		
-	}
-
-	public function hapus($id)
-	{
-		$this->pengguna_model->delete_pengguna($id);
-		redirect('pengguna');
 	}
 }
 ?>

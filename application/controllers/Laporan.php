@@ -11,6 +11,28 @@ class Laporan extends CI_Controller {
 		$this->load->helper('url_helper');
 	}
 
+	// Create
+	public function tambah($id)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('kemajuan[]', 'Kemajuan', 'required');
+		$this->form_validation->set_rules('ket_kendala', 'Kendala', 'required');
+
+	
+		if ($this->form_validation->run() === FALSE)
+		{
+			$data['proyek_item'] = $this->laporan_model->get_proyek($id);
+			$data['pekerjaan'] = $this->laporan_model->get_pekerjaan_query($data['proyek_item']['id_proyek']);
+			$this->load->view('laporan-tambah', $data);
+		} else {
+			$this->laporan_model->set_laporan($id);
+			redirect('laporan');
+		}		
+	}
+
+	// Read
 	public function index()
 	{
 		$data['proyek'] = $this->laporan_model->get_proyek();
@@ -33,26 +55,7 @@ class Laporan extends CI_Controller {
 		}
 	}
 
-	public function tambah($id)
-	{
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('kemajuan[]', 'Kemajuan', 'required');
-		$this->form_validation->set_rules('ket_kendala', 'Kendala', 'required');
-
-	
-		if ($this->form_validation->run() === FALSE)
-		{
-			$data['proyek_item'] = $this->laporan_model->get_proyek($id);
-			$data['pekerjaan'] = $this->laporan_model->get_pekerjaan_query($data['proyek_item']['id_proyek']);
-			$this->load->view('laporan-tambah', $data);
-		} else {
-			$this->laporan_model->set_laporan($id);
-			redirect('laporan');
-		}		
-	}
-
+	// Update
 	public function ubah($id = NULL, $tgl = NULL)
 	{
 		$this->load->helper('form');
@@ -73,6 +76,7 @@ class Laporan extends CI_Controller {
 		}		
 	}
 
+	// Delete
 	public function hapus($id, $tgl)
 	{
 		$this->laporan_model->delete_laporan($id, $tgl);

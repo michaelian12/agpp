@@ -6,34 +6,7 @@ class Risiko_model extends CI_Model {
 		$this->load->database();
 	}
 
-	public function get_risiko($id = FALSE)
-	{
-		if ($id === FALSE) {
-			$query = $this->db->get('risiko');
-			return $query->result_array();
-		} else {
-			$query = $this->db->get_where('risiko', array('id_risiko' => $id));
-			return $query->row_array();
-		}
-	}
-
-	public function get_efek($id)
-	{
-		$query = $this->db->get_where('efek', array('id_risiko' => $id));
-		return $query->result_array();
-	}
-
-	public function get_penyebab($id = FALSE)
-	{
-		if ($id === FALSE) {
-			$query = $this->db->get('penyebab');
-			return $query->result_array();
-		} else {
-			$query = $this->db->get_where('penyebab', array('id_risiko' => $id));
-			return $query->result_array();
-		}
-	}
-
+	// Create
 	public function set_risiko()
 	{
 		$data =  array(
@@ -72,6 +45,38 @@ class Risiko_model extends CI_Model {
 				'id_risiko' => $id
 			);
 			$this->db->insert('penyebab', $data);
+		}
+	}
+
+	// Read
+	public function get_risiko_query()
+	{
+		$sql = 'select r.nama_risiko, p.nama_penyebab, r.nilai_s, p.nilai_o, r.nilai_d, r.id_risiko from risiko r join penyebab p on r.id_risiko = p.id_risiko';
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
+	// Update
+	public function get_risiko($id)
+	{
+		$query = $this->db->get_where('risiko', array('id_risiko' => $id));
+		return $query->row_array();
+	}
+
+	public function get_efek($id)
+	{
+		$query = $this->db->get_where('efek', array('id_risiko' => $id));
+		return $query->result_array();
+	}
+
+	public function get_penyebab($id = FALSE)
+	{
+		if ($id === FALSE) {
+			$query = $this->db->get('penyebab');
+			return $query->result_array();
+		} else {
+			$query = $this->db->get_where('penyebab', array('id_risiko' => $id));
+			return $query->result_array();
 		}
 	}
 
@@ -140,6 +145,7 @@ class Risiko_model extends CI_Model {
 		}
 	}
 
+	// Delete
 	public function delete_risiko($id)
 	{
 		try {

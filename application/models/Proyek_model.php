@@ -6,17 +6,7 @@ class Proyek_model extends CI_Model {
 		$this->load->database();
 	}
 
-	public function get_proyek($id = FALSE)
-	{
-		if ($id === FALSE) {
-			$query = $this->db->get('proyek');
-			return $query->result_array();
-		} else {
-			$query = $this->db->get_where('proyek', array('id_proyek' => $id));
-			return $query->row_array();
-		}
-	}
-
+	// Create
 	public function set_proyek()
 	{
 		$data =  array(
@@ -31,6 +21,19 @@ class Proyek_model extends CI_Model {
 		$this->db->insert('proyek', $data);
 	}
 
+	// Read
+	public function get_proyek($id = FALSE)
+	{
+		if ($id === FALSE) {
+			$query = $this->db->get('proyek');
+			return $query->result_array();
+		} else {
+			$query = $this->db->get_where('proyek', array('id_proyek' => $id));
+			return $query->row_array();
+		}
+	}
+
+	// Update
 	public function update_proyek($id)
 	{
 		$data =  array(
@@ -46,6 +49,7 @@ class Proyek_model extends CI_Model {
 		$this->db->update('proyek', $data);
 	}
 
+	// Delete
 	public function delete_proyek($id)
 	{
 		$this->db->delete('proyek', array('id_proyek'=>$id));
