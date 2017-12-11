@@ -190,7 +190,7 @@
                                             <tbody>
                                                 <?php foreach ($laporan_pekerjaan as $laporan_pekerjaan_item) { ?>
                                                 <tr>
-                                                    <td><?php echo $laporan_pekerjaan_item['nama_pekerjaan'] ?><input type='hidden' name='id_laporan_pekerjaan[]' value='<?php echo $laporan_pekerjaan_item['id_laporan_pekerjaan']; ?>'/></td>
+                                                    <td><?php echo $laporan_pekerjaan_item['nama_pekerjaan'] ?><input type='hidden' name='id_laporan_pekerjaan[]' value='<?php echo $laporan_pekerjaan_item['id_laporan_pekerjaan']; ?>'></td>
                                                     <td><?php echo $laporan_pekerjaan_item['bobot'] ?></td>
                                                     <td><input type="number" name="kemajuan[]" step="0.001" min="0" max="<?php echo $laporan_pekerjaan_item['bobot'] ?>" class="form-control border-input" placeholder="0,014" value="<?php echo $laporan_pekerjaan_item['kemajuan'] ?>" required></td>
                                                 </tr>

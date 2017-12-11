@@ -1,3 +1,4 @@
+<?php echo validation_errors(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,49 +53,49 @@
 
             <ul class="nav">
                 <li>
-                    <a href="profil">
+                    <a href="../profil">
                         <i class="ti-user"></i>
                         <p>Profil</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pengguna">
+                    <a href="../pengguna">
                         <i class="ti-id-badge"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
                 <li>
-                    <a href="proyek">
+                    <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
                 <li>
-                    <a href="pekerjaan">
+                    <a href="../pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="identifikasi-risiko">
+                    <a href="../identifikasi-risiko">
                         <i class="ti-search"></i>
                         <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="risiko">
+                    <a href="../risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="#">
+                    <a href="../mitigasi">
                         <i class="ti-shield"></i>
                         <p>Mitigasi</p>
                     </a>
                 </li>
                 <li>
-                    <a href="laporan">
+                    <a href="../laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
@@ -113,14 +114,14 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Mitigasi</a>
+                    <a class="navbar-brand" href="pengguna">Mitigasi</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="keluar">
-                                <i class="ti-power-off"></i>
-                                <p>Keluar</p>
+						<li>
+                            <a href="../keluar">
+								<i class="ti-power-off"></i>
+								<p>Keluar</p>
                             </a>
                         </li>
                     </ul>
@@ -131,51 +132,68 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-2">
+                        
+                    </div>
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <h4 class="title">Daftar Mitigasi</h4>
-                                        <p class="category">Kelola data mitigasi</p>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <a href="mitigasi-tambah" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Mitigasi</a>
-                                    </div>
-                                </div>
-                                <br>
+                                <h4 class="title">Data Mitigasi</h4>
                             </div>
+                            <div class="content">
+                                <?php echo form_open('mitigasi-lihat/'.$mitigasi_item['id_mitigasi']); ?>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Risiko</label>
+                                                <input type="text" name="nama_risiko" class="form-control border-input" value="<?php echo $mitigasi_item['nama_risiko']; ?>" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <th>Risiko</th>
-                                    	<th>Penyebab</th>
-                                    	<th>RPN</th>
-                                    	<th>Mitigasi</th>
-                                    	<th>RPN</th>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            foreach ($mitigasi as $mitigasi_item) { ?>
-                                                <tr>
-                                                    <td><?php echo $mitigasi_item['nama_risiko']; ?></td>
-                                                    <td><?php echo $mitigasi_item['nama_penyebab']; ?></td>
-                                                    <td></td>
-                                                    <td><?php echo $mitigasi_item['nama_mitigasi']; ?></td>
-                                                    <td></td>
-                                                    <td><a href="mitigasi-lihat/<?php echo $mitigasi_item['id_mitigasi']; ?>"><i class="ti-eye"></i></a></td>
-                                                    <td><a href="mitigasi-hapus/<?php echo $mitigasi_item['id_mitigasi']; ?>"><i class="ti-trash"></i></a></td>
-                                                </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Penyebab</label>
+                                                <input type="text" name="nama_penyebab" class="form-control border-input" value="<?php echo $mitigasi_item['nama_penyebab']; ?>" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Mitigasi</label>
+                                                <input type="text" name="nama_mitigasi" class="form-control border-input" placeholder="Negosiasi dengan owner" value="<?php echo $mitigasi_item['nama_mitigasi'] ?>" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="button" onclick="goBack()" class="btn btn-default btn-block btn-wd">Batal</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="clearfix"></div>
+                                </form>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
+
 
         <footer class="footer">
             <div class="container-fluid">
@@ -188,7 +206,36 @@
     </div>
 </div>
 
+
 </body>
+
+    <!--  AJAX Select Dependent  -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#risiko").change(function () {
+                var id_risiko = $(this).val();
+                $.ajax({
+                    url: "<?php echo base_url() ?>mitigasi/get_penyebab",
+                    type: "POST",
+                    data: {'id_risiko' : id_risiko},
+                    dataType: 'json',
+                    success: function(data){
+                        $('#penyebab').html(data);
+                    },
+                    error: function(){
+                        console.log('error');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!--  Back Function  -->
+    <script type="text/javascript">
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -211,6 +258,5 @@
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="<?php echo base_url(); ?>/assets/js/demo.js"></script>
-
 
 </html>

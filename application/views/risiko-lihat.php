@@ -227,14 +227,14 @@
                                             <tbody>
                                                 <?php for ($i=0; $i < count($efek); $i++) { 
                                                     if ($i == 0) { ?>
-                                                        <tr>
-                                                            <td><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" value="<?php echo $efek[$i]['nama_efek'] ?>" required></td>
+                                                        <tr id="<?php echo 'row_efek'.$i; ?>">
+                                                            <td><input type='hidden' name='id_efek[]' value='<?php echo $efek[$i]['id_efek']; ?>'><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" value="<?php echo $efek[$i]['nama_efek'] ?>" required></td>
                                                             <td><button type="button" class="btn btn-default btn-wd" style="float: right;" id="tambah_efek">+ Efek</button></td>
                                                         </tr>
                                                     <?php } else { ?>
-                                                        <tr>
-                                                            <td><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" value="<?php echo $efek[$i]['nama_efek'] ?>" required></td>
-                                                            <td><a href="risiko-hapus/<?php echo $risiko_item['id_risiko']?>"><i class="ti-trash"></i></a></td>
+                                                        <tr id="<?php echo 'row_efek'.$i; ?>">
+                                                            <td><input type='hidden' name='id_efek[]' value='<?php echo $efek[$i]['id_efek']; ?>'><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" value="<?php echo $efek[$i]['nama_efek'] ?>" required></td>
+                                                            <td><a href="../efek-hapus/<?php echo $efek[$i]['id_efek']; ?>" type="button" id="<?php echo $i; ?>" class="remove_efek"><i class="ti-trash"></i></a></td>
                                                         </tr>
                                                 <?php }
                                                 } ?>
@@ -256,8 +256,8 @@
                                             <tbody>
                                                 <?php for ($i=0; $i < count($penyebab); $i++) { 
                                                     if ($i == 0) { ?>
-                                                        <tr>
-                                                            <td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" value="<?php echo $penyebab[$i]['nama_penyebab']; ?>" required></td>
+                                                        <tr id="<?php echo 'row_penyebab'.$i; ?>">
+                                                            <td><input type='hidden' name='id_penyebab[]' value='<?php echo $penyebab[$i]['id_penyebab']; ?>'><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" value="<?php echo $penyebab[$i]['nama_penyebab']; ?>" required></td>
                                                             <td><select name="nilai_o[]" class="form-control border-input" required>
                                                                 <option disabled> -- Nilai Kejadian -- </option>
                                                                 <option value="10"
@@ -314,8 +314,8 @@
                                                             <td><button type="button" class="btn btn-default btn-wd" style="float: right;" id="tambah_penyebab">+ Penyebab</button></td>
                                                         </tr>
                                                     <?php } else { ?>
-                                                        <tr>
-                                                            <td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" value="<?php echo $penyebab[$i]['nama_penyebab']; ?>" required></td>
+                                                        <tr id="<?php echo 'row_penyebab'.$i; ?>">
+                                                            <td><input type='hidden' name='id_penyebab[]' value='<?php echo $penyebab[$i]['id_penyebab']; ?>'><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" value="<?php echo $penyebab[$i]['nama_penyebab']; ?>" required></td>
                                                             <td><select name="nilai_o[]" class="form-control border-input" required>
                                                                 <option disabled> -- Nilai Kejadian -- </option>
                                                                 <option value="10"
@@ -369,7 +369,7 @@
                                                                 }?>
                                                                 >(1) - <= 1 dalam 1500000 kejadian</option>
                                                             </select></td>
-                                                            <td></td>
+                                                            <td><a href="../penyebab-hapus/<?php echo $penyebab[$i]['id_penyebab']; ?>" type="button" id="<?php echo $i; ?>" class="remove_penyebab"><i class="ti-trash"></i></a></td>
                                                         </tr>
                                                 <?php }
                                                 } ?>
@@ -498,9 +498,23 @@
                 $('#tabel_efek').append('<tr id="row_efek'+i+'"><td><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" required></td><td><a type="button" id="'+i+'" class="remove_efek"><i class="ti-trash"></i></a></td></tr>');
             });
 
-            $(document).on('click', '.remove_efek', function(){
+            $(document).on('click', '.remove_efek', function(e){
+                $this = $(this);
+                e.preventDefault();
+
                 var button_id = $(this).attr("id");
-                $('#row_efek'+button_id+'').remove();
+                var url = $(this).attr("href");
+                
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function(){
+                        $('#row_efek'+button_id+'').fadeOut("slow");
+                    },
+                    error: function(){
+                        console.log('error');
+                    }
+                });
             });
         });
     </script>
@@ -514,9 +528,23 @@
                 $('#tabel_penyebab').append('<tr id="row_penyebab'+i+'"><td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" required></td><td><select name="nilai_o[]" class="form-control border-input" required><option disabled selected> -- Nilai Kejadian -- </option><option value="10">(10) - >= 1 dalam 2 kejadian</option><option value="9">(9) - 1 dalam 3 kejadian</option><option value="8">(8) - 1 dalam 8 kejadian</option><option value="7">(7) - 1 dalam 20 kejadian</option><option value="6">(6) - 1 dalam 80 kejadian</option><option value="5">(5) - 1 dalam 400 kejadian</option><option value="4">(4) - 1 dalam 2000 kejadian</option><option value="3">(3) - 1 dalam 15000 kejadian</option><option value="2">(2) - 1 dalam 150000 kejadian</option><option value="1">(1) - <= 1 dalam 1500000 kejadian</option></select></td><td><a type="button" id="'+i+'" class="remove_penyebab"><i class="ti-trash"></i></a></td></tr>');
             });
 
-            $(document).on('click', '.remove_penyebab', function(){
+            $(document).on('click', '.remove_penyebab', function(e){
+                $this = $(this);
+                e.preventDefault();
+
                 var button_id = $(this).attr("id");
-                $('#row_penyebab'+button_id+'').remove();
+                var url = $(this).attr("href");
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function(){
+                        $('#row_penyebab'+button_id+'').fadeOut("slow");
+                    },
+                    error: function(){
+                        console.log('error');
+                    }
+                });
             });
         });
     </script>

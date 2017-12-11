@@ -136,7 +136,7 @@ create table penyebab
 
 create table mitigasi
 (
-	id_mitigasi int primary key unique,
+	id_mitigasi int primary key unique auto_increment,
 	nama_mitigasi varchar(100),
 	id_penyebab int,
 	foreign key(id_penyebab) references penyebab(id_penyebab)

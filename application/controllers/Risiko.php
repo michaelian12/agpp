@@ -75,5 +75,15 @@ class Risiko extends CI_Controller {
 		$this->risiko_model->delete_risiko($id);
 		// redirect('risiko');
 	}
+
+	public function hapus_efek($id)
+	{
+		$this->risiko_model->delete_efek($id);
+	}
+
+	public function hapus_penyebab($id)
+	{
+		$this->risiko_model->delete_penyebab($id);
+	}
 }
 ?>

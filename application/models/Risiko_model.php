@@ -77,6 +77,7 @@ class Risiko_model extends CI_Model {
 
 	public function update_risiko($id)
 	{
+		// risiko
 		$data =  array(
 			'nama_risiko' => $this->input->post('nama_risiko'),
 			'nilai_s' => $this->input->post('nilai_s'),
@@ -86,6 +87,57 @@ class Risiko_model extends CI_Model {
 
 		$this->db->where('id_risiko', $id);
 		$this->db->update('risiko', $data);
+
+		// efek
+		$id_efek = $this->input->post('id_efek');
+		$nama_efek = $this->input->post('nama_efek');
+
+		for ($i = 0; $i < count($this->input->post('nama_efek')); $i++) {
+			// check  if id_efek is exists
+			if ($id_efek[$i] != null) {
+				// update
+				$data =  array(
+					'nama_efek' => $nama_efek[$i],
+					'id_risiko' => $id
+				);
+				$this->db->where('id_efek', $id_efek[$i]);
+				$this->db->update('efek', $data);
+			} else {
+				// insert
+				$data =  array(
+					'nama_efek' => $nama_efek[$i],
+					'id_risiko' => $id
+				);
+				$this->db->insert('efek', $data);
+			}
+		}
+
+		// penyebab
+		$id_penyebab = $this->input->post('id_penyebab');
+		$nama_penyebab = $this->input->post('nama_penyebab');
+		$nilai_o = $this->input->post('nilai_o');
+
+		for ($i = 0; $i < count($this->input->post('nama_penyebab')); $i++) {
+			// check  if id_penyebab is exists
+			if ($id_penyebab[$i] != null) {
+				// update
+				$data =  array(
+					'nama_penyebab' => $nama_penyebab[$i],
+					'nilai_o' => $nilai_o[$i],
+					'id_risiko' => $id
+				);
+				$this->db->where('id_penyebab', $id_penyebab[$i]);
+				$this->db->update('penyebab', $data);
+			} else {
+				// insert
+				$data =  array(
+					'nama_penyebab' => $nama_penyebab[$i],
+					'nilai_o' => $nilai_o[$i],
+					'id_risiko' => $id
+				);
+				$this->db->insert('penyebab', $data);
+			}
+		}
 	}
 
 	public function delete_risiko($id)
@@ -93,12 +145,21 @@ class Risiko_model extends CI_Model {
 		try {
 			// $this->db->delete('efek', array('id_risiko'=>$id));
 			// $this->db->delete('penyebab', array('id_risiko'=>$id));
-			echo "mau hapus";
 			$this->db->delete('risiko', array('id_risiko'=>$id));
 		} catch (Exception $e) {
 			echo "error";
 			echo 'Caught exception: ', $e->getMessage(), '\n';
 		}
+	}
+
+	public function delete_efek($id)
+	{
+		$this->db->delete('efek', array('id_efek'=>$id));
+	}
+
+	public function delete_penyebab($id)
+	{
+		$this->db->delete('penyebab', array('id_penyebab'=>$id));
 	}
 }
 ?>
