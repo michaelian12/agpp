@@ -164,7 +164,7 @@ create table mitigasi
 
 create table laporan_pekerjaan
 (
-	id_laporan_pekerjaan int primary key unique,
+	id_laporan_pekerjaan int primary key unique auto_increment,
 	tgl_laporan_pekerjaan date,
 	kemajuan float,
 	id_pekerjaan int,
@@ -173,7 +173,7 @@ create table laporan_pekerjaan
 
 create table laporan_kendala
 (
-	id_laporan_kendala int primary key unique,
+	id_laporan_kendala int primary key unique auto_increment,
 	ket_kendala varchar(300),
 	tgl_laporan_kendala date,
 	id_proyek int,

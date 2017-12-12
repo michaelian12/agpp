@@ -137,7 +137,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Data Proyek</h4>
+                                <h4 class="title">Data Pekerjaan</h4>
                             </div>
                             <div class="content">
                                 <?php echo form_open('pekerjaan-lihat/'.$pekerjaan_item['id_pekerjaan']); ?>
