@@ -180,18 +180,14 @@ create table laporan_kendala
 	foreign key(id_proyek) references proyek(id_proyek)
 );
 
-create table identifikasi_risiko
+create table evaluasi
 (
-	id_identifikasi_risiko int primary key unique,
-	tgl_identifikasi_risiko date,
+	id_evaluasi int primary key unique,
+	tgl_evaluasi date,
 	id_proyek int,
 	id_risiko int,
-	id_efek int,
-	id_penyebab int,
 	id_mitigasi int,
 	foreign key(id_proyek) references proyek(id_proyek),
 	foreign key(id_risiko) references risiko(id_risiko),
-	foreign key(id_efek) references efek(id_efek),
-	foreign key(id_penyebab) references penyebab(id_penyebab),
 	foreign key(id_mitigasi) references mitigasi(id_mitigasi)
 );

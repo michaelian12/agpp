@@ -1,4 +1,8 @@
-<?php echo validation_errors(); ?>
+<?php  
+// check if session is not empty
+if (!empty($this->session->userdata('id_pengguna'))) {
+    echo validation_errors();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -69,6 +73,7 @@
                         <p>Profil</p>
                     </a>
                 </li>
+                <?php if ($this->session->userdata('jabatan') == 'Admin') { ?>
                 <li>
                     <a href="pengguna">
                         <i class="ti-id-badge"></i>
@@ -81,16 +86,11 @@
                         <p>Proyek</p>
                     </a>
                 </li>
+                <?php } elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') { ?>
                 <li>
                     <a href="pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="identifikasi-risiko">
-                        <i class="ti-search"></i>
-                        <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
@@ -106,11 +106,19 @@
                     </a>
                 </li>
                 <li>
+                    <a href="evaluasi">
+                        <i class="ti-write"></i>
+                        <p>Evaluasi</p>
+                    </a>
+                </li>
+                <?php } elseif ($this->session->userdata('jabatan') == 'Site Manager') { ?>
+                <li>
                     <a href="laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
                 </li>
+                <?php } ?>
             </ul>
     	</div>
     </div>
@@ -307,3 +315,6 @@
 	<script src="<?php echo base_url(); ?>/assets/js/demo.js"></script>
 
 </html>
+<?php } else {
+    redirect('masuk');
+} ?>

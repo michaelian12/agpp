@@ -75,17 +75,11 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Proyek</p>
                     </a>
                 </li>
+                <?php } elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') { ?>
                 <li>
                     <a href="pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
-                    </a>
-                </li>
-                <?php } elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') { ?>
-                <li>
-                    <a href="identifikasi-risiko">
-                        <i class="ti-search"></i>
-                        <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
@@ -100,7 +94,13 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Mitigasi</p>
                     </a>
                 </li>
-                <?php } elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') { ?>
+                <li>
+                    <a href="evaluasi">
+                        <i class="ti-write"></i>
+                        <p>Evaluasi</p>
+                    </a>
+                </li>
+                <?php } elseif ($this->session->userdata('jabatan') == 'Site Manager') { ?>
                 <li>
                     <a href="laporan">
                         <i class="ti-pencil-alt"></i>
