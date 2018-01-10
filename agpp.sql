@@ -33,7 +33,7 @@ create table proyek
 insert into proyek values
 (1, '01/SPP/AGPP-NM/V/2010', 'Pelaksanaan Bangunan Mazda Showroom di Jl. Suryopranoto, Jakarta', 'PT. Nusantara Mazda', '6500000000', '2010-05-19', '2010-12-19'),
 (2, '01/SPP/EGC-AGPP/PORSCHE/III/2014', 'Pelaksanaan Pekerjaan Struktur, Arsitektur, dan Mechanical Electrical Porsche Centre Jakarta', 'PT. Eurokars Artha Utama', '32670000000', '2014-03-26', '2015-03-25'),
-(3, '01/SPP/NBM-AGPP/MITSUBISHI/II/2017', 'Pelaksanaan Pekerjaan Showroom, Service Reception, Service Bay, Service Store, Car Wash and Exterior', 'PT. Nusantara Berlian Motor', '10780000000', '2017-02-15', '2017-07-30');
+(3, '01/SPP/NBM-AGPP/MITSUBISHI/II/2017', 'Pelaksanaan Pekerjaan Showroom, Service Reception, Service Bay, Service Store, Car Wash and Exterior Mitsubishi Showroom Medan', 'PT. Nusantara Berlian Motor', '10780000000', '2017-02-15', '2017-07-30');
 
 create table risiko
 (
@@ -69,6 +69,8 @@ create table pekerjaan
 	id_pekerjaan int primary key unique auto_increment,
 	nama_pekerjaan varchar(100),
 	bobot float,
+	tgl_mulai_pekerjaan date,
+	tgl_selesai_pekerjaan date,
 	id_proyek int,
 	foreign key(id_proyek) references proyek(id_proyek)
 );

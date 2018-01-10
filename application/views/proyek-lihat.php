@@ -63,7 +63,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
-                    Anantagraha Primaperkasa
+                    <span style="line-height:30px; font-size:32px">ANANTA</span>
+                    <img src="../agpp.png" style="vertical-align:bottom; width: 48px; height: 48px">
                 </a>
             </div>
 
