@@ -171,6 +171,21 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                     </div>
 
                                     <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>RPN</label>
+                                                <input type="text" name="rpn" class="form-control border-input" value="<?php echo $mitigasi_item['rpn']; ?>" required readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Kategori</label>
+                                                <input type="text" name="kategori" class="form-control border-input" value="<?php echo $mitigasi_item['kategori']; ?>" required readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Mitigasi</label>
@@ -219,7 +234,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 </body>
 
     <!--  AJAX Select Dependent  -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(document).ready(function () {
             $("#risiko").change(function () {
                 var id_risiko = $(this).val();
@@ -237,7 +252,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                 });
             });
         });
-    </script>
+    </script> -->
 
     <!--  Back Function  -->
     <script type="text/javascript">
@@ -258,9 +273,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url(); ?>/assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="<?php echo base_url(); ?>/assets/js/paper-dashboard.js"></script>

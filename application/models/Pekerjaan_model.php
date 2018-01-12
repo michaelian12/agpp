@@ -12,11 +12,15 @@ class Pekerjaan_model extends CI_Model {
 		$nama_pekerjaan = $this->input->post('nama_pekerjaan');
 		$bobot = $this->input->post('bobot');
 		$id_proyek = $this->input->post('id_proyek');
+		$tgl_mulai_pekerjaan = $this->input->post('tgl_mulai_pekerjaan');
+		$tgl_selesai_pekerjaan = $this->input->post('tgl_selesai_pekerjaan');
 
 		for ($i = 0; $i < count($this->input->post('nama_pekerjaan')); $i++) { 
 			$data =  array(
 				'nama_pekerjaan' => $nama_pekerjaan[$i],
 				'bobot' => $bobot[$i],
+				'tgl_mulai_pekerjaan' => $tgl_mulai_pekerjaan[$i],
+				'tgl_selesai_pekerjaan' => $tgl_selesai_pekerjaan[$i],
 				'id_proyek' => $id_proyek
 			);
 			$this->db->insert('pekerjaan', $data);
@@ -53,7 +57,9 @@ class Pekerjaan_model extends CI_Model {
 	{
 		$data =  array(
 			'nama_pekerjaan' => $this->input->post('nama_pekerjaan'),
-			'bobot' => $this->input->post('bobot')
+			'bobot' => $this->input->post('bobot'),
+			'tgl_mulai_pekerjaan' => $this->input->post('tgl_mulai_pekerjaan'),
+			'tgl_selesai_pekerjaan' => $this->input->post('tgl_selesai_pekerjaan')
 		);
 
 		$this->db->where('id_pekerjaan', $id);

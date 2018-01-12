@@ -6,14 +6,57 @@ class Risiko_model extends CI_Model {
 		$this->load->database();
 	}
 
+	public function update_nilai_kritis($id)
+	{
+		// nilai kritis
+		$sql = 'select p.id_penyebab, p.rpn from penyebab p join risiko r on p.id_risiko = r.id_risiko where r.id_proyek = '.$id;
+		$query = $this->db->query($sql);
+		$output = $query->result_array();
+
+		$total_rpn = 0;
+
+		foreach ($output as $output_item) {
+			$total_rpn += $output_item['rpn'];
+		}
+
+		$nilai_kritis = round($total_rpn/count($output));
+
+		$data = array(
+			'nilai_kritis' => $nilai_kritis
+		);
+
+		$this->db->where('id_proyek', $id);
+		$this->db->update('proyek', $data);
+
+		// kategori risiko
+		foreach ($output as $output_item) {
+			$rpn = $output_item['rpn'];
+
+			if ($rpn >= $nilai_kritis) {
+				$kategori = 'Tinggi';
+			} else {
+				$kategori = 'Rendah';
+			}
+
+			$data = array(
+				'kategori' => $kategori
+			);
+
+			$this->db->where('id_penyebab', $output_item['id_penyebab']);
+			$this->db->update('penyebab', $data);
+		}
+
+	}
+
 	// Create
-	public function set_risiko()
+	public function set_risiko($id)
 	{
 		$data =  array(
 			'nama_risiko' => $this->input->post('nama_risiko'),
 			'nilai_s' => $this->input->post('nilai_s'),
 			'nama_kontrol' => $this->input->post('nama_kontrol'),
-			'nilai_d' => $this->input->post('nilai_d')
+			'nilai_d' => $this->input->post('nilai_d'),
+			'id_proyek' => $id
 		);
 
 		$this->db->insert('risiko', $data);
@@ -35,6 +78,9 @@ class Risiko_model extends CI_Model {
 
 	public function set_penyebab($id)
 	{
+		$query = $this->db->get_where('risiko', array('id_risiko' => $id));
+		$output = $query->row_array();
+
 		$nama_penyebab = $this->input->post('nama_penyebab');
 		$nilai_o = $this->input->post('nilai_o');
 
@@ -42,6 +88,7 @@ class Risiko_model extends CI_Model {
 			$data =  array(
 				'nama_penyebab' => $nama_penyebab[$i],
 				'nilai_o' => $nilai_o[$i],
+				'rpn' => $output['nilai_s'] * $nilai_o[$i] * $output['nilai_d'],
 				'id_risiko' => $id
 			);
 			$this->db->insert('penyebab', $data);
@@ -49,9 +96,20 @@ class Risiko_model extends CI_Model {
 	}
 
 	// Read
-	public function get_risiko_query()
+	public function get_proyek($id = FALSE)
 	{
-		$sql = 'select r.nama_risiko, p.nama_penyebab, r.nilai_s, p.nilai_o, r.nilai_d, r.id_risiko from risiko r join penyebab p on r.id_risiko = p.id_risiko';
+		if ($id === FALSE) {
+			$query = $this->db->get('proyek');
+			return $query->result_array();
+		} else {
+			$query = $this->db->get_where('proyek', array('id_proyek' => $id));
+			return $query->row_array();
+		}
+	}
+
+	public function get_risiko_query($id)
+	{
+		$sql = 'select r.nama_risiko, r.nilai_s, p.nama_penyebab, p.nilai_o, r.nama_kontrol, r.nilai_d, p.rpn, r.id_risiko from risiko r join penyebab p on r.id_risiko = p.id_risiko where r.id_proyek = '.$id;
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -118,6 +176,9 @@ class Risiko_model extends CI_Model {
 		}
 
 		// penyebab
+		$query = $this->db->get_where('risiko', array('id_risiko' => $id));
+		$output = $query->row_array();
+		
 		$id_penyebab = $this->input->post('id_penyebab');
 		$nama_penyebab = $this->input->post('nama_penyebab');
 		$nilai_o = $this->input->post('nilai_o');
@@ -129,6 +190,7 @@ class Risiko_model extends CI_Model {
 				$data =  array(
 					'nama_penyebab' => $nama_penyebab[$i],
 					'nilai_o' => $nilai_o[$i],
+					'rpn' => $output['nilai_s'] * $nilai_o[$i] * $output['nilai_d'],
 					'id_risiko' => $id
 				);
 				$this->db->where('id_penyebab', $id_penyebab[$i]);
@@ -138,11 +200,14 @@ class Risiko_model extends CI_Model {
 				$data =  array(
 					'nama_penyebab' => $nama_penyebab[$i],
 					'nilai_o' => $nilai_o[$i],
+					'rpn' => $output['nilai_s'] * $nilai_o[$i] * $output['nilai_d'],
 					'id_risiko' => $id
 				);
 				$this->db->insert('penyebab', $data);
 			}
 		}
+
+		return $output['id_proyek'];
 	}
 
 	// Delete

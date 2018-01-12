@@ -1,7 +1,6 @@
 <?php  
 // check if session is not empty
 if (!empty($this->session->userdata('id_pengguna'))) {
-    echo validation_errors();
 ?>
 <!doctype html>
 <html lang="en">
@@ -52,58 +51,58 @@ if (!empty($this->session->userdata('id_pengguna'))) {
             <div class="logo">
                 <a href="#" class="simple-text">
                     <span style="line-height:30px; font-size:32px">ANANTA</span>
-                    <img src="../agpp.png" style="vertical-align:bottom; width: 48px; height: 48px">
+                    <img src="agpp.png" style="vertical-align:bottom; width: 48px; height: 48px">
                 </a>
             </div>
 
             <ul class="nav">
                 <li>
-                    <a href="../profil">
+                    <a href="profil">
                         <i class="ti-user"></i>
                         <p>Profil</p>
                     </a>
                 </li>
                 <?php if ($this->session->userdata('jabatan') == 'Admin') { ?>
-                <li class="active">
-                    <a href="../pengguna">
+                <li>
+                    <a href="pengguna">
                         <i class="ti-id-badge"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../proyek">
+                    <a href="proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
                 <?php } elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') { ?>
                 <li>
-                    <a href="../pekerjaan">
+                    <a href="pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../risiko">
+                    <a href="risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
                     </a>
                 </li>
                 <li>
-                    <a href="../mitigasi">
+                    <a href="mitigasi">
                         <i class="ti-shield"></i>
                         <p>Mitigasi</p>
                     </a>
                 </li>
-                <li>
-                    <a href="../evaluasi">
+                <li class="active">
+                    <a href="#">
                         <i class="ti-write"></i>
                         <p>Evaluasi</p>
                     </a>
                 </li>
                 <?php } elseif ($this->session->userdata('jabatan') == 'Site Manager') { ?>
                 <li>
-                    <a href="../laporan">
+                    <a href="laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
@@ -123,14 +122,14 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="pengguna">Pengguna</a>
+                    <a class="navbar-brand" href="#">Evaluasi</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-						<li>
-                            <a href="../keluar">
-								<i class="ti-power-off"></i>
-								<p>Keluar</p>
+                        <li>
+                            <a href="keluar">
+                                <i class="ti-power-off"></i>
+                                <p>Keluar</p>
                             </a>
                         </li>
                     </ul>
@@ -141,101 +140,61 @@ if (!empty($this->session->userdata('id_pengguna'))) {
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2">
-                        
-                    </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Data Pengguna</h4>
+                                <h4 class="title">Proyek</h4>
+                                <p class="category">Pilih proyek untuk menampilkan daftar evaluasi pada proyek</p>
                             </div>
                             <div class="content">
-                                <?php echo form_open('pengguna-lihat/'.$pengguna_item['id_pengguna']); ?>
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email</label>
-                                                <input type="email" name="email" class="form-control border-input" placeholder="username@email.com" value="<?php echo $pengguna_item['email']; ?>" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Nama Lengkap</label>
-                                                <input type="text" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $pengguna_item['nama_pengguna']; ?>" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Jabatan</label>
-                                                <select name="jabatan" class="form-control border-input" required>
-                                                    <option value="Admin"
-                                                    <?php if ($pengguna_item['jabatan'] == 'Admin') {
-                                                        echo 'selected="selected"';    
-                                                    }?>
-                                                    >Direktur</option>
-                                                    <option value="Manajer Proyek"
-                                                    <?php if ($pengguna_item['jabatan'] == 'Manajer Proyek') {
-                                                        echo 'selected="selected"';    
-                                                    }?>
-                                                    >Manajer Proyek</option>
-                                                    <option value="Site Manager"
-                                                    <?php if ($pengguna_item['jabatan'] == 'Site Manager') {
-                                                        echo 'selected="selected"';    
-                                                    }?>
-                                                    >Site Manager</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <select name="status" class="form-control border-input" required>
-                                                    <option value="Aktif"
-                                                    <?php if ($pengguna_item['status'] == 'Aktif') {
-                                                        echo 'selected="selected"';    
-                                                    }?>
-                                                    >Aktif</option>
-                                                    <option value="Nonaktif"
-                                                    <?php if ($pengguna_item['status'] == 'Nonaktif') {
-                                                        echo 'selected="selected"';    
-                                                    }?>
-                                                    >Nonaktif</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button type="button" onclick="goBack()" class="btn btn-default btn-block btn-wd">Batal</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="clearfix"></div>
-                                </form>
-                                <?php echo form_close(); ?>
+                                <select name="proyek" class="form-control border-input" id="proyek">
+                                    <option disabled selected> -- Pilih Proyek -- </option>
+                                    <?php 
+                                        foreach ($proyek as $proyek_item) { ?>
+                                            <option value="<?php echo $proyek_item['id_proyek']; ?>"><?php echo $proyek_item['nama_proyek']; ?></option>
+                                        <?php }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <h4 class="title">Daftar Evaluasi</h4>
+                                        <p class="category">Kelola data evaluasi</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <a id="tambah_evaluasi" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Evaluasi</a>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
 
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-striped" id="evaluasi">
+                                    <thead>
+                                        <th>Tgl. Evaluasi</th>
+                                        <th>Risiko</th>
+                                    	<th>Penyebab</th>
+                                    	<th>RPN</th>
+                                        <th>Kategori</th>
+                                    	<th>Mitigasi</th>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
 
         <footer class="footer">
             <div class="container-fluid">
@@ -248,14 +207,57 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     </div>
 </div>
 
-
 </body>
     
-    <!--  Back Function  -->
+    <!--  Check if project has been selected  -->
     <script type="text/javascript">
-        function goBack() {
-            window.history.back();
-        }
+        $('#tambah_evaluasi').click(function(){
+            if ($(this).attr('href') === undefined) {
+                $.notify({
+                    icon: 'ti-info-alt',
+                    message: "Pilih proyek untuk melanjutkan"
+
+                },{
+                    type: 'warning',
+                    timer: 200
+                });
+
+                return false;
+            }
+        });
+    </script>
+
+    <!--  AJAX Table Dependent  -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#proyek").change(function () {
+                // clear table
+                $('#evaluasi tbody').empty();
+
+                // get risks data
+                var id_proyek = $(this).val();
+                if (id_proyek !== null || id_proyek !== "") {
+                    $.ajax({
+                        url: "<?php echo base_url() ?>evaluasi/get_evaluasi",
+                        type: "POST",
+                        data: {'id_proyek' : id_proyek},
+                        dataType: 'json',
+                        success: function(data){
+                            $('#evaluasi tbody').append(data);
+                        },
+                        error: function(){
+                            console.log('error');
+                        }
+                    });
+                }
+
+                // set href link
+                var original_link = "evaluasi-tambah";
+                $('#tambah_evaluasi').attr('href', original_link);                
+                var new_href = $('#tambah_evaluasi').attr('href') + '/' + id_proyek;
+                $('#tambah_evaluasi').attr('href', new_href);
+            });
+        });
     </script>
 
     <!--   Core JS Files   -->
@@ -276,6 +278,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="<?php echo base_url(); ?>/assets/js/demo.js"></script>
+
 
 </html>
 <?php } else {

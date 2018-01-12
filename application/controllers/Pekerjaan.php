@@ -19,6 +19,8 @@ class Pekerjaan extends CI_Controller {
 
 		$this->form_validation->set_rules('nama_pekerjaan[]', 'Nama Pekerjaan', 'required');
 		$this->form_validation->set_rules('bobot[]', 'Bobot', 'required');
+		$this->form_validation->set_rules('tgl_mulai_pekerjaan[]', 'Tanggal Mulai', 'required');
+		$this->form_validation->set_rules('tgl_selesai_pekerjaan[]', 'Tanggal Selesai', 'required');
 
 	
 		if ($this->form_validation->run() === FALSE)
@@ -46,7 +48,7 @@ class Pekerjaan extends CI_Controller {
 		if (count($pekerjaan) > 0) {
 			$table_row = '';
 			foreach ($pekerjaan as $pekerjaan_item) {
-				$table_row .= '<tr><td>'.$pekerjaan_item["nama_pekerjaan"].'</td><td>'.$pekerjaan_item["bobot"].'</td><td><a href="pekerjaan-lihat/'.$pekerjaan_item["id_pekerjaan"].'"><i class="ti-eye"></i></a></td><td><a href="pekerjaan-hapus/'.$pekerjaan_item["id_pekerjaan"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
+				$table_row .= '<tr><td>'.$pekerjaan_item["nama_pekerjaan"].'</td><td>'.$pekerjaan_item["bobot"].'</td><td>'.$pekerjaan_item["tgl_mulai_pekerjaan"].'</td><td>'.$pekerjaan_item["tgl_selesai_pekerjaan"].'</td><td><a href="pekerjaan-lihat/'.$pekerjaan_item["id_pekerjaan"].'"><i class="ti-eye"></i></a></td><td><a href="pekerjaan-hapus/'.$pekerjaan_item["id_pekerjaan"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
 			}
 			echo json_encode($table_row);
 		}
@@ -60,6 +62,8 @@ class Pekerjaan extends CI_Controller {
 
 		$this->form_validation->set_rules('nama_pekerjaan', 'Nama Pekerjaan', 'required');
 		$this->form_validation->set_rules('bobot', 'Bobot', 'required');
+		$this->form_validation->set_rules('tgl_mulai_pekerjaan', 'Tanggal Mulai', 'required');
+		$this->form_validation->set_rules('tgl_selesai_pekerjaan', 'Tanggal Selesai', 'required');
 
 	
 		if ($this->form_validation->run() === FALSE)

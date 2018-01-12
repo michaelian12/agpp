@@ -13,10 +13,16 @@ class Mitigasi_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function get_penyebab($id)
+	public function get_penyebab_query($id)
 	{
 		$query = $this->db->get_where('penyebab', array('id_risiko' => $id));
 		return $query->result_array();
+	}
+
+	public function get_penyebab($id)
+	{
+		$query = $this->db->get_where('penyebab', array('id_penyebab' => $id));
+		return $query->row_array();
 	}
 
 	public function set_mitigasi()
@@ -30,9 +36,20 @@ class Mitigasi_model extends CI_Model {
 	}
 
 	// Read
-	public function get_mitigasi_query()
+	public function get_proyek($id = FALSE)
 	{
-		$sql = 'select r.nama_risiko, p.nama_penyebab, m.nama_mitigasi, m.id_mitigasi from mitigasi m join penyebab p on m.id_penyebab = p.id_penyebab join risiko r on p.id_risiko = r.id_risiko';
+		if ($id === FALSE) {
+			$query = $this->db->get('proyek');
+			return $query->result_array();
+		} else {
+			$query = $this->db->get_where('proyek', array('id_proyek' => $id));
+			return $query->row_array();
+		}
+	}
+
+	public function get_mitigasi_query($id)
+	{
+		$sql = 'select r.nama_risiko, p.nama_penyebab, p.rpn, p.kategori, m.nama_mitigasi, m.id_mitigasi from mitigasi m join penyebab p on m.id_penyebab = p.id_penyebab join risiko r on p.id_risiko = r.id_risiko where r.id_proyek = '.$id;
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -40,7 +57,7 @@ class Mitigasi_model extends CI_Model {
 	// Update
 	public function get_mitigasi($id)
 	{
-		$sql = 'select r.nama_risiko, p.nama_penyebab, m.nama_mitigasi, m.id_mitigasi from mitigasi m join penyebab p on m.id_penyebab = p.id_penyebab join risiko r on p.id_risiko = r.id_risiko having m.id_mitigasi = '.$id;
+		$sql = 'select r.nama_risiko, p.nama_penyebab, p.rpn, p.kategori, m.nama_mitigasi, m.id_mitigasi from mitigasi m join penyebab p on m.id_penyebab = p.id_penyebab join risiko r on p.id_risiko = r.id_risiko having m.id_mitigasi = '.$id;
 		$query = $this->db->query($sql);
 		return $query->row_array();
 	}

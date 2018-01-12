@@ -16,9 +16,11 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
     <!-- Bootstrap core CSS     -->
     <link href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--  JQuery UI CSS  -->
+    <link href="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
     <link href="<?php echo base_url(); ?>/assets/css/animate.min.css" rel="stylesheet"/>
@@ -128,7 +130,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a href=".../keluar">
+                            <a href="../keluar">
 								<i class="ti-power-off"></i>
 								<p>Keluar</p>
                             </a>
@@ -141,9 +143,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Proyek</h4>
@@ -172,9 +172,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
                                 <div class="row">
@@ -192,17 +190,23 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                     <input type='hidden' name='id_proyek' value='<?php echo $proyek_item['id_proyek']; ?>'/>
                                     <div class="content table-responsive table-full-width">
                                         <table class="table table-striped" id="dynamic_field">
-                                            <col width="65%">
-                                            <col width="25%">
+                                            <col width="42%">
+                                            <col width="14%">
+                                            <col width="17%">
+                                            <col width="17%">
                                             <col width="10%">
                                             <thead>
                                                 <th>Nama Pekerjaan</th>
                                                 <th>Bobot</th>
+                                                <th>Mulai</th>
+                                                <th>Selesai</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td>
                                                     <td><input type="number" name="bobot[]" step="0.001" min="0" max="1" class="form-control border-input" placeholder="0,014" required></td>
+                                                    <td><input type="text" id="tgl_mulai_pekerjaan" name="tgl_mulai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required></td>
+                                                    <td><input type="text" id="tgl_selesai_pekerjaan" name="tgl_selesai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required></td>
                                                     <td></td>
                                                 </tr>
                                             </tbody>
@@ -238,7 +242,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 </div>
 
 
-</body>    
+</body>
 
     <!--  Dynamic Dependent Table  -->
     <script type="text/javascript">
@@ -246,12 +250,75 @@ if (!empty($this->session->userdata('id_pengguna'))) {
             var i = 1;
             $('#tambah_entri').click(function(){
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td><td><input type="number" name="bobot[]" step="0.001" min="0" max="1" class="form-control border-input" placeholder="0,014" required></td><td><a type="button" id="'+i+'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td><td><input type="number" name="bobot[]" step="0.001" min="0" max="1" class="form-control border-input" placeholder="0,014" required></td><td><input type="text" id="tgl_mulai_pekerjaan'+i+'" name="tgl_mulai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required></td><td><input type="text" id="tgl_selesai_pekerjaan'+i+'" name="tgl_selesai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required></td><td><a type="button" id="'+i+'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>');
+
+                $('#tgl_mulai_pekerjaan'+i).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat : 'yy-mm-dd',
+                    minDate: 0,
+                    onSelect: function (date) {
+                        var dt2 = $('#tgl_selesai_pekerjaan'+i);
+                        var startDate = $(this).datepicker('getDate');
+                        var minDate = $(this).datepicker('getDate');
+                        dt2.datepicker('option', 'minDate', minDate);
+                    }
+                });
+
+                $('#tgl_selesai_pekerjaan'+i).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat : 'yy-mm-dd'
+                });
             });
+
+            if (i > 1) {
+                $('#tgl_mulai_pekerjaan'+i).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat : 'yy-mm-dd',
+                    minDate: 0,
+                    onSelect: function (date) {
+                        var dt2 = $('#tgl_selesai_pekerjaan'+i);
+                        var startDate = $(this).datepicker('getDate');
+                        var minDate = $(this).datepicker('getDate');
+                        dt2.datepicker('option', 'minDate', minDate);
+                    }
+                });
+
+                $('#tgl_selesai_pekerjaan'+i).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat : 'yy-mm-dd'
+                });
+            }
+            else {
+                $("#tgl_mulai_pekerjaan").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat : 'yy-mm-dd',
+                    minDate: 0,
+                    onSelect: function (date) {
+                        var dt2 = $('#tgl_selesai_pekerjaan');
+                        var startDate = $(this).datepicker('getDate');
+                        var minDate = $(this).datepicker('getDate');
+                        dt2.datepicker('option', 'minDate', minDate);
+                    }
+                });
+
+                $('#tgl_selesai_pekerjaan').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat : 'yy-mm-dd'
+                });
+            }
 
             $(document).on('click', '.btn_remove', function(){
                 var button_id = $(this).attr("id");
-                $('#row'+button_id+'').remove();
+                // $('#row'+button_id+'').remove();
+                $('#row'+button_id+'').fadeOut('slow', function() {
+                    $(this).remove();
+                });
             });
         });
     </script>
@@ -259,6 +326,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/external/jquery/jquery.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap-checkbox-radio.js"></script>
@@ -268,9 +337,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url(); ?>/assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="<?php echo base_url(); ?>/assets/js/paper-dashboard.js"></script>

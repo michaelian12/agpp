@@ -245,7 +245,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $("#tgl_mulai").datepicker({
+            $('#tgl_mulai').datepicker({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat : 'yy-mm-dd',
@@ -305,9 +305,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url(); ?>/assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="<?php echo base_url(); ?>/assets/js/paper-dashboard.js"></script>

@@ -20,6 +20,9 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     <!-- Bootstrap core CSS     -->
     <link href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css" rel="stylesheet" />
 
+    <!--  JQuery UI CSS  -->
+    <link href="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
+
     <!-- Animation library for notifications   -->
     <link href="<?php echo base_url(); ?>/assets/css/animate.min.css" rel="stylesheet"/>
 
@@ -141,9 +144,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Data Pekerjaan</h4>
@@ -152,16 +153,28 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                 <?php echo form_open('pekerjaan-lihat/'.$pekerjaan_item['id_pekerjaan']); ?>
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nama Pekerjaan</label>
                                                 <input type="text" name="nama_pekerjaan" class="form-control border-input" placeholder="Land Scrapping" value="<?php echo $pekerjaan_item['nama_pekerjaan']; ?>" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Bobot</label>
-                                                <input type="number" name="bobot" step="0.001" min="0" max="1" class="form-control border-input" placeholder="0,014" value="<?php echo $pekerjaan_item['bobot']; ?>" required>
+                                                <input type="number" name="bobot" step="0.001" min="0" max="100" class="form-control border-input" placeholder="0,014" value="<?php echo $pekerjaan_item['bobot']; ?>" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Tgl. Mulai</label>
+                                                <input type="text" id="tgl_mulai_pekerjaan" name="tgl_mulai_pekerjaan" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" value="<?php echo $pekerjaan_item['tgl_mulai_pekerjaan']; ?>" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Tgl. Selesai</label>
+                                                <input type="text" id="tgl_selesai_pekerjaan" name="tgl_selesai_pekerjaan" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" value="<?php echo $pekerjaan_item['tgl_selesai_pekerjaan']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -205,6 +218,30 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 </body>
     
+    <!--  Date Validation  -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tgl_mulai_pekerjaan').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat : 'yy-mm-dd',
+                minDate: 0,
+                onSelect: function (date) {
+                    var dt2 = $('#tgl_selesai_pekerjaan');
+                    var startDate = $(this).datepicker('getDate');
+                    var minDate = $(this).datepicker('getDate');
+                    dt2.datepicker('option', 'minDate', minDate);
+                }
+            });
+            $('#tgl_selesai_pekerjaan').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat : 'yy-mm-dd'
+            });
+        });        
+    </script>
+
     <!--  Back Function  -->
     <script type="text/javascript">
         function goBack() {
@@ -215,6 +252,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/external/jquery/jquery.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>/assets/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap-checkbox-radio.js"></script>
@@ -224,9 +263,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url(); ?>/assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="<?php echo base_url(); ?>/assets/js/paper-dashboard.js"></script>

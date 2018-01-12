@@ -71,16 +71,19 @@ $route['pekerjaan-lihat/(:any)'] = 'pekerjaan/ubah/$1';
 $route['pekerjaan-hapus/(:any)'] = 'pekerjaan/hapus/$1';
 
 $route['risiko'] = 'risiko';
-$route['risiko-tambah'] = 'risiko/tambah';
+$route['risiko-tambah/(:any)'] = 'risiko/tambah/$1';
 $route['risiko-lihat/(:any)'] = 'risiko/ubah/$1';
 $route['risiko-hapus/(:any)'] = 'risiko/hapus/$1';
 $route['efek-hapus/(:any)'] = 'risiko/hapus_efek/$1';
 $route['penyebab-hapus/(:any)'] = 'risiko/hapus_penyebab/$1';
 
 $route['mitigasi'] = 'mitigasi';
-$route['mitigasi-tambah'] = 'mitigasi/tambah';
+$route['mitigasi-tambah/(:any)'] = 'mitigasi/tambah/$1';
 $route['mitigasi-lihat/(:any)'] = 'mitigasi/ubah/$1';
 $route['mitigasi-hapus/(:any)'] = 'mitigasi/hapus/$1';
+
+$route['evaluasi'] = 'evaluasi';
+$route['evaluasi-tambah/(:any)'] = 'evaluasi/tambah/$1';
 
 $route['laporan'] = 'laporan';
 $route['laporan-tambah/(:any)'] = 'laporan/tambah/$1';

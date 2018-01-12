@@ -1,195 +1,321 @@
-drop database if exists agpp;
-create database agpp;
-use agpp;
+DROP DATABASE IF EXISTS agpp;
+CREATE DATABASE agpp;
+USE agpp;
 
 -- Parent Tables
 
-create table pengguna
-(
-	id_pengguna int primary key unique auto_increment,
-	nama_pengguna varchar(100),
-	jabatan enum('Admin', 'Manajer Proyek', 'Site Manager'),
-	email varchar(50) unique,
-	kata_sandi varchar(50),
-	status enum('Aktif', 'Nonaktif')
-);
+CREATE TABLE `pengguna` (
+  `id_pengguna` int(11) NOT NULL,
+  `nama_pengguna` varchar(100) DEFAULT NULL,
+  `jabatan` enum('Admin','Manajer Proyek','Site Manager') DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `kata_sandi` varchar(50) DEFAULT NULL,
+  `status` enum('Aktif','Nonaktif') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-insert into pengguna values
+INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `jabatan`, `email`, `kata_sandi`, `status`) VALUES
 (1, 'Budianto Azis', 'Admin', 'budianto.azis@agpp.com', 'agpp', 'Aktif'),
 (2, 'Agus Permana', 'Manajer Proyek', 'agus.permana@agpp.com', 'agpp', 'Aktif'),
 (3, 'Agus Purnama', 'Site Manager', 'agus.purnama@agpp.com', 'agpp', 'Aktif');
 
-create table proyek
-(
-	id_proyek int primary key unique auto_increment,
-	no_spp varchar(50),
-	nama_proyek varchar(100),
-	nama_klien varchar(100),
-	nilai_kontrak bigint,
-	tgl_mulai date,
-	tgl_selesai date
-);
+CREATE TABLE `proyek` (
+  `id_proyek` int(11) NOT NULL,
+  `no_spp` varchar(50) DEFAULT NULL,
+  `nama_proyek` varchar(300) DEFAULT NULL,
+  `nama_klien` varchar(100) DEFAULT NULL,
+  `nilai_kontrak` bigint(20) DEFAULT NULL,
+  `tgl_mulai` date DEFAULT NULL,
+  `tgl_selesai` date DEFAULT NULL,
+  `nilai_kritis` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-insert into proyek values
-(1, '01/SPP/AGPP-NM/V/2010', 'Pelaksanaan Bangunan Mazda Showroom di Jl. Suryopranoto, Jakarta', 'PT. Nusantara Mazda', '6500000000', '2010-05-19', '2010-12-19'),
-(2, '01/SPP/EGC-AGPP/PORSCHE/III/2014', 'Pelaksanaan Pekerjaan Struktur, Arsitektur, dan Mechanical Electrical Porsche Centre Jakarta', 'PT. Eurokars Artha Utama', '32670000000', '2014-03-26', '2015-03-25'),
-(3, '01/SPP/NBM-AGPP/MITSUBISHI/II/2017', 'Pelaksanaan Pekerjaan Showroom, Service Reception, Service Bay, Service Store, Car Wash and Exterior Mitsubishi Showroom Medan', 'PT. Nusantara Berlian Motor', '10780000000', '2017-02-15', '2017-07-30');
-
-create table risiko
-(
-	id_risiko int primary key unique auto_increment,
-	nama_risiko varchar(100),
-	nilai_s int,
-	nama_kontrol varchar(100),
-	nilai_d int
-);
-
--- insert into risiko values
--- (1, 'Perubahan desain', 6, null, 10),
--- (2, 'Gambar desain lama', 7, 'Penjadwalan proyek', 1),
--- (3, 'Pembayaran macet dari owner', 10, 'Pemberitahuan jadwal pembayaran ke owner', 2),
--- (4, 'Pengeluaran biaya kompensasi untuk lingkungan', 2, null, 10),
--- (5, 'Harga material naik mendadak', 7, null, 8),
--- (6, 'Kualitas pekerjaan kurang baik', 6, 'Pengawasan lapangan', 2),
--- (7, 'Pekerja berhalangan hadir', 5, 'Absensi pekerja', 1),
--- (8, 'Pekerja tertimpa material', 2, 'Hasil laporan', 8),
--- (9, 'Pekerja celaka karena alat kerja', 2, 'Hasil laporan', 8),
--- (10, 'Tipe material diubah', 5, 'Hasil laporan', 6),
--- (11, 'Material yang dikirim salah', 8, 'Memberi daftar tipe material yang dibeli', 7),
--- (12, 'Alat kerja rusak', 10, 'Hasil laporan', 6),
--- (13, 'Pengiriman material terlambat', 6, 'Hasil laporan', 8),
--- (14, 'Penambahan pekerjaan', 5, null, 10),
--- (15, 'Bangunan proyek disegel', 9, null, 10),
--- (16, 'Pengerjaan ulang (faktor cuaca)', 8, null, 8);
+INSERT INTO `proyek` (`id_proyek`, `no_spp`, `nama_proyek`, `nama_klien`, `nilai_kontrak`, `tgl_mulai`, `tgl_selesai`, `nilai_kritis`) VALUES
+(1, '01/SPP/AGPP-NM/V/2010', 'Pelaksanaan Bangunan Mazda Showroom di Jl. Suryopranoto, Jakarta', 'PT. Nusantara Mazda', 6500000000, '2010-05-19', '2010-12-19', NULL),
+(2, '01/SPP/EGC-AGPP/PORSCHE/III/2014', 'Pelaksanaan Pekerjaan Struktur, Arsitektur, dan Mechanical Electrical Porsche Centre Jakarta', 'PT. Eurokars Artha Utama', 32670000000, '2014-03-26', '2015-03-25', NULL),
+(3, '01/SPP/NBM-AGPP/MITSUBISHI/II/2017', 'Pelaksanaan Pekerjaan Showroom, Service Reception, Service Bay, Service Store, Car Wash and Exterior Mitsubishi Showroom Medan', 'PT. Nusantara Berlian Motor', 10780000000, '2017-02-15', '2017-07-30', 155);
 
 -- Child Tables
 
-create table pekerjaan
-(
-	id_pekerjaan int primary key unique auto_increment,
-	nama_pekerjaan varchar(100),
-	bobot float,
-	tgl_mulai_pekerjaan date,
-	tgl_selesai_pekerjaan date,
-	id_proyek int,
-	foreign key(id_proyek) references proyek(id_proyek)
-);
+CREATE TABLE `pekerjaan` (
+  `id_pekerjaan` int(11) NOT NULL,
+  `nama_pekerjaan` varchar(300) DEFAULT NULL,
+  `bobot` float DEFAULT NULL,
+  `tgl_mulai_pekerjaan` date DEFAULT NULL,
+  `tgl_selesai_pekerjaan` date DEFAULT NULL,
+  `id_proyek` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-create table efek
-(
-	id_efek int primary key unique auto_increment,
-	nama_efek varchar(100),
-	id_risiko int,
-	foreign key(id_risiko) references risiko(id_risiko)
-);
+INSERT INTO `pekerjaan` (`id_pekerjaan`, `nama_pekerjaan`, `bobot`, `tgl_mulai_pekerjaan`, `tgl_selesai_pekerjaan`, `id_proyek`) VALUES
+(1, 'Preliminary', 3.452, '2017-02-06', '2017-07-29', 3),
+(2, 'Showroom - Civil work - Ground floor', 5.962, '2017-02-13', '2017-04-08', 3),
+(3, 'Showroom - Civil work - Mezzanine floor', 4.102, '2017-03-06', '2017-04-15', 3),
+(4, 'Showroom - Civil work - Roof deck and roof top', 1.547, '2017-04-03', '2017-04-22', 3),
+(5, 'Showroom - Steel structure (SR, service reception, and service bay)', 6.414, '2017-05-15', '2017-07-15', 3),
+(6, 'Showroom - Architecture (SR) - Floor finish - Ground floor', 3.915, '2017-05-08', '2017-06-17', 3),
+(7, 'Showroom - Architecture (SR) - Floor finish - Mezzanine and roof floor', 1.008, '2017-06-06', '2017-07-15', 3),
+(8, 'Showroom - Architecture (SR) - Wall type - Ground floor', 2.472, '2017-03-27', '2017-06-10', 3),
+(9, 'Showroom - Architecture (SR) - Wall type - Mezzanine and roof floor', 2.334, '2017-04-10', '2017-06-17', 3),
+(10, 'Showroom - Architecture (SR) - Ceiling - Ground floor', 0.697, '2017-05-08', '2017-06-10', 3),
+(11, 'Showroom - Architecture (SR) - Ceiling - Mezzanine and roof floor', 1.131, '2017-05-22', '2017-07-15', 3),
+(12, 'Showroom - Architecture (SR) - Doors and windows - Ground floor', 2.208, '2017-05-11', '2017-07-22', 3),
+(13, 'Showroom - Architecture (SR) - Doors and window - Mezzanine and roof floor', 4.207, '2017-06-12', '2017-07-29', 3),
+(14, 'Showroom - Architecture (SR) - Sanitairs - Ground floor', 0.884, '2017-06-05', '2017-07-15', 3),
+(15, 'Showroom - Architecture (SR) - Sanitairs - Mezzanine and roof floor', 1.037, '2017-07-10', '2017-07-22', 3),
+(16, 'Service area - Civil work - Ground floor', 8.046, '2017-02-13', '2017-04-08', 3),
+(17, 'Service area - Civil work - Roof deck and roof top', 0.405, '2017-03-27', '2017-04-22', 3),
+(18, 'Service area - Steel structure (SR, service reception and service bay', 10.255, '2017-03-13', '2017-05-06', 3),
+(19, 'Service area - Architecture (Service bay, service store, car wash, and canteen) - Floor finish - Ground floor', 6.716, '2017-05-15', '2017-07-15', 3),
+(20, 'Service area - Architecture (Service bay, service store, car wash, and canteen) - Wall type - Ground floor', 2.780, '2017-04-24', '2017-06-10', 3),
+(21, 'Service area - Architecture (Service bay, service store, car wash, and canteen) - Ceiling - Ground floor', 1.076, '2017-05-22', '2017-06-10', 3),
+(22, 'Service area - Architecture (Service bay, service store, car wash, and canteen) - Doors and windows - Ground floor', 1.738, '2017-06-05', '2017-07-15', 3),
+(23, 'Service area - Architecture (Service bay, service store, car wash, and canteen) - Sanitairs - Ground floor', 0.464, '2017-06-12', '2017-07-22', 3),
+(24, 'Exterior', 10.282, '2017-06-12', '2017-07-22', 3),
+(25, 'Drainage', 1.414, '2017-02-27', '2017-05-06', 3),
+(26, 'ME', 10.912, '2017-05-01', '2017-07-29', 3),
+(27, 'Plumbing', 4.543, '2017-03-20', '2017-05-27', 3);
 
--- insert into `efek` (`id_efek`, `nama_efek`, `id_risiko`) values
--- (1, 'Menunggu gambar desain baru', 1),
--- (2, 'Pekerjaan utama terganggu', 1),
--- (3, 'Pekerjaan selanjutnya tertunda', 2),
--- (4, 'Biaya operasional membengkak', 3),
--- (5, 'Biaya lebih tinggi tidak sesuai rencana', 4),
--- (6, 'Biaya lebih tinggi tidak sesuai rencana', 5),
--- (7, 'Pengerjaan ulang', 6),
--- (8, 'Pekerjaan selanjutnya tertunda', 6),
--- (9, 'Pekerjaan kurang maksimal', 7),
--- (10, 'Biaya perawatan', 8),
--- (11, 'Biaya perawatan', 9),
--- (12, 'Harga material bisa lebih mahal', 10),
--- (13, 'Pekerjaan selanjutnya tertunda', 11),
--- (14, 'Pekerjaan kurang maksimal', 12),
--- (15, 'Pekerjaan selanjutnya tertunda', 13),
--- (16, 'Jadwal tidak sesuai rencana', 14),
--- (17, 'Proyek ditunda', 15),
--- (18, 'Biaya operasional membengkak', 15),
--- (19, 'Biaya tambahan untuk perbaikan', 16),
--- (20, 'Pekerjaan selanjutnya tertunda', 17);
+CREATE TABLE `risiko` (
+  `id_risiko` int(11) NOT NULL,
+  `nama_risiko` varchar(100) DEFAULT NULL,
+  `nilai_s` int(11) DEFAULT NULL,
+  `nama_kontrol` varchar(100) DEFAULT NULL,
+  `nilai_d` int(11) DEFAULT NULL,
+  `id_proyek` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-create table penyebab
-(
-	id_penyebab int primary key unique auto_increment,
-	nama_penyebab varchar(100),
-	nilai_o int,
-	id_risiko int,
-	foreign key(id_risiko) references risiko(id_risiko)
-);
+INSERT INTO `risiko` (`id_risiko`, `nama_risiko`, `nilai_s`, `nama_kontrol`, `nilai_d`, `id_proyek`) VALUES
+(1, 'Perubahan desain', 6, 'Tidak ada', 10, 3),
+(2, 'Gambar desain lama', 7, 'Penjadwalan proyek', 1, 3),
+(3, 'Pembayaran macet dari owner', 10, 'Pemberitahuan jadwal pembayaran ke owner', 2, 3),
+(4, 'Pengeluaran biaya kompensasi untuk lingkungan', 2, 'Tidak ada', 10, 3),
+(5, 'Harga material naik mendadak', 7, 'Tidak ada', 8, 3),
+(6, 'Kualitas pekerjaan kurang baik', 6, 'Pengawasan lapangan', 2, 3),
+(7, 'Pekerja berhalangan hadir', 5, 'Absensi pekerja', 1, 3),
+(8, 'Pekerja tertimpa material', 2, 'Hasil laporan', 8, 3),
+(9, 'Pekerja celaka karena alat kerja', 2, 'Hasil laporan', 8, 3),
+(10, 'Tipe material diubah', 5, 'Hasil laporan', 6, 3),
+(11, 'Material yang dikirim salah', 8, 'Memberi daftar tipe material yang dibeli', 7, 3),
+(12, 'Alat kerja rusak', 10, 'Hasil laporan', 6, 3),
+(13, 'Pengiriman material terlambat', 6, 'Hasil laporan', 8, 3),
+(14, 'Penambahan pekerjaan', 5, 'Tidak ada', 10, 3),
+(15, 'Bangunan proyek disegel', 9, 'Tidak ada', 10, 3),
+(16, 'Pengerjaan ulang (faktor cuaca)', 8, 'Tidak ada', 8, 3);
 
--- insert into penyebab values
--- (1, 'Keinginan owner', 7, 1),
--- (2, 'Keputusan owner berubah-ubah', 5, 2),
--- (3, 'Owner tidak membayar angsuran tepat waktu', 7, 3),
--- (4, 'Lingkungan merasa terganggu karena pekerjaan proyek', 5, 4),
--- (5, 'Kenaikan harga dolar', 2, 5),
--- (6, 'Pekerjaan dilakukan manual tanpa alat saat malam', 3, 6),
--- (7, 'Pekerja kurang andal', 2, 6),
--- (8, 'Pekerja sakit', 3, 7),
--- (9, 'Kelalaian pekerja', 5, 8),
--- (10, 'Kelalaian pekerja', 5, 9),
--- (11, 'Tipe material yang dipesan kosong', 2, 10),
--- (12, 'Keinginan owner', 3, 10),
--- (13, 'Kesalahan distributor', 2, 11),
--- (14, 'Pekerja kurang tepat menggunakan alat', 3, 12),
--- (15, 'Jadwal produksi tidak sesuai dengan jadwal proyek', 3, 13),
--- (16, 'Kendaraan pengirim mengalami kecelakaan', 3, 13),
--- (17, 'Aturan red line untuk material impor', 2. 13),
--- (18, 'Owner menambah spesifikasi proyek', 8, 14),
--- (19, 'Bangunan tidak sesuai izin', 7, 15),
--- (20, 'Kerusakan karena cuaca buruk', 3, 16);
+CREATE TABLE `efek` (
+  `id_efek` int(11) NOT NULL,
+  `nama_efek` varchar(100) DEFAULT NULL,
+  `id_risiko` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-create table mitigasi
-(
-	id_mitigasi int primary key unique auto_increment,
-	nama_mitigasi varchar(100),
-	id_penyebab int,
-	foreign key(id_penyebab) references penyebab(id_penyebab)
-);
+INSERT INTO `efek` (`id_efek`, `nama_efek`, `id_risiko`) VALUES
+(1, 'Menunggu gambar desain baru', 1),
+(2, 'Pekerjaan utama terganggu', 1),
+(3, 'Pekerjaan selanjutnya tertunda', 2),
+(4, 'Biaya operasional membengkak', 3),
+(5, 'Biaya lebih tinggi tidak sesuai rencana', 4),
+(6, 'Biaya lebih tinggi tidak sesuai rencana', 5),
+(7, 'Pengerjaan ulang', 6),
+(8, 'Pekerjaan selanjutnya tertunda', 6),
+(9, 'Pekerjaan kurang maksimal', 7),
+(10, 'Biaya perawatan', 8),
+(11, 'Biaya perawatan', 9),
+(12, 'Harga material bisa lebih mahal', 10),
+(13, 'Pekerjaan selanjutnya tertunda', 11),
+(14, 'Pekerjaan kurang maksimal', 12),
+(15, 'Pekerjaan selanjutnya tertunda', 13),
+(16, 'Jadwal tidak sesuai rencana', 14),
+(17, 'Proyek ditunda', 15),
+(18, 'Biaya operasional membengkak', 15),
+(19, 'Biaya tambahan untuk perbaikan', 16),
+(20, 'Pekerjaan selanjutnya tertunda', 16);
 
--- insert into mitigasi values
--- (1, 'Negosiasi dengan owner', 1),
--- (2, 'Memberi saran kepada owner agar mantap menentukan keputusan', 2),
--- (3, 'Proyek ditunda hingga owner membayar tagihan', 3),
--- (4, 'Negosiasi dengan lingkungan', 4),
--- (5, 'Negosiasi dengan owner', 5),
--- (6, 'Pengerjaan ulang', 6),
--- (7, 'Pelatihan kepada pekerja', 7),
--- (8, 'Klaim asuransi', 9),
--- (9, 'Klaim asuransi', 10),
--- (10, 'Negosiasi dengan owner', 11),
--- (11, 'Negosiasi dengan owner', 12),
--- (12, 'Jadwal pengiriman dimajukan', 13),
--- (13, 'Pelatihan kepada pekerja', 14),
--- (14, 'Jadwal pengiriman dimajukan', 16),
--- (15, 'Jadwal pengiriman dimajukan', 17),
--- (16, 'Negosiasi dengan owner', 18),
--- (17, 'Hubungi owner untuk menangani izin', 19),
--- (18, 'Klaim asuransi', 20);
+CREATE TABLE `penyebab` (
+  `id_penyebab` int(11) NOT NULL,
+  `nama_penyebab` varchar(100) DEFAULT NULL,
+  `nilai_o` int(11) DEFAULT NULL,
+  `rpn` int(11) DEFAULT NULL,
+  `kategori` enum('Tinggi','Rendah') DEFAULT NULL,
+  `id_risiko` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-create table laporan_pekerjaan
-(
-	id_laporan_pekerjaan int primary key unique auto_increment,
-	tgl_laporan_pekerjaan date,
-	kemajuan float,
-	id_pekerjaan int,
-	foreign key(id_pekerjaan) references pekerjaan(id_pekerjaan)
-);
+INSERT INTO `penyebab` (`id_penyebab`, `nama_penyebab`, `nilai_o`, `rpn`, `kategori`, `id_risiko`) VALUES
+(1, 'Keinginan owner', 7, 420, 'Tinggi', 1),
+(2, 'Keputusan owner berubah-ubah', 5, 35, 'Rendah', 2),
+(3, 'Owner tidak membayar angsuran tepat waktu', 7, 140, 'Rendah', 3),
+(4, 'Lingkungan merasa terganggu karena pekerjaan proyek', 5, 100, 'Rendah', 4),
+(5, 'Kenaikan harga dolar', 2, 112, 'Rendah', 5),
+(6, 'Pekerjaan dilakukan manual tanpa alat saat malam', 3, 36, 'Rendah', 6),
+(7, 'Pekerja kurang andal', 2, 24, 'Rendah', 6),
+(8, 'Pekerja sakit', 3, 15, 'Rendah', 7),
+(9, 'Kelalaian pekerja', 5, 80, 'Rendah', 8),
+(10, 'Kelalaian pekerja', 5, 80, 'Rendah', 9),
+(11, 'Tipe material yang dipesan kosong', 2, 60, 'Rendah', 10),
+(12, 'Keinginan owner', 3, 90, 'Rendah', 10),
+(13, 'Kesalahan distributor', 2, 112, 'Rendah', 11),
+(14, 'Pekerja kurang tepat menggunakan alat', 3, 180, 'Tinggi', 12),
+(15, 'Jadwal produksi tidak sesuai dengan jadwal proyek', 3, 144, 'Rendah', 13),
+(16, 'Kendaraan pengirim mengalami kecelakaan', 3, 144, 'Rendah', 13),
+(17, 'Aturan red line untuk material impor', 2, 96, 'Rendah', 13),
+(18, 'Owner menambah spesifikasi proyek', 8, 400, 'Tinggi', 14),
+(19, 'Bangunan tidak sesuai izin', 7, 630, 'Tinggi', 15),
+(20, 'Kerusakan karena cuaca buruk', 3, 192, 'Tinggi', 16);
 
-create table laporan_kendala
-(
-	id_laporan_kendala int primary key unique auto_increment,
-	ket_kendala varchar(300),
-	tgl_laporan_kendala date,
-	id_proyek int,
-	foreign key(id_proyek) references proyek(id_proyek)
-);
+CREATE TABLE `mitigasi` (
+  `id_mitigasi` int(11) NOT NULL,
+  `nama_mitigasi` varchar(100) DEFAULT NULL,
+  `id_penyebab` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-create table evaluasi
-(
-	id_evaluasi int primary key unique,
-	tgl_evaluasi date,
-	id_proyek int,
-	id_risiko int,
-	id_mitigasi int,
-	foreign key(id_proyek) references proyek(id_proyek),
-	foreign key(id_risiko) references risiko(id_risiko),
-	foreign key(id_mitigasi) references mitigasi(id_mitigasi)
-);
+INSERT INTO `mitigasi` (`id_mitigasi`, `nama_mitigasi`, `id_penyebab`) VALUES
+(1, 'Negosiasi dengan owner', 1),
+(2, 'Memberi saran kepada owner agar mantap menentukan keputusan', 2),
+(3, 'Proyek ditunda hingga owner membayar tagihan', 3),
+(4, 'Negosiasi dengan lingkungan', 4),
+(5, 'Negosiasi dengan owner', 5),
+(6, 'Pengerjaan ulang menggunakan alat saat siang', 6),
+(7, 'Pelatihan kepada pekerja', 7),
+(8, 'Klaim asuransi', 9),
+(9, 'Klaim asuransi', 10),
+(10, 'Negosiasi dengan owner', 11),
+(11, 'Negosiasi dengan owner', 12),
+(12, 'Jadwal pengiriman dimajukan', 13),
+(13, 'Pelatihan kepada pekerja', 14),
+(14, 'Jadwal pengiriman dimajukan', 16),
+(15, 'Jadwal pengiriman dimajukan', 17),
+(16, 'Negosiasi dengan owner', 18),
+(17, 'Hubungi owner untuk menangani izin', 19),
+(18, 'Klaim asuransi', 20);
+
+CREATE TABLE `laporan_pekerjaan` (
+  `id_laporan_pekerjaan` int(11) NOT NULL,
+  `tgl_laporan_pekerjaan` date DEFAULT NULL,
+  `kemajuan` float DEFAULT NULL,
+  `id_pekerjaan` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `laporan_harian` (
+  `id_laporan_harian` int(11) NOT NULL,
+  `tgl_laporan_harian` date DEFAULT NULL,
+  `cuaca` varchar(100) DEFAULT NULL,
+  `kendala` varchar(300) DEFAULT NULL,
+  `efek` varchar(300) DEFAULT NULL,
+  `penyebab` varchar(300) DEFAULT NULL,
+  `id_proyek` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `evaluasi` (
+  `id_evaluasi` int(11) NOT NULL,
+  `tgl_evaluasi` date DEFAULT NULL,
+  `id_proyek` int(11) DEFAULT NULL,
+  `id_risiko` int(11) DEFAULT NULL,
+  `id_efek` int(11) DEFAULT NULL,
+  `id_penyebab` int(11) DEFAULT NULL,
+  `id_mitigasi` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Primary and Foreign Key
+
+ALTER TABLE `pengguna`
+  ADD PRIMARY KEY (`id_pengguna`),
+  ADD UNIQUE KEY `email` (`email`);
+
+ALTER TABLE `proyek`
+  ADD PRIMARY KEY (`id_proyek`);
+
+ALTER TABLE `pekerjaan`
+  ADD PRIMARY KEY (`id_pekerjaan`),
+  ADD KEY `id_proyek` (`id_proyek`);
+
+ALTER TABLE `risiko`
+  ADD PRIMARY KEY (`id_risiko`),
+  ADD KEY `id_proyek` (`id_proyek`);
+
+ALTER TABLE `efek`
+  ADD PRIMARY KEY (`id_efek`),
+  ADD KEY `id_risiko` (`id_risiko`);
+
+ALTER TABLE `penyebab`
+  ADD PRIMARY KEY (`id_penyebab`),
+  ADD KEY `id_risiko` (`id_risiko`);
+
+ALTER TABLE `mitigasi`
+  ADD PRIMARY KEY (`id_mitigasi`),
+  ADD KEY `id_penyebab` (`id_penyebab`);
+
+ALTER TABLE `laporan_pekerjaan`
+  ADD PRIMARY KEY (`id_laporan_pekerjaan`),
+  ADD KEY `id_pekerjaan` (`id_pekerjaan`);
+
+ALTER TABLE `laporan_harian`
+  ADD PRIMARY KEY (`id_laporan_harian`),
+  ADD KEY `id_proyek` (`id_proyek`);
+
+ALTER TABLE `evaluasi`
+  ADD PRIMARY KEY (`id_evaluasi`),
+  ADD KEY `id_proyek` (`id_proyek`),
+  ADD KEY `id_risiko` (`id_risiko`),
+  ADD KEY `id_efek` (`id_efek`),
+  ADD KEY `id_penyebab` (`id_penyebab`),
+  ADD KEY `id_mitigasi` (`id_mitigasi`);
+
+-- Auto Increment
+
+ALTER TABLE `pengguna`
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+ALTER TABLE `proyek`
+  MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+ALTER TABLE `pekerjaan`
+  MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+ALTER TABLE `risiko`
+  MODIFY `id_risiko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+ALTER TABLE `efek`
+  MODIFY `id_efek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `penyebab`
+  MODIFY `id_penyebab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+ALTER TABLE `mitigasi`
+  MODIFY `id_mitigasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+ALTER TABLE `laporan_pekerjaan`
+  MODIFY `id_laporan_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `laporan_harian`
+  MODIFY `id_laporan_harian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `evaluasi`
+  MODIFY `id_evaluasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+-- Constraint for Foreign Key
+
+ALTER TABLE `pekerjaan`
+  ADD CONSTRAINT `pekerjaan_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
+
+ALTER TABLE `risiko`
+  ADD CONSTRAINT `risiko_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
+
+ALTER TABLE `efek`
+  ADD CONSTRAINT `efek_ibfk_1` FOREIGN KEY (`id_risiko`) REFERENCES `risiko` (`id_risiko`);
+
+ALTER TABLE `penyebab`
+  ADD CONSTRAINT `penyebab_ibfk_1` FOREIGN KEY (`id_risiko`) REFERENCES `risiko` (`id_risiko`);
+
+ALTER TABLE `mitigasi`
+  ADD CONSTRAINT `mitigasi_ibfk_1` FOREIGN KEY (`id_penyebab`) REFERENCES `penyebab` (`id_penyebab`);
+
+ALTER TABLE `laporan_pekerjaan`
+  ADD CONSTRAINT `laporan_pekerjaan_ibfk_1` FOREIGN KEY (`id_pekerjaan`) REFERENCES `pekerjaan` (`id_pekerjaan`);
+
+ALTER TABLE `laporan_harian`
+  ADD CONSTRAINT `laporan_harian_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
+
+ALTER TABLE `evaluasi`
+  ADD CONSTRAINT `evaluasi_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`),
+  ADD CONSTRAINT `evaluasi_ibfk_2` FOREIGN KEY (`id_risiko`) REFERENCES `risiko` (`id_risiko`),
+  ADD CONSTRAINT `evaluasi_ibfk_3` FOREIGN KEY (`id_efek`) REFERENCES `efek` (`id_efek`),
+  ADD CONSTRAINT `evaluasi_ibfk_4` FOREIGN KEY (`id_penyebab`) REFERENCES `penyebab` (`id_penyebab`),
+  ADD CONSTRAINT `evaluasi_ibfk_5` FOREIGN KEY (`id_mitigasi`) REFERENCES `mitigasi` (`id_mitigasi`);

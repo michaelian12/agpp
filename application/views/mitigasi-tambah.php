@@ -52,58 +52,58 @@ if (!empty($this->session->userdata('id_pengguna'))) {
             <div class="logo">
                 <a href="#" class="simple-text">
                     <span style="line-height:30px; font-size:32px">ANANTA</span>
-                    <img src="agpp.png" style="vertical-align:bottom; width: 48px; height: 48px">
+                    <img src="../agpp.png" style="vertical-align:bottom; width: 48px; height: 48px">
                 </a>
             </div>
 
             <ul class="nav">
                 <li>
-                    <a href="profil">
+                    <a href="../profil">
                         <i class="ti-user"></i>
                         <p>Profil</p>
                     </a>
                 </li>
                 <?php if ($this->session->userdata('jabatan') == 'Admin') { ?>
                 <li>
-                    <a href="pengguna">
+                    <a href="../pengguna">
                         <i class="ti-id-badge"></i>
                         <p>Pengguna</p>
                     </a>
                 </li>
                 <li>
-                    <a href="proyek">
+                    <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
                 </li>
                 <?php } elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') { ?>
                 <li>
-                    <a href="pekerjaan">
+                    <a href="../pekerjaan">
                         <i class="ti-list"></i>
                         <p>Pekerjaan</p>
                     </a>
                 </li>
                 <li>
-                    <a href="risiko">
+                    <a href="../risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="mitigasi">
+                    <a href="../mitigasi">
                         <i class="ti-shield"></i>
                         <p>Mitigasi</p>
                     </a>
                 </li>
                 <li>
-                    <a href="evaluasi">
+                    <a href="../evaluasi">
                         <i class="ti-write"></i>
                         <p>Evaluasi</p>
                     </a>
                 </li>
                 <?php } elseif ($this->session->userdata('jabatan') == 'Site Manager') { ?>
                 <li>
-                    <a href="laporan">
+                    <a href="../laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
@@ -128,7 +128,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a href="keluar">
+                            <a href="../keluar">
 								<i class="ti-power-off"></i>
 								<p>Keluar</p>
                             </a>
@@ -140,6 +140,37 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
         <div class="content">
             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Proyek</h4>
+                            </div>
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>No.SPP</label>
+                                            <input type="text" name="no_spp" class="form-control border-input" value="<?php echo $proyek_item['no_spp']; ?>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Nama Proyek</label>
+                                            <input type="text" name="nama_proyek" class="form-control border-input" value="<?php echo $proyek_item['nama_proyek']; ?>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-2">
                         
@@ -157,7 +188,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             <div class="form-group">
                                                 <label>Risiko</label>
                                                 <select name="id_risiko" class="form-control border-input" id="risiko">
-                                                    <option disabled selected> -- Pilih Risiko -- </option>
+                                                    <option value="" disabled selected> -- Pilih Risiko -- </option>
                                                     <?php 
                                                         foreach ($risiko as $risiko_item) { ?>
                                                             <option value="<?php echo $risiko_item['id_risiko']; ?>"><?php echo $risiko_item['nama_risiko']; ?></option>
@@ -172,8 +203,23 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             <div class="form-group">
                                                 <label>Penyebab</label>
                                                 <select name="id_penyebab" class="form-control border-input" id="penyebab">
-                                                    <option disabled selected> -- Pilih Penyebab -- </option>
+                                                    <option value="" disabled selected> -- Pilih Penyebab -- </option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="result">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>RPN</label>
+                                                <input id="rpn" type="text" name="rpn" class="form-control border-input" placeholder="120" required readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Kategori</label>
+                                                <input id="kategori" type="text" name="kategori" class="form-control border-input" placeholder="Tinggi" required readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -224,12 +270,30 @@ if (!empty($this->session->userdata('id_pengguna'))) {
             $("#risiko").change(function () {
                 var id_risiko = $(this).val();
                 $.ajax({
-                    url: "<?php echo base_url() ?>mitigasi/get_penyebab",
+                    url: "<?php echo base_url() ?>mitigasi/get_penyebab_query",
                     type: "POST",
                     data: {'id_risiko' : id_risiko},
                     dataType: 'json',
                     success: function(data){
                         $('#penyebab').html(data);
+                        $('#rpn').val('');
+                        $('#kategori').val('');
+                    },
+                    error: function(){
+                        console.log('error');
+                    }
+                });
+            });
+
+            $("#penyebab").change(function () {
+                var id_penyebab = $(this).val();
+                $.ajax({
+                    url: "<?php echo base_url() ?>mitigasi/get_penyebab",
+                    type: "POST",
+                    data: {'id_penyebab' : id_penyebab},
+                    dataType: 'json',
+                    success: function(data){
+                        $('#result').html(data);
                     },
                     error: function(){
                         console.log('error');
@@ -251,9 +315,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url(); ?>/assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="<?php echo base_url(); ?>/assets/js/paper-dashboard.js"></script>

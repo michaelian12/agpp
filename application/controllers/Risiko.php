@@ -12,7 +12,7 @@ class Risiko extends CI_Controller {
 	}
 
 	// Create
-	public function tambah()
+	public function tambah($id)
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -28,11 +28,13 @@ class Risiko extends CI_Controller {
 	
 		if ($this->form_validation->run() === FALSE)
 		{
-			$this->load->view('risiko-tambah');
+			$data['proyek_item'] = $this->risiko_model->get_proyek($id);
+			$this->load->view('risiko-tambah', $data);
 		} else {
-			$id_risiko = $this->risiko_model->set_risiko();
+			$id_risiko = $this->risiko_model->set_risiko($id);
 			$this->risiko_model->set_efek($id_risiko);
 			$this->risiko_model->set_penyebab($id_risiko);
+			$this->risiko_model->update_nilai_kritis($id);
 			redirect('risiko');
 		}		
 	}
@@ -40,9 +42,23 @@ class Risiko extends CI_Controller {
 	// Read
 	public function index()
 	{
-		$data['risiko'] = $this->risiko_model->get_risiko_query();
+		// $data['risiko'] = $this->risiko_model->get_risiko_query();
+		$data['proyek'] = $this->risiko_model->get_proyek();
 
 		$this->load->view('risiko', $data);
+	}
+
+	public function get_risiko()
+	{
+		$id_proyek = $this->input->post('id_proyek');
+		$risiko = $this->risiko_model->get_risiko_query($id_proyek);
+		if (count($risiko) > 0) {
+			$table_row = '';
+			foreach ($risiko as $risiko_item) {
+				$table_row .= '<tr><td>'.$risiko_item["nama_risiko"].'</td><td>'.$risiko_item["nilai_s"].'</td><td>'.$risiko_item["nama_penyebab"].'</td><td>'.$risiko_item["nilai_o"].'</td><td>'.$risiko_item["nama_kontrol"].'</td><td>'.$risiko_item["nilai_d"].'</td><td>'.$risiko_item["rpn"].'</td><td><a href="risiko-lihat/'.$risiko_item["id_risiko"].'"><i class="ti-eye"></i></a></td><td><a href="risiko-hapus/'.$risiko_item["id_risiko"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
+			}
+			echo json_encode($table_row);
+		}
 	}
 
 	// Update
@@ -67,7 +83,8 @@ class Risiko extends CI_Controller {
 			$data['penyebab'] = $this->risiko_model->get_penyebab($id);
 			$this->load->view('risiko-lihat', $data);
 		} else {
-			$this->risiko_model->update_risiko($id);
+			$id_proyek = $this->risiko_model->update_risiko($id);
+			$this->risiko_model->update_nilai_kritis($id_proyek);
 			redirect('risiko');
 		}		
 	}

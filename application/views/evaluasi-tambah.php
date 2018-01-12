@@ -83,7 +83,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Pekerjaan</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="../risiko">
                         <i class="ti-alert"></i>
                         <p>Risiko</p>
@@ -95,15 +95,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Mitigasi</p>
                     </a>
                 </li>
-                <li>
-                    <a href="evaluasi">
+                <li class="active">
+                    <a href="../evaluasi">
                         <i class="ti-write"></i>
                         <p>Evaluasi</p>
                     </a>
                 </li>
                 <?php } elseif ($this->session->userdata('jabatan') == 'Site Manager') { ?>
                 <li>
-                    <a href="laporan">
+                    <a href="../laporan">
                         <i class="ti-pencil-alt"></i>
                         <p>Laporan</p>
                     </a>
@@ -123,7 +123,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="risiko">Risiko</a>
+                    <a class="navbar-brand" href="pengguna">Mitigasi</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -173,15 +173,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
                 <div class="row">
                     <div class="col-md-2">
+                        
                     </div>
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Data Risiko</h4>
+                                <h4 class="title">Data Evaluasi</h4>
                             </div>
-                            
                             <div class="content">
-                                <?php echo form_open('risiko-tambah/'.$proyek_item['id_proyek']); ?>
+                                <?php echo form_open('evaluasi-tambah'); ?>
                                 <form>
                                     <div class="content table-responsive table-full-width">
                                         <table class="table table-striped">
@@ -195,8 +195,16 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" required></td>
-                                                    <td><select name="nilai_s" class="form-control border-input" required>
+                                                    <td>
+                                                        <input id="nama_risiko" type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" list="risk_suggestion" required>
+                                                        <datalist id="risk_suggestion">
+                                                            <?php 
+                                                                foreach ($risiko as $risiko_item) { ?>
+                                                                    <option id="<?php echo $risiko_item['id_risiko']; ?>" value="<?php echo $risiko_item['nama_risiko']; ?>">
+                                                            <?php } ?>
+                                                        </datalist>
+                                                    </td>
+                                                    <td><select id="nilai_s" name="nilai_s" class="form-control border-input" required>
                                                         <option value="" disabled selected> -- Nilai Keparahan -- </option>
                                                         <option value="10">(10) - Berbahaya (tanpa peringatan)</option>
                                                         <option value="9">(9) - Berbahaya (dengan peringatan)</option>
@@ -226,7 +234,11 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" required></td>
+                                                    <td>
+                                                        <input id="nama_efek" type="text" name="nama_efek[]" class="form-control border-input" placeholder="Pekerjaan selanjutnya tertunda" list="effect_suggestion" required>
+                                                        <datalist id="effect_suggestion">
+                                                        </datalist>
+                                                    </td>
                                                     <td><button type="button" class="btn btn-default btn-wd" style="float: right;" id="tambah_efek">+ Efek</button></td>
                                                 </tr>
                                             </tbody>
@@ -246,8 +258,12 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" required></td>
-                                                    <td><select name="nilai_o[]" class="form-control border-input" required>
+                                                    <td>
+                                                        <input id="nama_penyebab" type="text" name="nama_penyebab" class="form-control border-input" placeholder="Aturan red line untuk material impor" list="cause_suggestion" required>
+                                                        <datalist id="cause_suggestion">
+                                                        </datalist>
+                                                    </td>
+                                                    <td><select id="nilai_o" name="nilai_o" class="form-control border-input" required>
                                                         <option value="" disabled selected> -- Nilai Kejadian -- </option>
                                                         <option value="10">(10) - >= 1 dalam 2 kejadian</option>
                                                         <option value="9">(9) - 1 dalam 3 kejadian</option>
@@ -260,7 +276,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                         <option value="2">(2) - 1 dalam 150000 kejadian</option>
                                                         <option value="1">(1) - <= 1 dalam 1500000 kejadian</option>
                                                     </select></td>
-                                                    <td><button type="button" class="btn btn-default btn-wd" style="float: right;" id="tambah_penyebab">+ Penyebab</button></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -280,7 +295,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             <tbody>
                                                 <tr>
                                                     <td><input type="text" name="nama_kontrol" class="form-control border-input" placeholder="Hasil laporan" required></td>
-                                                    <td><select name="nilai_d" class="form-control border-input" required>
+                                                    <td><select id="nilai_d" name="nilai_d" class="form-control border-input" required>
                                                         <option value="" disabled selected> -- Nilai Deteksi -- </option>
                                                         <option value="10">(10) - Mutlak tidak pasti</option>
                                                         <option value="9">(9) - Sangat Jauh</option>
@@ -297,6 +312,18 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+
+                                    <!-- Mitigasi dari risiko -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Mitigasi</label>
+                                                <input id="nama_mitigasi" type="text" name="nama_mitigasi" class="form-control border-input" placeholder="Jadwal pengiriman dimajukan" list="mitigation_suggestion" required>
+                                                <datalist id="mitigation_suggestion">
+                                                </datalist>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="text-center">
@@ -346,18 +373,48 @@ if (!empty($this->session->userdata('id_pengguna'))) {
         });
     </script>
 
-    <!--  Add Entries for Cause Table  -->
+    <!--  AJAX Select Dependent  -->
     <script type="text/javascript">
-        $(document).ready(function(){
-            var i = 1;
-            $('#tambah_penyebab').click(function(){
-                i++;
-                $('#tabel_penyebab').append('<tr id="row_penyebab'+i+'"><td><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" required></td><td><select name="nilai_o[]" class="form-control border-input" required><option value="" disabled selected> -- Nilai Kejadian -- </option><option value="10">(10) - >= 1 dalam 2 kejadian</option><option value="9">(9) - 1 dalam 3 kejadian</option><option value="8">(8) - 1 dalam 8 kejadian</option><option value="7">(7) - 1 dalam 20 kejadian</option><option value="6">(6) - 1 dalam 80 kejadian</option><option value="5">(5) - 1 dalam 400 kejadian</option><option value="4">(4) - 1 dalam 2000 kejadian</option><option value="3">(3) - 1 dalam 15000 kejadian</option><option value="2">(2) - 1 dalam 150000 kejadian</option><option value="1">(1) - <= 1 dalam 1500000 kejadian</option></select></td><td><a type="button" id="'+i+'" class="remove_penyebab"><i class="ti-trash"></i></a></td></tr>');
+        $(function() {
+            $("#nama_risiko").on("input", function() {
+                var opt = $("option[value='"+$(this).val()+"']");
+                if (opt.length) {
+                    $.ajax({
+                        url: "<?php echo base_url() ?>evaluasi/get_penyebab_query",
+                        type: "POST",
+                        data: {'id_risiko' : opt.attr("id")},
+                        dataType: 'json',
+                        success: function(data){
+                            $('#cause_suggestion').html(data.return_option);
+                            document.getElementById("nilai_s").value = data.return_nilai_s;
+                        },
+                        error: function(){
+                            console.log('error');
+                        }
+                    });
+                } else {
+                    $('#cause_suggestion').html('');
+                }
             });
 
-            $(document).on('click', '.remove_penyebab', function(){
-                var button_id = $(this).attr("id");
-                $('#row_penyebab'+button_id+'').remove();
+            $("#nama_penyebab").on("input", function() {
+                var opt = $("option[value='"+$(this).val()+"']");
+                if (opt.length) {                    
+                    $.ajax({
+                        url: "<?php echo base_url() ?>evaluasi/get_mitigasi_query",
+                        type: "POST",
+                        data: {'id_penyebab' : opt.attr("id")},
+                        dataType: 'json',
+                        success: function(data){
+                            $('#mitigation_suggestion').html(data);
+                        },
+                        error: function(){
+                            console.log('error');
+                        }
+                    });
+                } else {
+                    $('#mitigation_suggestion').html('');
+                }
             });
         });
     </script>

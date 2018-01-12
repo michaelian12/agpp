@@ -143,42 +143,51 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
+                                <h4 class="title">Proyek</h4>
+                                <p class="category">Pilih proyek untuk menampilkan daftar risiko pada proyek</p>
+                            </div>
+                            <div class="content">
+                                <select name="proyek" class="form-control border-input" id="proyek">
+                                    <option disabled selected> -- Pilih Proyek -- </option>
+                                    <?php 
+                                        foreach ($proyek as $proyek_item) { ?>
+                                            <option value="<?php echo $proyek_item['id_proyek']; ?>"><?php echo $proyek_item['nama_proyek']; ?></option>
+                                        <?php }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <h4 class="title">Daftar Risiko</h4>
                                         <p class="category">Kelola data risiko</p>
                                     </div>
                                     <div class="col-md-7">
-                                        <a href="risiko-tambah" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Risiko</a>
+                                        <a id="tambah_risiko" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Risiko</a>
                                     </div>
                                 </div>
                                 <br>
                             </div>
 
                             <div class="content table-responsive table-full-width">
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="risiko">
                                     <thead>
                                         <th>Risiko</th>
+                                        <th>S</th>
                                     	<th>Penyebab</th>
-                                    	<th>S</th>
                                     	<th>O</th>
+                                        <th>Kontrol</th>
                                     	<th>D</th>
                                         <th>RPN</th>
                                     </thead>
                                     <tbody>
-                                        <?php 
-                                            foreach ($risiko as $risiko_item) { ?>
-                                                <tr>
-                                                    <td><?php echo $risiko_item['nama_risiko']; ?></td>
-                                                    <td><?php echo $risiko_item['nama_penyebab']; ?></td>
-                                                    <td><?php echo $risiko_item['nilai_s']; ?></td>
-                                                    <td><?php echo $risiko_item['nilai_o']; ?></td>
-                                                    <td><?php echo $risiko_item['nilai_d']; ?></td>
-                                                    <td><?php echo ($risiko_item['nilai_s'] * $risiko_item['nilai_o'] * $risiko_item['nilai_d']); ?></td>
-                                                    <td><a href="risiko-lihat/<?php echo $risiko_item['id_risiko']?>"><i class="ti-eye"></i></a></td>
-                                                    <td><a href="risiko-hapus/<?php echo $risiko_item['id_risiko']?>"><i class="ti-trash"></i></a></td>
-                                                </tr>
-                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -200,6 +209,57 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 </div>
 
 </body>
+    
+    <!--  Check if project has been selected  -->
+    <script type="text/javascript">
+        $('#tambah_risiko').click(function(){
+            if ($(this).attr('href') === undefined) {
+                $.notify({
+                    icon: 'ti-info-alt',
+                    message: "Pilih proyek untuk melanjutkan"
+
+                },{
+                    type: 'warning',
+                    timer: 200
+                });
+
+                return false;
+            }
+        });
+    </script>
+
+    <!--  AJAX Table Dependent  -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#proyek").change(function () {
+                // clear table
+                $('#risiko tbody').empty();
+
+                // get risks data
+                var id_proyek = $(this).val();
+                if (id_proyek !== null || id_proyek !== "") {
+                    $.ajax({
+                        url: "<?php echo base_url() ?>risiko/get_risiko",
+                        type: "POST",
+                        data: {'id_proyek' : id_proyek},
+                        dataType: 'json',
+                        success: function(data){
+                            $('#risiko tbody').append(data);
+                        },
+                        error: function(){
+                            console.log('error');
+                        }
+                    });
+                }
+
+                // set href link
+                var original_link = "risiko-tambah";
+                $('#tambah_risiko').attr('href', original_link);                
+                var new_href = $('#tambah_risiko').attr('href') + '/' + id_proyek;
+                $('#tambah_risiko').attr('href', new_href);
+            });
+        });
+    </script>
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
@@ -213,9 +273,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
     <!--  Notifications Plugin    -->
     <script src="<?php echo base_url(); ?>/assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="<?php echo base_url(); ?>/assets/js/paper-dashboard.js"></script>
