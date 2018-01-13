@@ -294,7 +294,11 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="nama_kontrol" class="form-control border-input" placeholder="Hasil laporan" required></td>
+                                                    <td>
+                                                        <input id="nama_kontrol" type="text" name="nama_kontrol" class="form-control border-input" placeholder="Hasil laporan" list="control_suggestion" required>
+                                                        <datalist id="control_suggestion">
+                                                        </datalist>
+                                                    </td>
                                                     <td><select id="nilai_d" name="nilai_d" class="form-control border-input" required>
                                                         <option value="" disabled selected> -- Nilai Deteksi -- </option>
                                                         <option value="10">(10) - Mutlak tidak pasti</option>
@@ -385,15 +389,22 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         data: {'id_risiko' : opt.attr("id")},
                         dataType: 'json',
                         success: function(data){
-                            $('#cause_suggestion').html(data.return_option);
+                            $('#effect_suggestion').html(data.return_efek);
+                            $('#cause_suggestion').html(data.return_penyebab);
+                            $('#control_suggestion').html(data.return_kontrol);
                             document.getElementById("nilai_s").value = data.return_nilai_s;
+                            document.getElementById("nilai_d").value = data.return_nilai_d;
                         },
                         error: function(){
                             console.log('error');
                         }
                     });
                 } else {
+                    $('#effect_suggestion').html('');
                     $('#cause_suggestion').html('');
+                    $('#control_suggestion').html('');
+                    document.getElementById("nilai_s").selectedIndex = 0;
+                    document.getElementById("nilai_d").selectedIndex = 0;
                 }
             });
 
@@ -406,7 +417,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         data: {'id_penyebab' : opt.attr("id")},
                         dataType: 'json',
                         success: function(data){
-                            $('#mitigation_suggestion').html(data);
+                            $('#mitigation_suggestion').html(data.return_mitigasi);
+                            document.getElementById("nilai_o").value = data.return_nilai_o;
                         },
                         error: function(){
                             console.log('error');

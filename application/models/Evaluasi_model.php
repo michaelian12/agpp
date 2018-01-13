@@ -7,12 +7,6 @@ class Evaluasi_model extends CI_Model {
 	}
 
 	// Create
-	// public function get_risiko()
-	// {
-	// 	$query = $this->db->get('risiko');
-	// 	return $query->result_array();
-	// }
-
 	public function get_risiko($id = FALSE)
 	{
 		if ($id === FALSE) {
@@ -22,6 +16,18 @@ class Evaluasi_model extends CI_Model {
 			$query = $this->db->get_where('risiko', array('id_risiko' => $id));
 			return $query->row_array();
 		}
+	}
+
+	public function get_penyebab($id)
+	{
+		$query = $this->db->get_where('penyebab', array('id_penyebab' => $id));
+		return $query->row_array();
+	}
+
+	public function get_efek_query($id)
+	{
+		$query = $this->db->get_where('efek', array('id_risiko' => $id));
+		return $query->result_array();
 	}
 
 	public function get_penyebab_query($id)

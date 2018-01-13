@@ -211,9 +211,45 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
+                                                <label>Cuaca</label>
+                                                <input type='hidden' name='id_laporan_harian' value='<?php echo $laporan_harian_item['id_laporan_harian']; ?>'/>
+                                                <input type="text" name="cuaca" class="form-control border-input" placeholder="Gerimis pukul 15.00-16.00" value="<?php echo $laporan_harian_item['cuaca']; ?>" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
                                                 <label>Kendala</label>
-                                                <input type='hidden' name='id_laporan_kendala' value='<?php echo $laporan_kendala_item['id_laporan_kendala']; ?>'/>
-                                                <textarea name="ket_kendala" class="form-control border-input" placeholder="Kendala yang terjadi saat pelaksanaan"><?php echo $laporan_kendala_item['ket_kendala']; ?></textarea>
+                                                <input type="text" name="kendala" class="form-control border-input" placeholder="Kualitas pekerjaan kurang baik" value="<?php echo $laporan_harian_item['kendala']; ?>" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Efek</label>
+                                                <input type="text" name="efek" class="form-control border-input" placeholder="Pengerjaan ulang dan pekeraan selanjutnya tertunda" value="<?php echo $laporan_harian_item['efek']; ?>" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Penyebab</label>
+                                                <input type="text" name="penyebab" class="form-control border-input" placeholder="Kualitas pekerjaan kurang baik" value="<?php echo $laporan_harian_item['penyebab']; ?>" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Deteksi</label>
+                                                <input type="text" name="deteksi" class="form-control border-input" placeholder="Hasil pengawasan lapangan" value="<?php echo $laporan_harian_item['deteksi']; ?>" required>
                                             </div>
                                         </div>
                                     </div>

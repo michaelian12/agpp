@@ -196,10 +196,11 @@ CREATE TABLE `laporan_pekerjaan` (
 CREATE TABLE `laporan_harian` (
   `id_laporan_harian` int(11) NOT NULL,
   `tgl_laporan_harian` date DEFAULT NULL,
-  `cuaca` varchar(100) DEFAULT NULL,
+  `cuaca` varchar(300) DEFAULT NULL,
   `kendala` varchar(300) DEFAULT NULL,
   `efek` varchar(300) DEFAULT NULL,
   `penyebab` varchar(300) DEFAULT NULL,
+  `deteksi` varchar(300) DEFAULT NULL,
   `id_proyek` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

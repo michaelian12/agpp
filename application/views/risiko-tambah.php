@@ -96,7 +96,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
-                    <a href="evaluasi">
+                    <a href="../evaluasi">
                         <i class="ti-write"></i>
                         <p>Evaluasi</p>
                     </a>

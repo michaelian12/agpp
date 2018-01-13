@@ -211,8 +211,44 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
+                                                <label>Cuaca</label>
+                                                <input type="text" name="cuaca" class="form-control border-input" placeholder="Gerimis pukul 15.00-16.00" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
                                                 <label>Kendala</label>
-                                                <textarea name="ket_kendala" class="form-control border-input" placeholder="Kendala yang terjadi saat pelaksanaan" required></textarea>
+                                                <input type="text" name="kendala" class="form-control border-input" placeholder="Kualitas pekerjaan kurang baik" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Efek</label>
+                                                <input type="text" name="efek" class="form-control border-input" placeholder="Pengerjaan ulang dan pekeraan selanjutnya tertunda" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Penyebab</label>
+                                                <input type="text" name="penyebab" class="form-control border-input" placeholder="Kualitas pekerjaan kurang baik" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Deteksi</label>
+                                                <input type="text" name="deteksi" class="form-control border-input" placeholder="Hasil pengawasan lapangan" required>
                                             </div>
                                         </div>
                                     </div>

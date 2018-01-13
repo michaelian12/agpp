@@ -18,7 +18,11 @@ class Laporan extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('kemajuan[]', 'Kemajuan', 'required');
-		$this->form_validation->set_rules('ket_kendala', 'Kendala', 'required');
+		$this->form_validation->set_rules('cuaca', 'Cuaca', 'required');
+		$this->form_validation->set_rules('kendala', 'Kendala', 'required');
+		$this->form_validation->set_rules('efek', 'Efek', 'required');
+		$this->form_validation->set_rules('penyebab', 'Penyebab', 'required');
+		$this->form_validation->set_rules('deteksi', 'Deteksi', 'required');
 
 	
 		if ($this->form_validation->run() === FALSE)
@@ -29,7 +33,7 @@ class Laporan extends CI_Controller {
 		} else {
 			$this->laporan_model->set_laporan($id);
 			redirect('laporan');
-		}		
+		}
 	}
 
 	// Read
@@ -62,13 +66,17 @@ class Laporan extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('kemajuan[]', 'Kemajuan', 'required');
-
+		$this->form_validation->set_rules('cuaca', 'Cuaca', 'required');
+		$this->form_validation->set_rules('kendala', 'Kendala', 'required');
+		$this->form_validation->set_rules('efek', 'Efek', 'required');
+		$this->form_validation->set_rules('penyebab', 'Penyebab', 'required');
+		$this->form_validation->set_rules('deteksi', 'Deteksi', 'required');
 	
 		if ($this->form_validation->run() === FALSE)
 		{
 			$data['proyek_item'] = $this->laporan_model->get_proyek($id);
 			$data['laporan_pekerjaan'] = $this->laporan_model->get_laporan_pekerjaan($id, $tgl);
-			$data['laporan_kendala_item'] = $this->laporan_model->get_laporan_kendala($id, $tgl);
+			$data['laporan_harian_item'] = $this->laporan_model->get_laporan_harian($id, $tgl);
 			$this->load->view('laporan-lihat', $data);
 		} else {
 			$this->laporan_model->update_laporan();

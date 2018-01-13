@@ -16,26 +16,30 @@ class Laporan_model extends CI_Model {
 	public function set_laporan($id)
 	{
 		// laporan pekerjaan
-		$tgl_laporan_pekerjaan = date('Y-m-d');
+		$tgl_laporan_harian = date('Y-m-d');
 		$kemajuan = $this->input->post('kemajuan');
 		$id_pekerjaan = $this->input->post('id_pekerjaan');
 
 		for ($i=0; $i < count($this->input->post('id_pekerjaan')); $i++) {
 			$data = array(
-				'tgl_laporan_pekerjaan' => $tgl_laporan_pekerjaan,
+				'tgl_laporan_pekerjaan' => $tgl_laporan_harian,
 				'kemajuan' => $kemajuan[$i],
 				'id_pekerjaan' => $id_pekerjaan[$i]
 			);
 			$this->db->insert('laporan_pekerjaan', $data);
 		}
 
-		// laporan kendala
+		// laporan harian
 		$data = array(
-			'ket_kendala' => $this->input->post('ket_kendala'),
-			'tgl_laporan_kendala' => $tgl_laporan_pekerjaan,
+			'tgl_laporan_harian' => $tgl_laporan_harian,
+			'cuaca' => $this->input->post('cuaca'),
+			'kendala' => $this->input->post('kendala'),
+			'efek' => $this->input->post('efek'),
+			'penyebab' => $this->input->post('penyebab'),
+			'deteksi' => $this->input->post('deteksi'),
 			'id_proyek' => $id
 		);
-		$this->db->insert('laporan_kendala', $data);
+		$this->db->insert('laporan_harian', $data);
 	}
 
 	// Read
@@ -65,9 +69,9 @@ class Laporan_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function get_laporan_kendala($id, $tgl)
+	public function get_laporan_harian($id, $tgl)
 	{
-		$query = $this->db->get_where('laporan_kendala', array('id_proyek' => $id, 'tgl_laporan_kendala' => $tgl));
+		$query = $this->db->get_where('laporan_harian', array('id_proyek' => $id, 'tgl_laporan_harian' => $tgl));
 		return $query->row_array();
 	}
 
@@ -87,10 +91,14 @@ class Laporan_model extends CI_Model {
 
 		// laporan kendala
 		$data = array(
-			'ket_kendala' => $this->input->post('ket_kendala')
+			'cuaca' => $this->input->post('cuaca'),
+			'kendala' => $this->input->post('kendala'),
+			'efek' => $this->input->post('efek'),
+			'penyebab' => $this->input->post('penyebab'),
+			'deteksi' => $this->input->post('deteksi')
 		);
-		$this->db->where('id_laporan_kendala', $this->input->post('id_laporan_kendala'));
-		$this->db->update('laporan_kendala', $data);
+		$this->db->where('id_laporan_harian', $this->input->post('id_laporan_harian'));
+		$this->db->update('laporan_harian', $data);
 	}
 
 	// Delete
@@ -106,7 +114,7 @@ class Laporan_model extends CI_Model {
 		};
 
 		// delete laporan kendala
-		$this->db->delete('laporan_kendala', array('id_proyek'=>$id, 'tgl_laporan_kendala'=>$tgl));
+		$this->db->delete('laporan_harian', array('id_proyek'=>$id, 'tgl_laporan_harian'=>$tgl));
 	}
 }
 ?>

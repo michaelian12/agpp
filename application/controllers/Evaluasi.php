@@ -37,28 +37,41 @@ class Evaluasi extends CI_Controller {
 		$id_risiko = $this->input->post('id_risiko');
 		$risiko = $this->evaluasi_model->get_risiko($id_risiko);
 
-		$penyebab = $this->evaluasi_model->get_penyebab_query($id_risiko);
-		if (count($penyebab) > 0) {
-			$option = '';
-			foreach ($penyebab as $penyebab_item) {
-				$option .= '<option id="'.$penyebab_item["id_penyebab"].'" value="'.$penyebab_item["nama_penyebab"].'">';
+		$efek = $this->evaluasi_model->get_efek_query($id_risiko);
+		if (count($efek) > 0) {
+			$option_efek = '';
+			foreach ($efek as $efek_item) {
+				$option_efek .= '<option id="'.$efek_item["id_efek"].'" value="'.$efek_item["nama_efek"].'">';
 			}
 		}
 
-		echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_option' => $option));
+		$penyebab = $this->evaluasi_model->get_penyebab_query($id_risiko);
+		if (count($penyebab) > 0) {
+			$option_penyebab = '';
+			foreach ($penyebab as $penyebab_item) {
+				$option_penyebab .= '<option id="'.$penyebab_item["id_penyebab"].'" value="'.$penyebab_item["nama_penyebab"].'">';
+			}
+		}
+
+		$option_kontrol = '<option value="'.$risiko["nama_kontrol"].'">';
+
+		echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_efek' => $option_efek, 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
 	}
 
 	public function get_mitigasi_query()
 	{
 		$id_penyebab = $this->input->post('id_penyebab');
+		$penyebab = $this->evaluasi_model->get_penyebab($id_penyebab);
+
 		$mitigasi = $this->evaluasi_model->get_mitigasi_query($id_penyebab);
 		if (count($mitigasi) > 0) {
-			$option = '';
+			$option_mitigasi = '';
 			foreach ($mitigasi as $mitigasi_item) {
-				$option .= '<option id="'.$mitigasi_item["id_mitigasi"].'" value="'.$mitigasi_item["nama_mitigasi"].'">';
+				$option_mitigasi .= '<option id="'.$mitigasi_item["id_mitigasi"].'" value="'.$mitigasi_item["nama_mitigasi"].'">';
 			}
-			echo json_encode($option);
 		}
+			
+		echo json_encode(array('return_nilai_o' => $penyebab['nilai_o'], 'return_mitigasi' => $option_mitigasi));
 	}
 
 	// public function get_penyebab()
