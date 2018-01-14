@@ -174,17 +174,19 @@ INSERT INTO `mitigasi` (`id_mitigasi`, `nama_mitigasi`, `id_penyebab`) VALUES
 (5, 'Negosiasi dengan owner', 5),
 (6, 'Pengerjaan ulang menggunakan alat saat siang', 6),
 (7, 'Pelatihan kepada pekerja', 7),
-(8, 'Klaim asuransi', 9),
-(9, 'Klaim asuransi', 10),
-(10, 'Negosiasi dengan owner', 11),
-(11, 'Negosiasi dengan owner', 12),
-(12, 'Jadwal pengiriman dimajukan', 13),
-(13, 'Pelatihan kepada pekerja', 14),
-(14, 'Jadwal pengiriman dimajukan', 16),
-(15, 'Jadwal pengiriman dimajukan', 17),
-(16, 'Negosiasi dengan owner', 18),
-(17, 'Hubungi owner untuk menangani izin', 19),
-(18, 'Klaim asuransi', 20);
+(8, 'Tidak ada', 8),
+(9, 'Klaim asuransi', 9),
+(10, 'Klaim asuransi', 10),
+(11, 'Negosiasi dengan owner', 11),
+(12, 'Negosiasi dengan owner', 12),
+(13, 'Jadwal pengiriman dimajukan', 13),
+(14, 'Pelatihan kepada pekerja', 14),
+(15, 'Tidak ada', 15),
+(16, 'Jadwal pengiriman dimajukan', 16),
+(17, 'Jadwal pengiriman dimajukan', 17),
+(18, 'Negosiasi dengan owner', 18),
+(19, 'Hubungi owner untuk menangani izin', 19),
+(20, 'Klaim asuransi', 20);
 
 CREATE TABLE `laporan_pekerjaan` (
   `id_laporan_pekerjaan` int(11) NOT NULL,
@@ -281,7 +283,7 @@ ALTER TABLE `penyebab`
   MODIFY `id_penyebab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 ALTER TABLE `mitigasi`
-  MODIFY `id_mitigasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_mitigasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 ALTER TABLE `laporan_pekerjaan`
   MODIFY `id_laporan_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;

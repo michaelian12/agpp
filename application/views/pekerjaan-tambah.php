@@ -198,8 +198,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             <thead>
                                                 <th>Nama Pekerjaan</th>
                                                 <th>Bobot</th>
-                                                <th>Mulai</th>
-                                                <th>Selesai</th>
+                                                <th>Tgl. Mulai</th>
+                                                <th>Tgl. Selesai</th>
                                             </thead>
                                             <tbody>
                                                 <tr>

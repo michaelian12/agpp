@@ -201,7 +201,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Tingkat Keparahan</label>
-                                                <select id="nilai_s" name="nilai_s" class="form-control border-input" required>
+                                                <select id="nilai_s" name="nilai_s" class="form-control border-input" onchange="clearRpn()" required>
                                                     <option value="" disabled selected> -- Nilai Keparahan -- </option>
                                                     <option value="10">(10) - Berbahaya (tanpa peringatan)</option>
                                                     <option value="9">(9) - Berbahaya (dengan peringatan)</option>
@@ -230,7 +230,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Tingkat Kejadian</label>
-                                                <select id="nilai_o" name="nilai_o" class="form-control border-input" required>
+                                                <select id="nilai_o" name="nilai_o" class="form-control border-input" onchange="clearRpn()" required>
                                                     <option value="" disabled selected> -- Nilai Kejadian -- </option>
                                                     <option value="10">(10) - >= 1 dalam 2 kejadian</option>
                                                     <option value="9">(9) - 1 dalam 3 kejadian</option>
@@ -259,7 +259,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Tingkat Deteksi</label>
-                                                <select id="nilai_d" name="nilai_d" class="form-control border-input" required>
+                                                <select id="nilai_d" name="nilai_d" class="form-control border-input" onchange="clearRpn()" required>
                                                     <option value="" disabled selected> -- Nilai Deteksi -- </option>
                                                     <option value="10">(10) - Mutlak tidak pasti</option>
                                                     <option value="9">(9) - Sangat Jauh</option>
@@ -485,6 +485,14 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 
 </body>
+
+    <!--  Clear RPN and Category  -->
+    <script type="text/javascript">
+        function clearRpn() {
+            document.getElementById("rpn").value = '';
+            document.getElementById("kategori").value = '';
+        }
+    </script>
 
     <!--  Make RPN and Category Not Editable  -->
     <script type="text/javascript">
