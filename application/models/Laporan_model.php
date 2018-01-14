@@ -96,7 +96,7 @@ class Laporan_model extends CI_Model {
 			'efek' => $this->input->post('efek'),
 			'penyebab' => $this->input->post('penyebab'),
 			'deteksi' => $this->input->post('deteksi')
-		);
+		);;
 		$this->db->where('id_laporan_harian', $this->input->post('id_laporan_harian'));
 		$this->db->update('laporan_harian', $data);
 	}

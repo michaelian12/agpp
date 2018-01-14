@@ -79,11 +79,14 @@ $route['penyebab-hapus/(:any)'] = 'risiko/hapus_penyebab/$1';
 
 $route['mitigasi'] = 'mitigasi';
 $route['mitigasi-tambah/(:any)'] = 'mitigasi/tambah/$1';
+$route['mitigasi-tambah'] = 'mitigasi/tambah';
 $route['mitigasi-lihat/(:any)'] = 'mitigasi/ubah/$1';
 $route['mitigasi-hapus/(:any)'] = 'mitigasi/hapus/$1';
 
 $route['evaluasi'] = 'evaluasi';
 $route['evaluasi-tambah/(:any)'] = 'evaluasi/tambah/$1';
+$route['evaluasi-lihat/(:any)'] = 'evaluasi/ubah/$1';
+$route['evaluasi-hapus/(:any)'] = 'evaluasi/hapus/$1';
 
 $route['laporan'] = 'laporan';
 $route['laporan-tambah/(:any)'] = 'laporan/tambah/$1';

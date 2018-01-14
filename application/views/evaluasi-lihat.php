@@ -140,7 +140,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-8">
@@ -171,7 +171,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                     <div class="col-md-2">
@@ -183,13 +183,13 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                 <h4 class="title">Data Evaluasi</h4>
                             </div>
                             <div class="content">
-                                <?php echo form_open('evaluasi-tambah/'.$proyek_item['id_proyek']); ?>
+                                <?php echo form_open('evaluasi-lihat/'.$evaluasi_item['id_evaluasi']); ?>
                                 <form>
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Risiko</label>
-                                                <input id="nama_risiko" type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" list="risk_suggestion" required>
+                                                <input id="nama_risiko" type="text" name="nama_risiko" class="form-control border-input" value="<?php echo $evaluasi_item['nama_risiko']; ?>" placeholder="Pengiriman material terlambat" list="risk_suggestion" required>
                                                 <datalist id="risk_suggestion">
                                                     <?php 
                                                         foreach ($risiko as $risiko_item) { ?>
@@ -203,16 +203,56 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                 <label>Tingkat Keparahan</label>
                                                 <select id="nilai_s" name="nilai_s" class="form-control border-input" required>
                                                     <option value="" disabled selected> -- Nilai Keparahan -- </option>
-                                                    <option value="10">(10) - Berbahaya (tanpa peringatan)</option>
-                                                    <option value="9">(9) - Berbahaya (dengan peringatan)</option>
-                                                    <option value="8">(8) - Sangat tinggi</option>
-                                                    <option value="7">(7) - Tinggi</option>
-                                                    <option value="6">(6) - Sedang</option>
-                                                    <option value="5">(5) - Rendah</option>
-                                                    <option value="4">(4) - Sangat rendah</option>
-                                                    <option value="3">(3) - Sangat rendah</option>
-                                                    <option value="2">(2) - Kecil</option>
-                                                    <option value="1">(1) - Sangat kecil</option>
+                                                    <option value="10"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 10) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(10) - Berbahaya (tanpa peringatan)</option>
+                                                    <option value="9"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 9) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(9) - Berbahaya (dengan peringatan)</option>
+                                                    <option value="8"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 8) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(8) - Sangat tinggi</option>
+                                                    <option value="7"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 7) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(7) - Tinggi</option>
+                                                    <option value="6"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 6) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(6) - Sedang</option>
+                                                    <option value="5"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 5) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(5) - Rendah</option>
+                                                    <option value="4"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 4) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(4) - Sangat rendah</option>
+                                                    <option value="3"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 3) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(3) - Sangat rendah</option>
+                                                    <option value="2"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 2) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(2) - Kecil</option>
+                                                    <option value="1"
+                                                    <?php if ($evaluasi_item['nilai_s'] == 1) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(1) - Sangat kecil</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -222,7 +262,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Penyebab</label>
-                                                <input id="nama_penyebab" type="text" name="nama_penyebab" class="form-control border-input" placeholder="Aturan red line untuk material impor" list="cause_suggestion" required>
+                                                <input id="nama_penyebab" type="text" name="nama_penyebab" class="form-control border-input" value="<?php echo $evaluasi_item['nama_penyebab']; ?>" placeholder="Aturan red line untuk material impor" list="cause_suggestion" required>
                                                         <datalist id="cause_suggestion">
                                                         </datalist>
                                             </div>
@@ -232,16 +272,56 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                 <label>Tingkat Kejadian</label>
                                                 <select id="nilai_o" name="nilai_o" class="form-control border-input" required>
                                                     <option value="" disabled selected> -- Nilai Kejadian -- </option>
-                                                    <option value="10">(10) - >= 1 dalam 2 kejadian</option>
-                                                    <option value="9">(9) - 1 dalam 3 kejadian</option>
-                                                    <option value="8">(8) - 1 dalam 8 kejadian</option>
-                                                    <option value="7">(7) - 1 dalam 20 kejadian</option>
-                                                    <option value="6">(6) - 1 dalam 80 kejadian</option>
-                                                    <option value="5">(5) - 1 dalam 400 kejadian</option>
-                                                    <option value="4">(4) - 1 dalam 2000 kejadian</option>
-                                                    <option value="3">(3) - 1 dalam 15000 kejadian</option>
-                                                    <option value="2">(2) - 1 dalam 150000 kejadian</option>
-                                                    <option value="1">(1) - <= 1 dalam 1500000 kejadian</option>
+                                                    <option value="10"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 10) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(10) - >= 1 dalam 2 kejadian</option>
+                                                    <option value="9"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 9) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(9) - 1 dalam 3 kejadian</option>
+                                                    <option value="8"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 8) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(8) - 1 dalam 8 kejadian</option>
+                                                    <option value="7"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 7) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(7) - 1 dalam 20 kejadian</option>
+                                                    <option value="6"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 6) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(6) - 1 dalam 80 kejadian</option>
+                                                    <option value="5"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 5) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(5) - 1 dalam 400 kejadian</option>
+                                                    <option value="4"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 4) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(4) - 1 dalam 2000 kejadian</option>
+                                                    <option value="3"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 3) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(3) - 1 dalam 15000 kejadian</option>
+                                                    <option value="2"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 2) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(2) - 1 dalam 150000 kejadian</option>
+                                                    <option value="1"
+                                                    <?php if ($evaluasi_item['nilai_o'] == 1) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(1) - <= 1 dalam 1500000 kejadian</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -251,7 +331,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Kontrol</label>
-                                                <input id="nama_kontrol" type="text" name="nama_kontrol" class="form-control border-input" placeholder="Hasil laporan" list="control_suggestion" required>
+                                                <input id="nama_kontrol" type="text" name="nama_kontrol" class="form-control border-input" value="<?php echo $evaluasi_item['nama_kontrol']; ?>" placeholder="Hasil laporan" list="control_suggestion" required>
                                                         <datalist id="control_suggestion">
                                                         </datalist>
                                             </div>
@@ -261,16 +341,56 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                 <label>Tingkat Deteksi</label>
                                                 <select id="nilai_d" name="nilai_d" class="form-control border-input" required>
                                                     <option value="" disabled selected> -- Nilai Deteksi -- </option>
-                                                    <option value="10">(10) - Mutlak tidak pasti</option>
-                                                    <option value="9">(9) - Sangat Jauh</option>
-                                                    <option value="8">(8) - Jauh</option>
-                                                    <option value="7">(7) - Sangat Rendah</option>
-                                                    <option value="6">(6) - Rendah</option>
-                                                    <option value="5">(5) - Sedang</option>
-                                                    <option value="4">(4) - Cukup Tinggi</option>
-                                                    <option value="3">(3) - Tinggi</option>
-                                                    <option value="2">(2) - Sangat Tinggi</option>
-                                                    <option value="1">(1) - Hampir Pasti</option>
+                                                    <option value="10"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 10) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(10) - Mutlak tidak pasti</option>
+                                                    <option value="9"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 9) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(9) - Sangat Jauh</option>
+                                                    <option value="8"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 8) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(8) - Jauh</option>
+                                                    <option value="7"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 7) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(7) - Sangat Rendah</option>
+                                                    <option value="6"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 6) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(6) - Rendah</option>
+                                                    <option value="5"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 5) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(5) - Sedang</option>
+                                                    <option value="4"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 4) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(4) - Cukup Tinggi</option>
+                                                    <option value="3"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 3) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(3) - Tinggi</option>
+                                                    <option value="2"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 2) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(2) - Sangat Tinggi</option>
+                                                    <option value="1"
+                                                    <?php if ($evaluasi_item['nilai_d'] == 1) {
+                                                        echo 'selected="selected"';    
+                                                    }?>
+                                                    >(1) - Hampir Pasti</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -280,13 +400,13 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>RPN</label>
-                                                <input id="rpn" type="text" name="rpn" class="form-control border-input" placeholder="120" required>
+                                                <input id="rpn" type="text" name="rpn" class="form-control border-input" value="<?php echo $evaluasi_item['rpn']; ?>" placeholder="120" required>
                                             </div>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>Kategori</label>
-                                                <input id="kategori" type="text" name="kategori" class="form-control border-input" placeholder="Tinggi" required>
+                                                <input id="kategori" type="text" name="kategori" class="form-control border-input" value="<?php echo $evaluasi_item['kategori']; ?>" placeholder="Tinggi" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -301,7 +421,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Mitigasi</label>
-                                                <input id="nama_mitigasi" type="text" name="nama_mitigasi" class="form-control border-input" placeholder="Jadwal pengiriman dimajukan" list="mitigation_suggestion" required>
+                                                <input id="nama_mitigasi" type="text" name="nama_mitigasi" class="form-control border-input" value="<?php echo $evaluasi_item['nama_mitigasi']; ?>" placeholder="Jadwal pengiriman dimajukan" list="mitigation_suggestion" required>
                                                 <datalist id="mitigation_suggestion">
                                                 </datalist>
                                             </div>
@@ -455,8 +575,16 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         </div>
                                     </div> -->
 
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="button" onclick="goBack()" class="btn btn-default btn-block btn-wd">Batal</button>
+                                        </div>
                                     </div>
                                     
                                     <div class="clearfix"></div>
@@ -629,6 +757,13 @@ if (!empty($this->session->userdata('id_pengguna'))) {
         }
     </script>
 
+    <!--  Back Function  -->
+    <script type="text/javascript">
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>

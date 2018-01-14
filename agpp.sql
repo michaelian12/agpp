@@ -207,11 +207,16 @@ CREATE TABLE `laporan_harian` (
 CREATE TABLE `evaluasi` (
   `id_evaluasi` int(11) NOT NULL,
   `tgl_evaluasi` date DEFAULT NULL,
-  `id_proyek` int(11) DEFAULT NULL,
-  `id_risiko` int(11) DEFAULT NULL,
-  `id_efek` int(11) DEFAULT NULL,
-  `id_penyebab` int(11) DEFAULT NULL,
-  `id_mitigasi` int(11) DEFAULT NULL
+  `nama_risiko` varchar(100) DEFAULT NULL,
+  `nilai_s` int(11) DEFAULT NULL,
+  `nama_penyebab` varchar(100) DEFAULT NULL,
+  `nilai_o` int(11) DEFAULT NULL,
+  `nama_kontrol` varchar(100) DEFAULT NULL,
+  `nilai_d` int(11) DEFAULT NULL,
+  `rpn` int(11) DEFAULT NULL,
+  `kategori` enum('Tinggi','Rendah') DEFAULT NULL,
+  `nama_mitigasi` varchar(100) DEFAULT NULL,
+  `id_proyek` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Primary and Foreign Key
@@ -253,11 +258,7 @@ ALTER TABLE `laporan_harian`
 
 ALTER TABLE `evaluasi`
   ADD PRIMARY KEY (`id_evaluasi`),
-  ADD KEY `id_proyek` (`id_proyek`),
-  ADD KEY `id_risiko` (`id_risiko`),
-  ADD KEY `id_efek` (`id_efek`),
-  ADD KEY `id_penyebab` (`id_penyebab`),
-  ADD KEY `id_mitigasi` (`id_mitigasi`);
+  ADD KEY `id_proyek` (`id_proyek`);
 
 -- Auto Increment
 
@@ -315,8 +316,4 @@ ALTER TABLE `laporan_harian`
   ADD CONSTRAINT `laporan_harian_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
 
 ALTER TABLE `evaluasi`
-  ADD CONSTRAINT `evaluasi_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`),
-  ADD CONSTRAINT `evaluasi_ibfk_2` FOREIGN KEY (`id_risiko`) REFERENCES `risiko` (`id_risiko`),
-  ADD CONSTRAINT `evaluasi_ibfk_3` FOREIGN KEY (`id_efek`) REFERENCES `efek` (`id_efek`),
-  ADD CONSTRAINT `evaluasi_ibfk_4` FOREIGN KEY (`id_penyebab`) REFERENCES `penyebab` (`id_penyebab`),
-  ADD CONSTRAINT `evaluasi_ibfk_5` FOREIGN KEY (`id_mitigasi`) REFERENCES `mitigasi` (`id_mitigasi`);
+  ADD CONSTRAINT `evaluasi_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);

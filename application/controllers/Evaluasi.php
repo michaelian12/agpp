@@ -17,9 +17,15 @@ class Evaluasi extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('id_penyebab', 'Penyebab', 'required');
-		$this->form_validation->set_rules('nama_mitigasi', 'Mitigasi', 'required');
-
+		$this->form_validation->set_rules('nama_risiko', 'Risiko', 'required');
+		$this->form_validation->set_rules('nilai_s', 'Tingkat Keparahan', 'required');
+		$this->form_validation->set_rules('nama_penyebab', 'Nama Penyebab', 'required');
+		$this->form_validation->set_rules('nilai_o', 'Tingkat Kejadian', 'required');
+		$this->form_validation->set_rules('nama_kontrol', 'Nama Kontrol', 'required');
+		$this->form_validation->set_rules('nilai_d', 'Tingkat Deteksi', 'required');
+		$this->form_validation->set_rules('rpn', 'RPN', 'required');
+		$this->form_validation->set_rules('kategori', 'Kategori', 'required');
+		$this->form_validation->set_rules('nama_mitigasi', 'Nama Mitigasi', 'required');
 	
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -27,7 +33,7 @@ class Evaluasi extends CI_Controller {
 			$data['risiko'] = $this->evaluasi_model->get_risiko();
 			$this->load->view('evaluasi-tambah', $data);
 		} else {
-			$this->evaluasi_model->set_evaluasi();
+			$this->evaluasi_model->set_evaluasi($id);
 			redirect('evaluasi');	
 		}		
 	}
@@ -37,13 +43,13 @@ class Evaluasi extends CI_Controller {
 		$id_risiko = $this->input->post('id_risiko');
 		$risiko = $this->evaluasi_model->get_risiko($id_risiko);
 
-		$efek = $this->evaluasi_model->get_efek_query($id_risiko);
-		if (count($efek) > 0) {
-			$option_efek = '';
-			foreach ($efek as $efek_item) {
-				$option_efek .= '<option id="'.$efek_item["id_efek"].'" value="'.$efek_item["nama_efek"].'">';
-			}
-		}
+		// $efek = $this->evaluasi_model->get_efek_query($id_risiko);
+		// if (count($efek) > 0) {
+		// 	$option_efek = '';
+		// 	foreach ($efek as $efek_item) {
+		// 		$option_efek .= '<option id="'.$efek_item["id_efek"].'" value="'.$efek_item["nama_efek"].'">';
+		// 	}
+		// }
 
 		$penyebab = $this->evaluasi_model->get_penyebab_query($id_risiko);
 		if (count($penyebab) > 0) {
@@ -55,7 +61,9 @@ class Evaluasi extends CI_Controller {
 
 		$option_kontrol = '<option value="'.$risiko["nama_kontrol"].'">';
 
-		echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_efek' => $option_efek, 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
+		// echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_efek' => $option_efek, 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
+
+		echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
 	}
 
 	public function get_mitigasi_query()
@@ -93,43 +101,50 @@ class Evaluasi extends CI_Controller {
 		$this->load->view('evaluasi', $data);
 	}
 
-	// public function get_mitigasi()
-	// {
-	// 	$id_proyek = $this->input->post('id_proyek');
-	// 	$mitigasi = $this->mitigasi_model->get_mitigasi_query($id_proyek);
-	// 	if (count($mitigasi) > 0) {
-	// 		$table_row = '';
-	// 		foreach ($mitigasi as $mitigasi_item) {
-	// 			$table_row .= '<tr><td>'.$mitigasi_item["nama_risiko"].'</td><td>'.$mitigasi_item["nama_penyebab"].'</td><td>'.$mitigasi_item["rpn"].'</td><td>'.$mitigasi_item["kategori"].'</td><td>'.$mitigasi_item["nama_mitigasi"].'</td><td><a href="mitigasi-lihat/'.$mitigasi_item["id_mitigasi"].'"><i class="ti-eye"></i></a></td><td><a href="mitigasi-hapus/'.$mitigasi_item["id_mitigasi"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
-	// 		}
-	// 		echo json_encode($table_row);
-	// 	}
-	// }
+	public function get_evaluasi()
+	{
+		$id_proyek = $this->input->post('id_proyek');
+		$evaluasi = $this->evaluasi_model->get_evaluasi_query($id_proyek);
+		if (count($evaluasi) > 0) {
+			$table_row = '';
+			foreach ($evaluasi as $evaluasi_item) {
+				$table_row .= '<tr><td>'.$evaluasi_item["tgl_evaluasi"].'</td><td>'.$evaluasi_item["nama_risiko"].'</td><td>'.$evaluasi_item["nama_penyebab"].'</td><td>'.$evaluasi_item["rpn"].'</td><td>'.$evaluasi_item["kategori"].'</td><td>'.$evaluasi_item["nama_mitigasi"].'</td><td><a href="evaluasi-lihat/'.$evaluasi_item["id_evaluasi"].'"><i class="ti-eye"></i></a></td><td><a href="evaluasi-hapus/'.$evaluasi_item["id_evaluasi"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
+			}
+			echo json_encode($table_row);
+		}
+	}
 
 	// Update
-	// public function ubah($id)
-	// {
-	// 	$this->load->helper('form');
-	// 	$this->load->library('form_validation');
+	public function ubah($id)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 
-	// 	$this->form_validation->set_rules('nama_mitigasi', 'Mitigasi', 'required');
-
+		$this->form_validation->set_rules('nama_risiko', 'Risiko', 'required');
+		$this->form_validation->set_rules('nilai_s', 'Tingkat Keparahan', 'required');
+		$this->form_validation->set_rules('nama_penyebab', 'Nama Penyebab', 'required');
+		$this->form_validation->set_rules('nilai_o', 'Tingkat Kejadian', 'required');
+		$this->form_validation->set_rules('nama_kontrol', 'Nama Kontrol', 'required');
+		$this->form_validation->set_rules('nilai_d', 'Tingkat Deteksi', 'required');
+		$this->form_validation->set_rules('rpn', 'RPN', 'required');
+		$this->form_validation->set_rules('kategori', 'Kategori', 'required');
+		$this->form_validation->set_rules('nama_mitigasi', 'Nama Mitigasi', 'required');
 	
-	// 	if ($this->form_validation->run() === FALSE)
-	// 	{
-	// 		$data['mitigasi_item'] = $this->mitigasi_model->get_mitigasi($id);
-	// 		$this->load->view('mitigasi-lihat', $data);
-	// 	} else {
-	// 		$this->mitigasi_model->update_mitigasi($id);
-	// 		redirect('mitigasi');	
-	// 	}		
-	// }
+		if ($this->form_validation->run() === FALSE)
+		{
+			$data['evaluasi_item'] = $this->evaluasi_model->get_evaluasi($id);
+			$this->load->view('evaluasi-lihat', $data);
+		} else {
+			$this->evaluasi_model->update_evaluasi($id);
+			redirect('evaluasi');	
+		}		
+	}
 
 	// Delete
-	// public function hapus($id)
-	// {
-	// 	$this->mitigasi_model->delete_mitigasi($id);
-	// 	redirect('mitigasi');
-	// }
+	public function hapus($id)
+	{
+		$this->evaluasi_model->delete_evaluasi($id);
+		redirect('evaluasi');
+	}
 }
 ?>

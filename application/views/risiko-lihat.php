@@ -166,7 +166,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                 <tr>
                                                     <td><input type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" value="<?php echo $risiko_item['nama_risiko']; ?>" required></td>
                                                     <td><select name="nilai_s" class="form-control border-input" required>
-                                                        <option disabled> -- Nilai Keparahan -- </option>
+                                                        <option value="" disabled> -- Nilai Keparahan -- </option>
                                                         <option value="10"
                                                         <?php if ($risiko_item['nilai_s'] == 10) {
                                                             echo 'selected="selected"';    
@@ -268,7 +268,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                         <tr id="<?php echo 'row_penyebab'.$i; ?>">
                                                             <td><input type='hidden' name='id_penyebab[]' value='<?php echo $penyebab[$i]['id_penyebab']; ?>'><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" value="<?php echo $penyebab[$i]['nama_penyebab']; ?>" required></td>
                                                             <td><select name="nilai_o[]" class="form-control border-input" required>
-                                                                <option disabled> -- Nilai Kejadian -- </option>
+                                                                <option value="" disabled> -- Nilai Kejadian -- </option>
                                                                 <option value="10"
                                                                 <?php if ($penyebab[$i]['nilai_o'] == 10) {
                                                                     echo 'selected="selected"';    
@@ -326,7 +326,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                         <tr id="<?php echo 'row_penyebab'.$i; ?>">
                                                             <td><input type='hidden' name='id_penyebab[]' value='<?php echo $penyebab[$i]['id_penyebab']; ?>'><input type="text" name="nama_penyebab[]" class="form-control border-input" placeholder="Aturan red line untuk material impor" value="<?php echo $penyebab[$i]['nama_penyebab']; ?>" required></td>
                                                             <td><select name="nilai_o[]" class="form-control border-input" required>
-                                                                <option disabled> -- Nilai Kejadian -- </option>
+                                                                <option value="" disabled> -- Nilai Kejadian -- </option>
                                                                 <option value="10"
                                                                 <?php if ($penyebab[$i]['nilai_o'] == 10) {
                                                                     echo 'selected="selected"';    
@@ -401,7 +401,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                 <tr>
                                                     <td><input type="text" name="nama_kontrol" class="form-control border-input" placeholder="Hasil laporan" value="<?php echo $risiko_item['nama_kontrol']; ?>" required></td>
                                                     <td><select name="nilai_d" class="form-control border-input" required>
-                                                        <option disabled> -- Nilai Deteksi -- </option>
+                                                        <option value="" disabled> -- Nilai Deteksi -- </option>
                                                         <option value="10"
                                                         <?php if ($risiko_item['nilai_d'] == 10) {
                                                             echo 'selected="selected"';    

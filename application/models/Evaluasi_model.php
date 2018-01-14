@@ -42,15 +42,26 @@ class Evaluasi_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	// public function set_mitigasi()
-	// {
-	// 	$data =  array(
-	// 		'nama_mitigasi' => $this->input->post('nama_mitigasi'),
-	// 		'id_penyebab' => $this->input->post('id_penyebab')
-	// 	);
+	public function set_evaluasi($id)
+	{
+		$tgl_evaluasi = date('Y-m-d');
 
-	// 	$this->db->insert('mitigasi', $data);
-	// }
+		$data =  array(
+			'tgl_evaluasi' => $tgl_evaluasi,
+			'nama_risiko' => $this->input->post('nama_risiko'),
+			'nilai_s' => $this->input->post('nilai_s'),
+			'nama_penyebab' => $this->input->post('nama_penyebab'),
+			'nilai_o' => $this->input->post('nilai_o'),
+			'nama_kontrol' => $this->input->post('nama_kontrol'),
+			'nilai_d' => $this->input->post('nilai_d'),
+			'rpn' => $this->input->post('rpn'),
+			'kategori' => $this->input->post('kategori'),
+			'nama_mitigasi' => $this->input->post('nama_mitigasi'),
+			'id_proyek' => $id
+		);
+
+		$this->db->insert('evaluasi', $data);
+	}
 
 	// Read
 	public function get_proyek($id = FALSE)
@@ -64,35 +75,41 @@ class Evaluasi_model extends CI_Model {
 		}
 	}
 
-	// public function get_mitigasi_query($id)
-	// {
-	// 	$sql = 'select r.nama_risiko, p.nama_penyebab, p.rpn, p.kategori, m.nama_mitigasi, m.id_mitigasi from mitigasi m join penyebab p on m.id_penyebab = p.id_penyebab join risiko r on p.id_risiko = r.id_risiko where r.id_proyek = '.$id;
-	// 	$query = $this->db->query($sql);
-	// 	return $query->result_array();
-	// }
+	public function get_evaluasi_query($id)
+	{
+		$query = $this->db->get_where('evaluasi', array('id_proyek' => $id));
+		return $query->result_array();
+	}
 
 	// Update
-	// public function get_mitigasi($id)
-	// {
-	// 	$sql = 'select r.nama_risiko, p.nama_penyebab, m.nama_mitigasi, m.id_mitigasi from mitigasi m join penyebab p on m.id_penyebab = p.id_penyebab join risiko r on p.id_risiko = r.id_risiko having m.id_mitigasi = '.$id;
-	// 	$query = $this->db->query($sql);
-	// 	return $query->row_array();
-	// }
+	public function get_evaluasi($id)
+	{
+		$query = $this->db->get_where('evaluasi', array('id_evaluasi' => $id));
+		return $query->row_array();
+	}
 
-	// public function update_mitigasi($id)
-	// {
-	// 	$data =  array(
-	// 		'nama_mitigasi' => $this->input->post('nama_mitigasi')
-	// 	);
+	public function update_evaluasi($id)
+	{
+		$data =  array(
+			'nama_risiko' => $this->input->post('nama_risiko'),
+			'nilai_s' => $this->input->post('nilai_s'),
+			'nama_penyebab' => $this->input->post('nama_penyebab'),
+			'nilai_o' => $this->input->post('nilai_o'),
+			'nama_kontrol' => $this->input->post('nama_kontrol'),
+			'nilai_d' => $this->input->post('nilai_d'),
+			'rpn' => $this->input->post('rpn'),
+			'kategori' => $this->input->post('kategori'),
+			'nama_mitigasi' => $this->input->post('nama_mitigasi')
+		);
 
-	// 	$this->db->where('id_mitigasi', $id);
-	// 	$this->db->update('mitigasi', $data);
-	// }
+		$this->db->where('id_evaluasi', $id);
+		$this->db->update('evaluasi', $data);
+	}
 
 	// Delete
-	// public function delete_mitigasi($id)
-	// {
-	// 	$this->db->delete('mitigasi', array('id_mitigasi'=>$id));
-	// }
+	public function delete_evaluasi($id)
+	{
+		$this->db->delete('evaluasi', array('id_evaluasi'=>$id));
+	}
 }
 ?>
