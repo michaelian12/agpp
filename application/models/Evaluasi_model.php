@@ -18,6 +18,12 @@ class Evaluasi_model extends CI_Model {
 		}
 	}
 
+	public function get_risiko_query($id)
+	{
+		$query = $this->db->get_where('risiko', array('id_proyek' => $id));
+			return $query->result_array();
+	}
+
 	public function get_penyebab($id)
 	{
 		$query = $this->db->get_where('penyebab', array('id_penyebab' => $id));

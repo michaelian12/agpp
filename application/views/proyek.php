@@ -69,6 +69,12 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Pengguna</p>
                     </a>
                 </li>
+                <li>
+                    <a href="klien">
+                        <i class="ti-comments-smiley"></i>
+                        <p>Klien</p>
+                    </a>
+                </li>
                 <li class="active">
                     <a href="#">
                         <i class="ti-agenda"></i>
@@ -163,6 +169,11 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-striped">
+                                    <col width="30%">
+                                    <col width="40%">
+                                    <col width="20%">
+                                    <col width="5%">
+                                    <col width="5%">
                                     <thead>
                                         <th>No. SPP</th>
                                     	<th>Nama Proyek</th>
@@ -174,7 +185,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                 <tr>
                                                     <td><?php echo $proyek_item['no_spp']; ?></td>
                                                     <td><?php echo $proyek_item['nama_proyek']; ?></td>
-                                                    <td><?php echo $proyek_item['nama_klien']; ?></td>
+                                                    <td><?php echo $proyek_item['perusahaan']; ?></td>
                                                     <td><a href="proyek-lihat/<?php echo $proyek_item['id_proyek']?>"><i class="ti-eye"></i></a></td>
                                                     <td><a href="proyek-hapus/<?php echo $proyek_item['id_proyek']?>"><i class="ti-trash"></i></a></td>
                                                 </tr>

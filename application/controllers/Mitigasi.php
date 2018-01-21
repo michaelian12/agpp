@@ -24,7 +24,7 @@ class Mitigasi extends CI_Controller {
 		if ($this->form_validation->run() === FALSE)
 		{
 			$data['proyek_item'] = $this->mitigasi_model->get_proyek($id);
-			$data['risiko'] = $this->mitigasi_model->get_risiko();
+			$data['risiko'] = $this->mitigasi_model->get_risiko_query($id);
 			$this->load->view('mitigasi-tambah', $data);
 		} else {
 			$this->mitigasi_model->set_mitigasi();

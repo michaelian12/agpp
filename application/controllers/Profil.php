@@ -9,6 +9,7 @@ class Profil extends CI_Controller {
 		$this->load->model('profil_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
+		// $this->load->library('encrypt');
 	}
 
 	// Update

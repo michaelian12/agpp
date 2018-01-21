@@ -30,7 +30,7 @@ class Evaluasi extends CI_Controller {
 		if ($this->form_validation->run() === FALSE)
 		{
 			$data['proyek_item'] = $this->evaluasi_model->get_proyek($id);
-			$data['risiko'] = $this->evaluasi_model->get_risiko();
+			$data['risiko'] = $this->evaluasi_model->get_risiko_query($id);
 			$this->load->view('evaluasi-tambah', $data);
 		} else {
 			$this->evaluasi_model->set_evaluasi($id);

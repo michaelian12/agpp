@@ -71,6 +71,12 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
+                    <a href="klien">
+                        <i class="ti-comments-smiley"></i>
+                        <p>Klien</p>
+                    </a>
+                </li>
+                <li>
                     <a href="proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>

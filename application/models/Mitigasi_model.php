@@ -7,9 +7,9 @@ class Mitigasi_model extends CI_Model {
 	}
 
 	// Create
-	public function get_risiko()
+	public function get_risiko_query($id)
 	{
-		$query = $this->db->get('risiko');
+		$query = $this->db->get_where('risiko', array('id_proyek' => $id));
 		return $query->result_array();
 	}
 

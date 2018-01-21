@@ -73,6 +73,12 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
+                    <a href="../klien">
+                        <i class="ti-comments-smiley"></i>
+                        <p>Klien</p>
+                    </a>
+                </li>
+                <li>
                     <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
@@ -256,7 +262,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     changeMonth: true,
                     changeYear: true,
                     dateFormat : 'yy-mm-dd',
-                    minDate: 0,
+                    minDate: '<?php echo $proyek_item['tgl_mulai']; ?>',
+                    maxDate: '<?php echo $proyek_item['tgl_selesai']; ?>',
                     onSelect: function (date) {
                         var dt2 = $('#tgl_selesai_pekerjaan'+i);
                         var startDate = $(this).datepicker('getDate');
@@ -268,7 +275,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                 $('#tgl_selesai_pekerjaan'+i).datepicker({
                     changeMonth: true,
                     changeYear: true,
-                    dateFormat : 'yy-mm-dd'
+                    dateFormat : 'yy-mm-dd',
+                    maxDate: '<?php echo $proyek_item['tgl_selesai']; ?>'
                 });
             });
 
@@ -277,7 +285,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     changeMonth: true,
                     changeYear: true,
                     dateFormat : 'yy-mm-dd',
-                    minDate: 0,
+                    minDate: '<?php echo $proyek_item['tgl_mulai']; ?>',
+                    maxDate: '<?php echo $proyek_item['tgl_selesai']; ?>',
                     onSelect: function (date) {
                         var dt2 = $('#tgl_selesai_pekerjaan'+i);
                         var startDate = $(this).datepicker('getDate');
@@ -289,7 +298,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                 $('#tgl_selesai_pekerjaan'+i).datepicker({
                     changeMonth: true,
                     changeYear: true,
-                    dateFormat : 'yy-mm-dd'
+                    dateFormat : 'yy-mm-dd',
+                    maxDate: '<?php echo $proyek_item['tgl_selesai']; ?>'
                 });
             }
             else {
@@ -297,7 +307,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     changeMonth: true,
                     changeYear: true,
                     dateFormat : 'yy-mm-dd',
-                    minDate: 0,
+                    minDate: '<?php echo $proyek_item['tgl_mulai']; ?>',
+                    maxDate: '<?php echo $proyek_item['tgl_selesai']; ?>',
                     onSelect: function (date) {
                         var dt2 = $('#tgl_selesai_pekerjaan');
                         var startDate = $(this).datepicker('getDate');
@@ -309,13 +320,13 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                 $('#tgl_selesai_pekerjaan').datepicker({
                     changeMonth: true,
                     changeYear: true,
-                    dateFormat : 'yy-mm-dd'
+                    dateFormat : 'yy-mm-dd',
+                    maxDate: '<?php echo $proyek_item['tgl_selesai']; ?>'
                 });
             }
 
             $(document).on('click', '.btn_remove', function(){
                 var button_id = $(this).attr("id");
-                // $('#row'+button_id+'').remove();
                 $('#row'+button_id+'').fadeOut('slow', function() {
                     $(this).remove();
                 });

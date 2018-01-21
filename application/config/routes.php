@@ -65,6 +65,11 @@ $route['proyek-tambah'] = 'proyek/tambah';
 $route['proyek-lihat/(:any)'] = 'proyek/ubah/$1';
 $route['proyek-hapus/(:any)'] = 'proyek/hapus/$1';
 
+$route['klien'] = 'klien';
+$route['klien-tambah'] = 'klien/tambah';
+$route['klien-lihat/(:any)'] = 'klien/ubah/$1';
+$route['klien-hapus/(:any)'] = 'klien/hapus/$1';
+
 $route['pekerjaan'] = 'pekerjaan';
 $route['pekerjaan-tambah/(:any)'] = 'pekerjaan/tambah/$1';
 $route['pekerjaan-lihat/(:any)'] = 'pekerjaan/ubah/$1';

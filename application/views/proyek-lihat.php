@@ -82,6 +82,12 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Pengguna</p>
                     </a>
                 </li>
+                <li>
+                    <a href="../klien">
+                        <i class="ti-comments-smiley"></i>
+                        <p>Klien</p>
+                    </a>
+                </li>
                 <li class="active">
                     <a href="../proyek">
                         <i class="ti-agenda"></i>
@@ -193,7 +199,16 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Klien</label>
-                                                <input type="text" name="nama_klien" class="form-control border-input" placeholder="PT. Nusantara Berlian Motor" value="<?php echo $proyek_item['nama_klien']; ?>" required>
+                                                <select name="id_klien" class="form-control border-input" required>
+                                                    <option value="" disabled selected> -- Pilih Klien -- </option>
+                                                    <?php 
+                                                        foreach ($klien as $klien_item) { ?>
+                                                            <option value="<?php echo $klien_item['id_klien']; ?>"<?php if ($proyek_item['id_klien'] == $klien_item['id_klien']) {
+                                                                echo 'selected="selected"';    
+                                                            }?>
+                                                            ><?php echo $klien_item['nama_klien'].' - ('.$klien_item['perusahaan'].')'; ?></option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

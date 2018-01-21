@@ -71,6 +71,12 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
+                    <a href="../klien">
+                        <i class="ti-comments-smiley"></i>
+                        <p>Klien</p>
+                    </a>
+                </li>
+                <li>
                     <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
@@ -563,8 +569,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         data: {'id_penyebab' : opt.attr("id")},
                         dataType: 'json',
                         success: function(data){
-                            $('#mitigation_suggestion').html(data.return_mitigasi);
                             document.getElementById("nilai_o").value = data.return_nilai_o;
+                            $('#mitigation_suggestion').html(data.return_mitigasi);
                         },
                         error: function(){
                             console.log('error');

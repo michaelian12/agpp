@@ -9,6 +9,7 @@ class Authentication extends CI_Controller {
 		$this->load->model('authentication_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
+		// $this->load->library('encrypt');
 	}
 
 	public function index()
@@ -62,8 +63,8 @@ class Authentication extends CI_Controller {
 					} else {
 						echo "kosong";
 					}
-					// $this->session->set_flashdata('error', 'Email dan kata sandi tidak valid');
-					// redirect('masuk');
+					$this->session->set_flashdata('error', 'Email dan kata sandi tidak valid');
+					redirect('masuk');
 				}
 			} else { // account doesn't exists
 				$this->session->set_flashdata('error', 'Akun tidak ditemukan');

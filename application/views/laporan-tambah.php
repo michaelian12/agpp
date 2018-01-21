@@ -71,6 +71,12 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
+                    <a href="../klien">
+                        <i class="ti-comments-smiley"></i>
+                        <p>Klien</p>
+                    </a>
+                </li>
+                <li>
                     <a href="../proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
@@ -128,7 +134,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a href=".../keluar">
+                            <a href="../keluar">
 								<i class="ti-power-off"></i>
 								<p>Keluar</p>
                             </a>

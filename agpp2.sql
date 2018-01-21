@@ -18,28 +18,59 @@ INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `jabatan`, `email`, `kat
 (2, 'Agus Permana', 'Manajer Proyek', 'agus.permana@agpp.com', 'agpp', 'Aktif'),
 (3, 'Agus Purnama', 'Site Manager', 'agus.purnama@agpp.com', 'agpp', 'Aktif');
 
-CREATE TABLE `proyek` (
-  `id_proyek` int(11) NOT NULL,
-  `no_spp` varchar(50) DEFAULT NULL,
-  `nama_proyek` varchar(300) DEFAULT NULL,
-  `nama_klien` varchar(100) DEFAULT NULL,
-  `nilai_kontrak` bigint(20) DEFAULT NULL,
-  `tgl_mulai` date DEFAULT NULL,
-  `tgl_selesai` date DEFAULT NULL,
-  `nilai_kritis` int(11) DEFAULT NULL
+CREATE TABLE `klien` (
+  `id_klien` int(11) NOT NULL,
+  `nama_klien` varchar(100) NOT NULL,
+  `no_telp` varchar(20) NOT NULL,
+  `perusahaan` varchar(100) NOT NULL,
+  `alamat` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `proyek` (`id_proyek`, `no_spp`, `nama_proyek`, `nama_klien`, `nilai_kontrak`, `tgl_mulai`, `tgl_selesai`, `nilai_kritis`) VALUES
-(1, '01/SPP/AGPP-NM/V/2010', 'Pelaksanaan Bangunan Mazda Showroom di Jl. Suryopranoto, Jakarta', 'PT. Nusantara Mazda', 6500000000, '2010-05-19', '2010-12-19', NULL),
-(2, '01/SPP/EGC-AGPP/PORSCHE/III/2014', 'Pelaksanaan Pekerjaan Struktur, Arsitektur, dan Mechanical Electrical Porsche Centre Jakarta', 'PT. Eurokars Artha Utama', 32670000000, '2014-03-26', '2015-03-25', NULL),
-(3, '01/SPP/NBM-AGPP/MITSUBISHI/II/2017', 'Pelaksanaan Pekerjaan Showroom, Service Reception, Service Bay, Service Store, Car Wash and Exterior Mitsubishi Showroom Medan', 'PT. Nusantara Berlian Motor', 10780000000, '2017-02-15', '2017-07-30', 155);
+INSERT INTO `klien` (`id_klien`, `nama_klien`, `no_telp`, `perusahaan`, `alamat`) VALUES
+(1, 'Joe Surya', '(021) 3510888', 'PT. Nusantara Mazda', 'Jl. Suryopranoto No. 77 - 79, Petojo Sel., Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta'),
+(2, 'Fransiska Renata', '(021) 7239333', 'PT. Eurokars Artha Utama', 'Jl. Sultan Iskandar Muda No.51, Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta'),
+(3, 'Joe Surya', '0813-5128-2992', 'PT. Nusantara Berlian Motor', 'Jl. Cinere Raya No. 18B, Cinere, Kota Depok, Jawa Barat');
 
 CREATE TABLE `master_risiko` (
   `id_master_risiko` int(11) NOT NULL,
   `nama_master_risiko` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `master_risiko` (`id_master_risiko`, `nama_master_risiko`) VALUES
+(1, 'Perubahan desain'),
+(2, 'Gambar desain lama'),
+(3, 'Pembayaran macet dari owner'),
+(4, 'Pengeluaran biaya kompensasi untuk lingkungan'),
+(5, 'Harga material naik mendadak'),
+(6, 'Kualitas pekerjaan kurang baik'),
+(7, 'Pekerja berhalangan hadir'),
+(8, 'Pekerja tertimpa material'),
+(9, 'Pekerja celaka karena alat kerja'),
+(10, 'Tipe material diubah'),
+(11, 'Material yang dikirim salah'),
+(12, 'Alat kerja rusak'),
+(13, 'Pengiriman material terlambat'),
+(14, 'Penambahan pekerjaan'),
+(15, 'Bangunan proyek disegel'),
+(16, 'Pengerjaan ulang (faktor cuaca)');
+
 -- Child Tables
+
+CREATE TABLE `proyek` (
+  `id_proyek` int(11) NOT NULL,
+  `no_spp` varchar(50) DEFAULT NULL,
+  `nama_proyek` varchar(300) DEFAULT NULL,
+  `nilai_kontrak` bigint(20) DEFAULT NULL,
+  `tgl_mulai` date DEFAULT NULL,
+  `tgl_selesai` date DEFAULT NULL,
+  `nilai_kritis` int(11) DEFAULT NULL,
+  `id_klien` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `proyek` (`id_proyek`, `no_spp`, `nama_proyek`, `nilai_kontrak`, `tgl_mulai`, `tgl_selesai`, `nilai_kritis`, `id_klien`) VALUES
+(1, '01/SPP/AGPP-NM/V/2010', 'Pelaksanaan Bangunan Mazda Showroom di Jl. Suryopranoto, Jakarta', 6500000000, '2010-05-19', '2010-12-19', NULL, 1),
+(2, '01/SPP/EGC-AGPP/PORSCHE/III/2014', 'Pelaksanaan Pekerjaan Struktur, Arsitektur, dan Mechanical Electrical Porsche Centre Jakarta', 32670000000, '2014-03-26', '2015-03-25', NULL, 2),
+(3, '01/SPP/NBM-AGPP/MITSUBISHI/II/2017', 'Pelaksanaan Pekerjaan Showroom, Service Reception, Service Bay, Service Store, Car Wash and Exterior Mitsubishi Showroom Medan', 10780000000, '2017-02-15', '2017-07-30', 155, 3);
 
 CREATE TABLE `pekerjaan` (
   `id_pekerjaan` int(11) NOT NULL,
@@ -232,8 +263,12 @@ ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id_pengguna`),
   ADD UNIQUE KEY `email` (`email`);
 
+ALTER TABLE `klien`
+  ADD PRIMARY KEY (`id_klien`);
+
 ALTER TABLE `proyek`
-  ADD PRIMARY KEY (`id_proyek`);
+  ADD PRIMARY KEY (`id_proyek`),
+  ADD KEY `id_klien` (`id_klien`);
 
 ALTER TABLE `master_risiko`
   ADD PRIMARY KEY (`id_master_risiko`);
@@ -275,6 +310,9 @@ ALTER TABLE `evaluasi`
 ALTER TABLE `pengguna`
   MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
+ALTER TABLE `klien`
+  MODIFY `id_klien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 ALTER TABLE `proyek`
   MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
@@ -306,6 +344,9 @@ ALTER TABLE `evaluasi`
   MODIFY `id_evaluasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 -- Constraint for Foreign Key
+
+ALTER TABLE `proyek`
+  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`id_klien`) REFERENCES `klien` (`id_klien`);
 
 ALTER TABLE `pekerjaan`
   ADD CONSTRAINT `pekerjaan_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
