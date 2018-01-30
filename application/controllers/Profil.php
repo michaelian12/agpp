@@ -30,6 +30,7 @@ class Profil extends CI_Controller {
 			$this->load->view('profil', $data);
 		} else {
 			$this->profil_model->update_profil($id);
+			$this->session->set_flashdata('success', 'Data berhasil diubah');
 			redirect('profil');
 		}		
 	}

@@ -28,6 +28,7 @@ class Mitigasi extends CI_Controller {
 			$this->load->view('mitigasi-tambah', $data);
 		} else {
 			$this->mitigasi_model->set_mitigasi();
+			$this->session->set_flashdata('success', 'Data berhasil ditambah');
 			redirect('mitigasi');
 		}		
 	}
@@ -70,7 +71,7 @@ class Mitigasi extends CI_Controller {
 		if (count($mitigasi) > 0) {
 			$table_row = '';
 			foreach ($mitigasi as $mitigasi_item) {
-				$table_row .= '<tr><td>'.$mitigasi_item["nama_risiko"].'</td><td>'.$mitigasi_item["nama_penyebab"].'</td><td>'.$mitigasi_item["rpn"].'</td><td>'.$mitigasi_item["kategori"].'</td><td>'.$mitigasi_item["nama_mitigasi"].'</td><td><a href="mitigasi-lihat/'.$mitigasi_item["id_mitigasi"].'"><i class="ti-eye"></i></a></td><td><a href="mitigasi-hapus/'.$mitigasi_item["id_mitigasi"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
+				$table_row .= '<tr><td>'.$mitigasi_item["nama_risiko"].'</td><td>'.$mitigasi_item["nama_penyebab"].'</td><td>'.$mitigasi_item["rpn"].'</td><td>'.$mitigasi_item["kategori"].'</td><td>'.$mitigasi_item["nama_mitigasi"].'</td><td><a href="mitigasi-lihat/'.$mitigasi_item["id_mitigasi"].'"><i class="ti-eye"></i></a></td><td><a href="mitigasi-hapus/'.$mitigasi_item["id_mitigasi"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="ti-trash"></i></a></td></tr>';
 			}
 			echo json_encode($table_row);
 		}
@@ -91,6 +92,7 @@ class Mitigasi extends CI_Controller {
 			$this->load->view('mitigasi-lihat', $data);
 		} else {
 			$this->mitigasi_model->update_mitigasi($id);
+			$this->session->set_flashdata('success', 'Data berhasil diubah');
 			redirect('mitigasi');	
 		}		
 	}
@@ -99,6 +101,7 @@ class Mitigasi extends CI_Controller {
 	public function hapus($id)
 	{
 		$this->mitigasi_model->delete_mitigasi($id);
+			$this->session->set_flashdata('success', 'Data berhasil dihapus');
 		redirect('mitigasi');
 	}
 }

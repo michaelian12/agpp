@@ -101,6 +101,19 @@ class Laporan_model extends CI_Model {
 		$this->db->update('laporan_harian', $data);
 	}
 
+	public function update_notifikasi($id)
+	{
+		$data = array(
+			'read_status' => 1
+		);
+
+		$this->db->where('id_laporan_harian', $id);
+		$this->db->update('laporan_harian', $data);
+
+		$query = $this->db->get_where('laporan_harian', array('id_laporan_harian' => $id));
+		return $query->row_array();
+	}
+
 	// Delete
 	public function delete_laporan($id, $tgl)
 	{

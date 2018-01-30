@@ -25,6 +25,16 @@ class Authentication_model extends CI_Model {
 		return $query->row_array();
 	}
 
+	public function reset_kata_sandi($email)
+	{
+		$data = array(
+			'kata_sandi' => ''
+		);
+
+		$this->db->where('email', $email);
+		$this->db->update('pengguna', $data);
+	}
+
 	// password encryption function
 	// private function encryptIt($q){
 	//   $cryptKey = 'qJB0rGtIn5UB1xG03efyCp';

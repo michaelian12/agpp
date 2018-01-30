@@ -13,7 +13,8 @@ class Pengguna_model extends CI_Model {
 			'nama_pengguna' => $this->input->post('nama_pengguna'),
 			'jabatan' => $this->input->post('jabatan'),
 			'email' => $this->input->post('email'),
-			'kata_sandi' => $this->encryptIt($this->input->post('kata_sandi')),
+			// 'kata_sandi' => $this->encryptIt($this->input->post('kata_sandi')),
+			'kata_sandi' => $this->input->post('kata_sandi'),
 			'status' => $this->input->post('status')
 		);
 

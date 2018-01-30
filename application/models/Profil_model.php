@@ -27,6 +27,14 @@ class Profil_model extends CI_Model {
 		$this->db->update('pengguna', $data);
 	}
 
+	// Notification
+	public function get_notification()
+	{
+		$sql = 'select * from laporan_harian l join proyek p on l.id_proyek = p.id_proyek where l.read_status = 0';
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
 	// password encryption function
 	// private function encryptIt($q){
 	//   $cryptKey = 'qJB0rGtIn5UB1xG03efyCp';

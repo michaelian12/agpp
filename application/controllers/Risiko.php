@@ -35,6 +35,7 @@ class Risiko extends CI_Controller {
 			$this->risiko_model->set_efek($id_risiko);
 			$this->risiko_model->set_penyebab($id_risiko);
 			$this->risiko_model->update_nilai_kritis($id);
+			$this->session->set_flashdata('success', 'Data berhasil ditambah');
 			redirect('risiko');
 		}		
 	}
@@ -55,7 +56,7 @@ class Risiko extends CI_Controller {
 		if (count($risiko) > 0) {
 			$table_row = '';
 			foreach ($risiko as $risiko_item) {
-				$table_row .= '<tr><td>'.$risiko_item["nama_risiko"].'</td><td>'.$risiko_item["nilai_s"].'</td><td>'.$risiko_item["nama_penyebab"].'</td><td>'.$risiko_item["nilai_o"].'</td><td>'.$risiko_item["nama_kontrol"].'</td><td>'.$risiko_item["nilai_d"].'</td><td>'.$risiko_item["rpn"].'</td><td><a href="risiko-lihat/'.$risiko_item["id_risiko"].'"><i class="ti-eye"></i></a></td><td><a href="risiko-hapus/'.$risiko_item["id_risiko"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
+				$table_row .= '<tr><td>'.$risiko_item["nama_risiko"].'</td><td>'.$risiko_item["nilai_s"].'</td><td>'.$risiko_item["nama_penyebab"].'</td><td>'.$risiko_item["nilai_o"].'</td><td>'.$risiko_item["nama_kontrol"].'</td><td>'.$risiko_item["nilai_d"].'</td><td>'.$risiko_item["rpn"].'</td><td><a href="risiko-lihat/'.$risiko_item["id_risiko"].'"><i class="ti-eye"></i></a></td><td><a href="risiko-hapus/'.$risiko_item["id_risiko"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="ti-trash"></i></a></td></tr>';
 			}
 			echo json_encode($table_row);
 		}
@@ -85,6 +86,7 @@ class Risiko extends CI_Controller {
 		} else {
 			$id_proyek = $this->risiko_model->update_risiko($id);
 			$this->risiko_model->update_nilai_kritis($id_proyek);
+			$this->session->set_flashdata('success', 'Data berhasil diubah');
 			redirect('risiko');
 		}		
 	}

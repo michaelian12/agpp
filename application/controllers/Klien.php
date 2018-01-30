@@ -27,6 +27,7 @@ class Klien extends CI_Controller {
 			$this->load->view('klien-tambah');
 		} else {
 			$this->klien_model->set_klien();
+			$this->session->set_flashdata('success', 'Data berhasil ditambah');
 			redirect('klien');	
 		}		
 	}
@@ -56,6 +57,7 @@ class Klien extends CI_Controller {
 			$this->load->view('klien-lihat', $data);
 		} else {
 			$this->klien_model->update_klien($id);
+			$this->session->set_flashdata('success', 'Data berhasil diubah');
 			redirect('klien');	
 		}		
 	}
@@ -64,6 +66,7 @@ class Klien extends CI_Controller {
 	public function hapus($id)
 	{
 		$this->klien_model->delete_klien($id);
+		$this->session->set_flashdata('success', 'Data berhasil dihapus');
 		redirect('klien');
 	}
 }

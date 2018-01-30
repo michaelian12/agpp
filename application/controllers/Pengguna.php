@@ -27,6 +27,7 @@ class Pengguna extends CI_Controller {
 			$this->load->view('pengguna-tambah');
 		} else {
 			$this->pengguna_model->set_pengguna();
+			$this->session->set_flashdata('success', 'Data berhasil ditambah');
 			redirect('pengguna');	
 		}		
 	}
@@ -55,6 +56,7 @@ class Pengguna extends CI_Controller {
 			$this->load->view('pengguna-lihat', $data);
 		} else {
 			$this->pengguna_model->update_pengguna($id);
+			$this->session->set_flashdata('success', 'Data berhasil diubah');
 			redirect('pengguna');	
 		}		
 	}
@@ -63,6 +65,7 @@ class Pengguna extends CI_Controller {
 	public function hapus($id)
 	{
 		$this->pengguna_model->delete_pengguna($id);
+			$this->session->set_flashdata('success', 'Data berhasil dihapus');
 		redirect('pengguna');
 	}
 }

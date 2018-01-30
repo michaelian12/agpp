@@ -34,6 +34,7 @@ class Evaluasi extends CI_Controller {
 			$this->load->view('evaluasi-tambah', $data);
 		} else {
 			$this->evaluasi_model->set_evaluasi($id);
+			$this->session->set_flashdata('success', 'Data berhasil ditambah');
 			redirect('evaluasi');	
 		}		
 	}
@@ -108,7 +109,7 @@ class Evaluasi extends CI_Controller {
 		if (count($evaluasi) > 0) {
 			$table_row = '';
 			foreach ($evaluasi as $evaluasi_item) {
-				$table_row .= '<tr><td>'.$evaluasi_item["tgl_evaluasi"].'</td><td>'.$evaluasi_item["nama_risiko"].'</td><td>'.$evaluasi_item["nama_penyebab"].'</td><td>'.$evaluasi_item["rpn"].'</td><td>'.$evaluasi_item["kategori"].'</td><td>'.$evaluasi_item["nama_mitigasi"].'</td><td><a href="evaluasi-lihat/'.$evaluasi_item["id_evaluasi"].'"><i class="ti-eye"></i></a></td><td><a href="evaluasi-hapus/'.$evaluasi_item["id_evaluasi"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
+				$table_row .= '<tr><td>'.$evaluasi_item["tgl_evaluasi"].'</td><td>'.$evaluasi_item["nama_risiko"].'</td><td>'.$evaluasi_item["nama_penyebab"].'</td><td>'.$evaluasi_item["rpn"].'</td><td>'.$evaluasi_item["kategori"].'</td><td>'.$evaluasi_item["nama_mitigasi"].'</td><td><a href="evaluasi-lihat/'.$evaluasi_item["id_evaluasi"].'"><i class="ti-eye"></i></a></td><td><a href="evaluasi-hapus/'.$evaluasi_item["id_evaluasi"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="ti-trash"></i></a></td></tr>';
 			}
 			echo json_encode($table_row);
 		}
@@ -136,6 +137,7 @@ class Evaluasi extends CI_Controller {
 			$this->load->view('evaluasi-lihat', $data);
 		} else {
 			$this->evaluasi_model->update_evaluasi($id);
+			$this->session->set_flashdata('success', 'Data berhasil diubah');
 			redirect('evaluasi');	
 		}		
 	}
@@ -144,6 +146,7 @@ class Evaluasi extends CI_Controller {
 	public function hapus($id)
 	{
 		$this->evaluasi_model->delete_evaluasi($id);
+		$this->session->set_flashdata('success', 'Data berhasil dihapus');
 		redirect('evaluasi');
 	}
 }

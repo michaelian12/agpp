@@ -27,32 +27,32 @@ CREATE TABLE `klien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `klien` (`id_klien`, `nama_klien`, `no_telp`, `perusahaan`, `alamat`) VALUES
-(1, 'Joe Surya', '(021) 3510888', 'PT. Nusantara Mazda', 'Jl. Suryopranoto No. 77 - 79, Petojo Sel., Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta'),
-(2, 'Fransiska Renata', '(021) 7239333', 'PT. Eurokars Artha Utama', 'Jl. Sultan Iskandar Muda No.51, Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta'),
+(1, 'Joe Surya', '021-3510888', 'PT. Nusantara Mazda', 'Jl. Suryopranoto No. 77 - 79, Petojo Sel., Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta'),
+(2, 'Fransiska Renata', '021-7239333', 'PT. Eurokars Artha Utama', 'Jl. Sultan Iskandar Muda No.51, Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta'),
 (3, 'Joe Surya', '0813-5128-2992', 'PT. Nusantara Berlian Motor', 'Jl. Cinere Raya No. 18B, Cinere, Kota Depok, Jawa Barat');
 
-CREATE TABLE `master_risiko` (
-  `id_master_risiko` int(11) NOT NULL,
-  `nama_master_risiko` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- CREATE TABLE `master_risiko` (
+--   `id_master_risiko` int(11) NOT NULL,
+--   `nama_master_risiko` varchar(100) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `master_risiko` (`id_master_risiko`, `nama_master_risiko`) VALUES
-(1, 'Perubahan desain'),
-(2, 'Gambar desain lama'),
-(3, 'Pembayaran macet dari owner'),
-(4, 'Pengeluaran biaya kompensasi untuk lingkungan'),
-(5, 'Harga material naik mendadak'),
-(6, 'Kualitas pekerjaan kurang baik'),
-(7, 'Pekerja berhalangan hadir'),
-(8, 'Pekerja tertimpa material'),
-(9, 'Pekerja celaka karena alat kerja'),
-(10, 'Tipe material diubah'),
-(11, 'Material yang dikirim salah'),
-(12, 'Alat kerja rusak'),
-(13, 'Pengiriman material terlambat'),
-(14, 'Penambahan pekerjaan'),
-(15, 'Bangunan proyek disegel'),
-(16, 'Pengerjaan ulang (faktor cuaca)');
+-- INSERT INTO `master_risiko` (`id_master_risiko`, `nama_master_risiko`) VALUES
+-- (1, 'Perubahan desain'),
+-- (2, 'Gambar desain lama'),
+-- (3, 'Pembayaran macet dari owner'),
+-- (4, 'Pengeluaran biaya kompensasi untuk lingkungan'),
+-- (5, 'Harga material naik mendadak'),
+-- (6, 'Kualitas pekerjaan kurang baik'),
+-- (7, 'Pekerja berhalangan hadir'),
+-- (8, 'Pekerja tertimpa material'),
+-- (9, 'Pekerja celaka karena alat kerja'),
+-- (10, 'Tipe material diubah'),
+-- (11, 'Material yang dikirim salah'),
+-- (12, 'Alat kerja rusak'),
+-- (13, 'Pengiriman material terlambat'),
+-- (14, 'Penambahan pekerjaan'),
+-- (15, 'Bangunan proyek disegel'),
+-- (16, 'Pengerjaan ulang (faktor cuaca)');
 
 -- Child Tables
 
@@ -239,6 +239,7 @@ CREATE TABLE `laporan_harian` (
   `efek` varchar(300) DEFAULT NULL,
   `penyebab` varchar(300) DEFAULT NULL,
   `deteksi` varchar(300) DEFAULT NULL,
+  `read_status` boolean DEFAULT 0,
   `id_proyek` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

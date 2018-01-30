@@ -32,6 +32,7 @@ class Laporan extends CI_Controller {
 			$this->load->view('laporan-tambah', $data);
 		} else {
 			$this->laporan_model->set_laporan($id);
+			$this->session->set_flashdata('success', 'Data berhasil ditambah');
 			redirect('laporan');
 		}
 	}
@@ -51,9 +52,16 @@ class Laporan extends CI_Controller {
 		if (count($laporan) > 0) {
 			$table_row = '';
 			$i = 1;
-			foreach ($laporan as $laporan_item) {
-				$table_row .= '<tr><td>'.$i.'</td><td>'.$laporan_item["tgl_laporan_pekerjaan"].'</td><td><a href="laporan-lihat/'.$laporan_item['id_proyek'].'/'.$laporan_item['tgl_laporan_pekerjaan'].'"><i class="ti-eye"></i></a></td><td><a href="laporan-hapus/'.$laporan_item['id_proyek'].'/'.$laporan_item["tgl_laporan_pekerjaan"].'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>';
-				$i++;
+			if ($this->session->userdata('jabatan') == 'Site Manager') {
+				foreach ($laporan as $laporan_item) {
+					$table_row .= '<tr><td>'.$i.'</td><td>'.$laporan_item["tgl_laporan_pekerjaan"].'</td><td><a href="laporan-lihat/'.$laporan_item['id_proyek'].'/'.$laporan_item['tgl_laporan_pekerjaan'].'"><i class="ti-eye"></i></a></td><td><a href="laporan-hapus/'.$laporan_item['id_proyek'].'/'.$laporan_item["tgl_laporan_pekerjaan"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="ti-trash"></i></a></td></tr>';
+					$i++;
+				}
+			} elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') {
+				foreach ($laporan as $laporan_item) {
+					$table_row .= '<tr><td>'.$i.'</td><td>'.$laporan_item["tgl_laporan_pekerjaan"].'</td><td><a href="laporan-lihat/'.$laporan_item['id_proyek'].'/'.$laporan_item['tgl_laporan_pekerjaan'].'"><i class="ti-eye"></i></a></td></tr>';
+					$i++;
+				}
 			}
 			echo json_encode($table_row);
 		}
@@ -80,14 +88,23 @@ class Laporan extends CI_Controller {
 			$this->load->view('laporan-lihat', $data);
 		} else {
 			$this->laporan_model->update_laporan();
+			$this->session->set_flashdata('success', 'Data berhasil diubah');
 			redirect('laporan');
 		}		
+	}
+
+	public function update_notifikasi($id)
+	{
+		$data['laporan_harian'] = $this->laporan_model->update_notifikasi($id);
+
+		$this->ubah($data['laporan_harian']['id_proyek'], $data['laporan_harian']['tgl_laporan_harian']);
 	}
 
 	// Delete
 	public function hapus($id, $tgl)
 	{
 		$this->laporan_model->delete_laporan($id, $tgl);
+		$this->session->set_flashdata('success', 'Data berhasil dihapus');
 		redirect('laporan');
 	}
 }

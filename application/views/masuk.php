@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url(); ?>/assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url(); ?>/assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url(); ?>assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url(); ?>assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>Sistem Informasi Manajemen Risiko Proyek</title>
@@ -14,24 +14,24 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href="<?php echo base_url(); ?>/assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="<?php echo base_url(); ?>assets/css/animate.min.css" rel="stylesheet"/>
 
     <!--  Paper Dashboard core CSS    -->
-    <link href="<?php echo base_url(); ?>/assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href="<?php echo base_url(); ?>assets/css/paper-dashboard.css" rel="stylesheet"/>
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="<?php echo base_url(); ?>/assets/css/demo.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>assets/css/demo.css" rel="stylesheet" />
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="<?php echo base_url(); ?>/assets/css/themify-icons.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/themify-icons.css" rel="stylesheet">
     
     <!--  JavaScript  -->
-    <script src="<?php echo base_url(); ?>/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -48,7 +48,7 @@
             <div class="logo">
                 <a href="#" class="simple-text">
                     <span style="line-height:30px; font-size:32px">ANANTA</span>
-                    <img src="agpp.png" style="vertical-align:bottom; width: 48px; height: 48px">
+                    <img src="<?php echo base_url(); ?>agpp.png" style="vertical-align:bottom; width: 48px; height: 48px">
                 </a>
             </div>
 
@@ -113,7 +113,7 @@
                                             
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email</label>
-                                                <input type="email" name="email" class="form-control border-input" placeholder="username@email.com" required>
+                                                <input type="email" name="email" class="form-control border-input" placeholder="username@email.com" oninvalid="this.setCustomValidity('Mohon isi kolom ini dengan format yang benar')" oninput="setCustomValidity('')" required>
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Kata Sandi</label>
-                                                <input type="password" name="kata_sandi" class="form-control border-input" placeholder="********" required>
+                                                <input type="password" name="kata_sandi" class="form-control border-input" placeholder="********" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
                                             </div>
                                         </div>
                                     </div>
@@ -163,22 +163,22 @@
 </body>
 
     <!--   Core JS Files   -->
-    <script src="<?php echo base_url(); ?>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="<?php echo base_url(); ?>/assets/js/bootstrap-checkbox-radio.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/bootstrap-checkbox-radio.js"></script>
 
 	<!--  Charts Plugin -->
-	<script src="<?php echo base_url(); ?>/assets/js/chartist.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="<?php echo base_url(); ?>/assets/js/bootstrap-notify.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap-notify.js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="<?php echo base_url(); ?>/assets/js/paper-dashboard.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="<?php echo base_url(); ?>/assets/js/demo.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/demo.js"></script>
 
 </html>

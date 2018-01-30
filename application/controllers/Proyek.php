@@ -31,6 +31,7 @@ class Proyek extends CI_Controller {
 			$this->load->view('proyek-tambah', $data);
 		} else {
 			$this->proyek_model->set_proyek();
+			$this->session->set_flashdata('success', 'Data berhasil ditambah');
 			redirect('proyek');
 		}		
 	}
@@ -64,6 +65,7 @@ class Proyek extends CI_Controller {
 			$this->load->view('proyek-lihat', $data);
 		} else {
 			$this->proyek_model->update_proyek($id);
+			$this->session->set_flashdata('success', 'Data berhasil diubah');
 			redirect('proyek');	
 		}		
 	}
@@ -72,6 +74,7 @@ class Proyek extends CI_Controller {
 	public function hapus($id)
 	{
 		$this->proyek_model->delete_proyek($id);
+		$this->session->set_flashdata('success', 'Data berhasil dihapus');
 		redirect('proyek');
 	}
 }
