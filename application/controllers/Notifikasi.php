@@ -21,7 +21,7 @@ class Notifikasi extends CI_Controller {
 				$output .= '<li><a href="laporan-lihat/'.$notifikasi_item["id_laporan_harian"].'"><strong>'.$notifikasi_item["tgl_laporan_harian"].'</strong><br/><small><em>'.$notifikasi_item["no_spp"].'</em></small></a></li><li class="divider"></li>';
 			}
 		} else {
-			$output .= '<li><a href="#" class="text-bold text-italic">No New notifikasi</a></li>';
+			$output .= '<li><a href="#" class="text-bold text-italic">Tidak ada notifikasi baru</a></li>';
 		}
 
 		echo json_encode(array('notifikasi' => $output, 'unread_notifikasi' => count($notifikasi)));
