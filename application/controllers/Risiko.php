@@ -56,7 +56,7 @@ class Risiko extends CI_Controller {
 		if (count($risiko) > 0) {
 			$table_row = '';
 			foreach ($risiko as $risiko_item) {
-				$table_row .= '<tr><td>'.$risiko_item["nama_risiko"].'</td><td>'.$risiko_item["nilai_s"].'</td><td>'.$risiko_item["nama_penyebab"].'</td><td>'.$risiko_item["nilai_o"].'</td><td>'.$risiko_item["nama_kontrol"].'</td><td>'.$risiko_item["nilai_d"].'</td><td>'.$risiko_item["rpn"].'</td><td><a href="risiko-lihat/'.$risiko_item["id_risiko"].'"><i class="ti-eye"></i></a></td><td><a href="risiko-hapus/'.$risiko_item["id_risiko"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="ti-trash"></i></a></td></tr>';
+				$table_row .= '<tr><td>'.$risiko_item["nama_risiko"].'</td><td>'.$risiko_item["nilai_s"].'</td><td>'.$risiko_item["nama_penyebab"].'</td><td>'.$risiko_item["nilai_o"].'</td><td>'.$risiko_item["nama_kontrol"].'</td><td>'.$risiko_item["nilai_d"].'</td><td>'.$risiko_item["rpn"].'</td><td><a href="risiko-lihat/'.$risiko_item["id_risiko"].'"><i class="ti-eye"></i></a></td><td><a href="risiko-hapus/'.$risiko_item["id_risiko"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.\')"><i class="ti-trash"></i></a></td></tr>';
 			}
 			echo json_encode($table_row);
 		}
@@ -95,7 +95,7 @@ class Risiko extends CI_Controller {
 	public function hapus($id)
 	{
 		$this->risiko_model->delete_risiko($id);
-		// redirect('risiko');
+		redirect('risiko');
 	}
 
 	public function hapus_efek($id)

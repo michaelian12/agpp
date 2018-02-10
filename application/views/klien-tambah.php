@@ -37,6 +37,14 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     <!--  JavaScript  -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
+    <!--  Hide Input Number Spin Button   -->
+    <style type="text/css">
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -162,7 +170,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Klien</label>
-                                                <input type="text" name="nama_klien" class="form-control border-input" placeholder="Joe Surya" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                                <input type="text" onkeydown="return alphaOnly(event);" name="nama_klien" class="form-control border-input" placeholder="Joe Surya" oninvalid="this.setCustomValidity('Mohon isi kolom ini dengan format yang benar')" oninput="setCustomValidity('')" required>
                                             </div>
                                         </div>
                                     </div>
@@ -221,6 +229,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 
 </body>
+    
+    <!--  Disabled Numeric  -->
+    <script type="text/javascript">
+        function alphaOnly(event) {
+            var key = event.keyCode;
+
+            return ((key >= 65 && key <= 90) || key == 8 || key == 32);
+        }
+    </script>
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js" type="text/javascript"></script>

@@ -181,7 +181,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                     <td><?php echo $proyek_item['nama_proyek']; ?></td>
                                                     <td><?php echo $proyek_item['perusahaan']; ?></td>
                                                     <td><a href="proyek-lihat/<?php echo $proyek_item['id_proyek']?>"><i class="ti-eye"></i></a></td>
-                                                    <td><a href="proyek-hapus/<?php echo $proyek_item['id_proyek']?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><i class="ti-trash"></i></a></td>
+                                                    <td><a href="proyek-hapus/<?php echo $proyek_item['id_proyek']?>" onclick="return confirm('Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.')"><i class="ti-trash"></i></a></td>
                                                 </tr>
                                             <?php }
                                         ?>

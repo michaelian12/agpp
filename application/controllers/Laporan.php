@@ -54,7 +54,7 @@ class Laporan extends CI_Controller {
 			$i = 1;
 			if ($this->session->userdata('jabatan') == 'Site Manager') {
 				foreach ($laporan as $laporan_item) {
-					$table_row .= '<tr><td>'.$i.'</td><td>'.$laporan_item["tgl_laporan_pekerjaan"].'</td><td><a href="laporan-lihat/'.$laporan_item['id_proyek'].'/'.$laporan_item['tgl_laporan_pekerjaan'].'"><i class="ti-eye"></i></a></td><td><a href="laporan-hapus/'.$laporan_item['id_proyek'].'/'.$laporan_item["tgl_laporan_pekerjaan"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="ti-trash"></i></a></td></tr>';
+					$table_row .= '<tr><td>'.$i.'</td><td>'.$laporan_item["tgl_laporan_pekerjaan"].'</td><td><a href="laporan-lihat/'.$laporan_item['id_proyek'].'/'.$laporan_item['tgl_laporan_pekerjaan'].'"><i class="ti-eye"></i></a></td><td><a href="laporan-hapus/'.$laporan_item['id_proyek'].'/'.$laporan_item["tgl_laporan_pekerjaan"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.\')"><i class="ti-trash"></i></a></td></tr>';
 					$i++;
 				}
 			} elseif ($this->session->userdata('jabatan') == 'Manajer Proyek') {

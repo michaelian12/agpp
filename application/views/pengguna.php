@@ -176,7 +176,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                     <td><?php echo $pengguna_item['jabatan']; ?></td>
                                                     <td><?php echo $pengguna_item['status']; ?></td>
                                                     <td><a href="pengguna-lihat/<?php echo $pengguna_item['id_pengguna']?>"><i class="ti-eye"></i></a></td>
-                                                    <td><a href="pengguna-hapus/<?php echo $pengguna_item['id_pengguna']?>" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><i class="ti-trash"></i></a></td>
+                                                    <td><a href="pengguna-hapus/<?php echo $pengguna_item['id_pengguna']?>" onclick="return confirm('Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.')"><i class="ti-trash"></i></a></td>
                                                 </tr>
                                             <?php }
                                         ?>

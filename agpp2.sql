@@ -29,7 +29,7 @@ CREATE TABLE `klien` (
 INSERT INTO `klien` (`id_klien`, `nama_klien`, `no_telp`, `perusahaan`, `alamat`) VALUES
 (1, 'Joe Surya', '021-3510888', 'PT. Nusantara Mazda', 'Jl. Suryopranoto No. 77 - 79, Petojo Sel., Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta'),
 (2, 'Fransiska Renata', '021-7239333', 'PT. Eurokars Artha Utama', 'Jl. Sultan Iskandar Muda No.51, Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta'),
-(3, 'Joe Surya', '0813-5128-2992', 'PT. Nusantara Berlian Motor', 'Jl. Cinere Raya No. 18B, Cinere, Kota Depok, Jawa Barat');
+(3, 'Joe Surya', '081351282992', 'PT. Nusantara Berlian Motor', 'Jl. Cinere Raya No. 18B, Cinere, Kota Depok, Jawa Barat');
 
 -- CREATE TABLE `master_risiko` (
 --   `id_master_risiko` int(11) NOT NULL,
@@ -271,8 +271,8 @@ ALTER TABLE `proyek`
   ADD PRIMARY KEY (`id_proyek`),
   ADD KEY `id_klien` (`id_klien`);
 
-ALTER TABLE `master_risiko`
-  ADD PRIMARY KEY (`id_master_risiko`);
+-- ALTER TABLE `master_risiko`
+--   ADD PRIMARY KEY (`id_master_risiko`);
 
 ALTER TABLE `pekerjaan`
   ADD PRIMARY KEY (`id_pekerjaan`),
@@ -317,8 +317,8 @@ ALTER TABLE `klien`
 ALTER TABLE `proyek`
   MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
-ALTER TABLE `master_risiko`
-  MODIFY `id_master_risiko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+-- ALTER TABLE `master_risiko`
+--   MODIFY `id_master_risiko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 ALTER TABLE `pekerjaan`
   MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
@@ -347,28 +347,28 @@ ALTER TABLE `evaluasi`
 -- Constraint for Foreign Key
 
 ALTER TABLE `proyek`
-  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`id_klien`) REFERENCES `klien` (`id_klien`);
+  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`id_klien`) REFERENCES `klien` (`id_klien`) ON DELETE CASCADE;
 
 ALTER TABLE `pekerjaan`
-  ADD CONSTRAINT `pekerjaan_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
+  ADD CONSTRAINT `pekerjaan_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE CASCADE;
 
 ALTER TABLE `risiko`
-  ADD CONSTRAINT `risiko_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
+  ADD CONSTRAINT `risiko_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE CASCADE;
 
 ALTER TABLE `efek`
-  ADD CONSTRAINT `efek_ibfk_1` FOREIGN KEY (`id_risiko`) REFERENCES `risiko` (`id_risiko`);
+  ADD CONSTRAINT `efek_ibfk_1` FOREIGN KEY (`id_risiko`) REFERENCES `risiko` (`id_risiko`) ON DELETE CASCADE;
 
 ALTER TABLE `penyebab`
-  ADD CONSTRAINT `penyebab_ibfk_1` FOREIGN KEY (`id_risiko`) REFERENCES `risiko` (`id_risiko`);
+  ADD CONSTRAINT `penyebab_ibfk_1` FOREIGN KEY (`id_risiko`) REFERENCES `risiko` (`id_risiko`) ON DELETE CASCADE;
 
 ALTER TABLE `mitigasi`
-  ADD CONSTRAINT `mitigasi_ibfk_1` FOREIGN KEY (`id_penyebab`) REFERENCES `penyebab` (`id_penyebab`);
+  ADD CONSTRAINT `mitigasi_ibfk_1` FOREIGN KEY (`id_penyebab`) REFERENCES `penyebab` (`id_penyebab`) ON DELETE CASCADE;
 
 ALTER TABLE `laporan_pekerjaan`
-  ADD CONSTRAINT `laporan_pekerjaan_ibfk_1` FOREIGN KEY (`id_pekerjaan`) REFERENCES `pekerjaan` (`id_pekerjaan`);
+  ADD CONSTRAINT `laporan_pekerjaan_ibfk_1` FOREIGN KEY (`id_pekerjaan`) REFERENCES `pekerjaan` (`id_pekerjaan`) ON DELETE CASCADE;
 
 ALTER TABLE `laporan_harian`
-  ADD CONSTRAINT `laporan_harian_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
+  ADD CONSTRAINT `laporan_harian_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE CASCADE;
 
 ALTER TABLE `evaluasi`
-  ADD CONSTRAINT `evaluasi_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
+  ADD CONSTRAINT `evaluasi_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`) ON DELETE CASCADE;

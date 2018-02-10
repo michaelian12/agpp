@@ -168,7 +168,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Kata Sandi</label>
-                                                <input type="password" name="kata_sandi" title="Three or more characters" class="form-control border-input" placeholder="********" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                                <input type="password" name="kata_sandi" class="form-control border-input" placeholder="********" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Lengkap</label>
-                                                <input type="text" pattern="[A-Za-z]{1,}" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                                <input type="text" onkeydown="return alphaOnly(event);" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" oninvalid="this.setCustomValidity('Mohon isi kolom ini dengan format yang benar')" oninput="setCustomValidity('')" required>
                                             </div>
                                         </div>
                                     </div>
@@ -234,6 +234,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 
 </body>
+    
+    <!--  Disabled Numeric  -->
+    <script type="text/javascript">
+        function alphaOnly(event) {
+            var key = event.keyCode;
+
+            return ((key >= 65 && key <= 90) || key == 8 || key == 32);
+        }
+    </script>
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js" type="text/javascript"></script>

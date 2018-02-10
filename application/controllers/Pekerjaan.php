@@ -49,7 +49,7 @@ class Pekerjaan extends CI_Controller {
 		if (count($pekerjaan) > 0) {
 			$table_row = '';
 			foreach ($pekerjaan as $pekerjaan_item) {
-				$table_row .= '<tr><td>'.$pekerjaan_item["nama_pekerjaan"].'</td><td>'.$pekerjaan_item["bobot"].'</td><td>'.$pekerjaan_item["tgl_mulai_pekerjaan"].'</td><td>'.$pekerjaan_item["tgl_selesai_pekerjaan"].'</td><td><a href="pekerjaan-lihat/'.$pekerjaan_item["id_pekerjaan"].'"><i class="ti-eye"></i></a></td><td><a href="pekerjaan-hapus/'.$pekerjaan_item["id_pekerjaan"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini?\')"><i class="ti-trash"></i></a></td></tr>';
+				$table_row .= '<tr><td>'.$pekerjaan_item["nama_pekerjaan"].'</td><td>'.$pekerjaan_item["bobot"].'</td><td>'.$pekerjaan_item["tgl_mulai_pekerjaan"].'</td><td>'.$pekerjaan_item["tgl_selesai_pekerjaan"].'</td><td><a href="pekerjaan-lihat/'.$pekerjaan_item["id_pekerjaan"].'"><i class="ti-eye"></i></a></td><td><a href="pekerjaan-hapus/'.$pekerjaan_item["id_pekerjaan"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.\')"><i class="ti-trash"></i></a></td></tr>';
 			}
 			echo json_encode($table_row);
 		}
@@ -81,7 +81,14 @@ class Pekerjaan extends CI_Controller {
 	// Delete
 	public function hapus($id)
 	{
-		$this->pekerjaan_model->delete_pekerjaan($id);
+		// $this->pekerjaan_model->delete_pekerjaan($id);
+		if($this->pekerjaan_model->delete_pekerjaan($id))
+		{
+		   	echo 'Email sent.';
+		} else {
+		   	echo 'error log';
+		   	show_error($this->email->print_debugger());
+		}
 		$this->session->set_flashdata('success', 'Data berhasil dihapus');
 		redirect('pekerjaan');
 	}

@@ -37,6 +37,14 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     <!--  JavaScript  -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 
+    <!--  Hide Input Number Spin Button   -->
+    <style type="text/css">
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -162,7 +170,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Klien</label>
-                                                <input type="text" name="nama_klien" class="form-control border-input" placeholder="PT. Nusantara Mazda" value="<?php echo $klien_item['nama_klien']; ?>" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                                <input type="text" onkeydown="return alphaOnly(event);" name="nama_klien" class="form-control border-input" placeholder="PT. Nusantara Mazda" value="<?php echo $klien_item['nama_klien']; ?>" oninvalid="this.setCustomValidity('Mohon isi kolom ini dengan format yang benar')" oninput="setCustomValidity('')" required>
                                             </div>
                                         </div>
                                     </div>
@@ -191,8 +199,16 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         </div>
                                     </div>
 
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" value="Batal" onclick="window.location.href='<?php echo base_url(); ?>klien'" class="btn btn-default btn-block btn-wd" />
+                                        </div>
                                     </div>
                                     
                                     <div class="clearfix"></div>
@@ -221,6 +237,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 
 </body>
+    
+    <!--  Disabled Numeric  -->
+    <script type="text/javascript">
+        function alphaOnly(event) {
+            var key = event.keyCode;
+
+            return ((key >= 65 && key <= 90) || key == 8 || key == 32);
+        }
+    </script>
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js" type="text/javascript"></script>

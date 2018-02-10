@@ -191,7 +191,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Lengkap</label>
-                                                <input type="text" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $profil['nama_pengguna']; ?>" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                                <input type="text" onkeydown="return alphaOnly(event);" name="nama_pengguna" class="form-control border-input" placeholder="Michael Agustian" value="<?php echo $profil['nama_pengguna']; ?>" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +204,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
                                         </div>
                                         <div class="col-md-4">
-                                            <button type="button" onclick="goBack()" class="btn btn-default btn-block btn-wd">Batal</button>
+                                            <input type="button" value="Batal" onclick="window.location.href='<?php echo base_url(); ?>profil'" class="btn btn-default btn-block btn-wd" />
                                         </div>
                                     </div>
                                     
@@ -281,10 +281,12 @@ if (!empty($this->session->userdata('id_pengguna'))) {
         });
     </script>
 
-    <!--  Back Function  -->
+    <!--  Disabled Numeric  -->
     <script type="text/javascript">
-        function goBack() {
-            window.history.back();
+        function alphaOnly(event) {
+            var key = event.keyCode;
+
+            return ((key >= 65 && key <= 90) || key == 8 || key == 32);
         }
     </script>
 

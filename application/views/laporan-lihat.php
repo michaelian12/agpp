@@ -282,7 +282,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
                                         </div>
                                         <div class="col-md-4">
-                                            <button type="button" onclick="goBack()" class="btn btn-default btn-block btn-wd">Batal</button>
+                                            <input type="button" value="Batal" onclick="window.location.href='<?php echo base_url(); ?>laporan'" class="btn btn-default btn-block btn-wd" />
                                         </div>
                                     </div>
                                     <?php } ?>
@@ -338,13 +338,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                 load_unseen_notification(); 
             }, 5000);
         });
-    </script>
-
-    <!--  Back Function  -->
-    <script type="text/javascript">
-        function goBack() {
-            window.history.back();
-        }
     </script>
 
     <!--   Core JS Files   -->
