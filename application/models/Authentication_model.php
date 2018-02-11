@@ -28,7 +28,7 @@ class Authentication_model extends CI_Model {
 	public function reset_kata_sandi($email)
 	{
 		$data = array(
-			'kata_sandi' => ''
+			'kata_sandi' => 'agpp12345'
 		);
 
 		$this->db->where('email', $email);

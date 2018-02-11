@@ -106,6 +106,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <?php } elseif ($success = $this->session->flashdata('success')) { ?>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="alert alert-dismissible alert-success">
+                                                    <?php echo $success;?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <?php } ?>
                                     <div class="row">
                                         <div class="col-md-12">

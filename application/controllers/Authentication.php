@@ -9,6 +9,7 @@ class Authentication extends CI_Controller {
 		$this->load->model('authentication_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
+		// $this->load->library('email');
 		// $this->load->library('encrypt');
 	}
 
@@ -71,30 +72,9 @@ class Authentication extends CI_Controller {
 
 			// check if the account exists
 			if (!empty($data)) {
-				// $this->load->library('email');
-
-				// $this->email->set_mailtype('html');
-				// $this->email->from($this->config->item('bot_mail'), 'Anantagraha Primaperkasa');
-				// $this->email->to('michaelagustian9@gmail.com');
-				// $this->email->subject('Setel Ulang Kata Sandi di Sistem Informasi Manajemen Risiko Proyek Anantagraha Primaperkasa');
-
-				// // $message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" >';
-				// $message = 'test';
-
-				// $this->email->message($message);
-				// // $this->email->send();
-				// if($this->email->send())
-			 //    {
-			 //    	echo 'Email sent.';
-			 //    } else {
-			 //    	show_error($this->email->print_debugger());
-			 //    }
-
-				// $this->authentication_model->reset_kata_sandi($data['email']);
-
-				$this->sendMail();
-				// $this->email();
-				// redirect('lupa');
+				$this->authentication_model->reset_kata_sandi($data['email']);
+				$this->sendMail($data['email']);
+				redirect('lupa');
 			} else {
 				// account doesn't exists
 				$this->session->set_flashdata('error', 'Akun tidak ditemukan');
@@ -109,51 +89,37 @@ class Authentication extends CI_Controller {
 		redirect(base_url());
 	}
 
-	function sendMail()
+	function sendMail($recipient)
 	{
 		$config = Array(
 	  		'protocol' => 'smtp',
-	  		'smtp_host' => 'ssl://smtp.googlemail.com',
-	  		'smtp_port' => 465,
-	  		'smtp_user' => 'michaelianzero@gmail.com', // change it to yours
-	  		'smtp_pass' => 'Professional12', // change it to yours
+	  		// 'smtp_host' => 'ssl://smtp.googlemail.com',
+	  		'smtp_host' => 'mail.anantagraha.com',
+	  		// 'smtp_port' => 465,
+	  		'smtp_port' => 587,
+	  		'smtp_user' => 'service-noreply@anantagraha.com', // change it to yours
+	  		'smtp_pass' => 'primaperkasapt', // change it to yours
 	  		'mailtype' => 'html',
-	  		'charset' => 'iso-8859-1',
-	  		// 'charset' => 'utf-8',
+	  		// 'charset' => 'iso-8859-1',
+	  		'charset' => 'utf-8',
 	  		'wordwrap' => TRUE
 		);
 
 	    $message = 'Test email';
 	    $this->load->library('email', $config);
 	    $this->email->set_newline("\r\n");
-	    $this->email->from('michaelianzero@gmail.com', 'Admin'); // change it to yours
-	    $this->email->to('michaelagustian9@gmail.com');// change it to yours
-	    $this->email->subject('Resume from JobsBuddy for your Job posting');
-	    $this->email->message($message);
+	    // $this->email->from('michaelianzero@gmail.com', 'Admin'); // change it to yours
+	    $this->email->from('service-noreply@anantagraha.com', 'service-noreply@anantagraha.com'); // change it to yours
+	    $this->email->to($recipient);// change it to yours
+	    $this->email->subject('Setel ulang kata sandi');
+	    $this->email->message('Kepada saudara diberitahukan bahwa kata sandi anda telah berhasil kami setel ulang. Berikut adalah adalah kata sandi anda: "agpp12345". Segera perbaharui kata sandi anda untuk keamanan akun. Terima kasih.');
 	    if($this->email->send())
 	    {
-	    	echo 'Email sent.';
+	    	// echo 'Email sent.';
+	    	$this->session->set_flashdata('success', 'Kata sandi baru telah dikirim ke email anda.');
 	    } else {
 	    	show_error($this->email->print_debugger());
 	    }
-	}
-
-	public function email()
-	{
-		$subject='Reset Password Akun Pelayanan PBB';
-		$message='Kepada saudara diberitahukan bahwa password anda telah berhasil kami reset. Berikut adalah adalah password anda: "pbb12345". Segera perbarui password anda untuk keamanan akun. Terima kasih.';
-		$headers = 'From: webmaster@disyanjak.com' . "\r\n" .
-    			   'Reply-To: webmaster@disyanjak.com' . "\r\n" .
-    			   'X-Mailer: PHP/' . phpversion();
-		if (mail('michaelagustian9@gmail.com',$subject,$message,$headers))
-		{
-			echo 'Email sent.';
-		} else {
-	    	// show_error($this->email->print_debugger());
-	    	echo "error";
-	    }
-		
-		// echo '<META HTTP-EQUIV="Refresh" Content="0; URL=../admin/index.php">';
 	}
 }
 ?>
