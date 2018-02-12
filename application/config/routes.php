@@ -97,7 +97,7 @@ $route['evaluasi-hapus/(:any)'] = 'evaluasi/hapus/$1';
 $route['laporan'] = 'laporan';
 $route['laporan-tambah/(:any)'] = 'laporan/tambah/$1';
 $route['laporan-lihat/(:any)'] = 'laporan/update_notifikasi/$1';
-$route['laporan-lihat'] = 'laporan/ubah';
+// $route['laporan-lihat'] = 'laporan/ubah';
 $route['laporan-lihat/(:any)/(:any)'] = 'laporan/ubah/$1/$2';
 $route['laporan-hapus/(:any)/(:any)'] = 'laporan/hapus/$1/$2';
 

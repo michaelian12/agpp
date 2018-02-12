@@ -109,7 +109,7 @@ class Risiko_model extends CI_Model {
 
 	public function get_risiko_query($id)
 	{
-		$sql = 'select r.nama_risiko, r.nilai_s, p.nama_penyebab, p.nilai_o, r.nama_kontrol, r.nilai_d, p.rpn, r.id_risiko from risiko r join penyebab p on r.id_risiko = p.id_risiko where r.id_proyek = '.$id;
+		$sql = 'select r.nama_risiko, r.nilai_s, p.nama_penyebab, p.nilai_o, r.nama_kontrol, r.nilai_d, p.rpn, r.id_risiko from risiko r join penyebab p on r.id_risiko = p.id_risiko where r.id_proyek = '.$id.' order by p.rpn desc';
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
