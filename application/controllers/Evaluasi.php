@@ -39,18 +39,51 @@ class Evaluasi extends CI_Controller {
 		}		
 	}
 
+	public function tambah_laporan($id = FALSE)
+	{
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		// $this->form_validation->set_rules('nama_risiko', 'Risiko', 'required');
+		// $this->form_validation->set_rules('nilai_s', 'Tingkat Keparahan', 'required');
+		// $this->form_validation->set_rules('nama_penyebab', 'Nama Penyebab', 'required');
+		// $this->form_validation->set_rules('nilai_o', 'Tingkat Kejadian', 'required');
+		// $this->form_validation->set_rules('nama_kontrol', 'Nama Kontrol', 'required');
+		// $this->form_validation->set_rules('nilai_d', 'Tingkat Deteksi', 'required');
+		// $this->form_validation->set_rules('rpn', 'RPN', 'required');
+		// $this->form_validation->set_rules('kategori', 'Kategori', 'required');
+		// $this->form_validation->set_rules('nama_mitigasi', 'Nama Mitigasi', 'required');
+	
+		if ($this->form_validation->run() === FALSE)
+		{
+			$data['proyek_item'] = $this->evaluasi_model->get_proyek($id);
+			$data['risiko'] = $this->evaluasi_model->get_risiko_query($id);
+			$data['form'] = Array(
+		  		'tgl_evaluasi' => $this->input->post('tgl_laporan'),
+		  		'nama_risiko' => $this->input->post('kendala'),
+		  		'nama_penyebab' => $this->input->post('penyebab'),
+		  		'nama_kontrol' => $this->input->post('deteksi')
+			);
+			$this->load->view('evaluasi-tambah', $data);
+		} else {
+			$this->evaluasi_model->set_evaluasi($id);
+			$this->session->set_flashdata('success', 'Data berhasil ditambah');
+			redirect('evaluasi');	
+		}		
+	}
+
 	public function get_penyebab_query()
 	{
 		$id_risiko = $this->input->post('id_risiko');
 		$risiko = $this->evaluasi_model->get_risiko($id_risiko);
 
-		// $efek = $this->evaluasi_model->get_efek_query($id_risiko);
-		// if (count($efek) > 0) {
-		// 	$option_efek = '';
-		// 	foreach ($efek as $efek_item) {
-		// 		$option_efek .= '<option id="'.$efek_item["id_efek"].'" value="'.$efek_item["nama_efek"].'">';
-		// 	}
-		// }
+		$efek = $this->evaluasi_model->get_efek_query($id_risiko);
+		if (count($efek) > 0) {
+			$option_efek = '';
+			foreach ($efek as $efek_item) {
+				$option_efek .= '<option id="'.$efek_item["id_efek"].'" value="'.$efek_item["nama_efek"].'">';
+			}
+		}
 
 		$penyebab = $this->evaluasi_model->get_penyebab_query($id_risiko);
 		if (count($penyebab) > 0) {
@@ -62,9 +95,9 @@ class Evaluasi extends CI_Controller {
 
 		$option_kontrol = '<option value="'.$risiko["nama_kontrol"].'">';
 
-		// echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_efek' => $option_efek, 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
+		echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_efek' => $option_efek, 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
 
-		echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
+		// echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
 	}
 
 	public function get_mitigasi_query()
@@ -134,6 +167,7 @@ class Evaluasi extends CI_Controller {
 		if ($this->form_validation->run() === FALSE)
 		{
 			$data['evaluasi_item'] = $this->evaluasi_model->get_evaluasi($id);
+			$data['proyek_item'] = $this->evaluasi_model->get_proyek($data['evaluasi_item']['id_proyek']);
 			$this->load->view('evaluasi-lihat', $data);
 		} else {
 			$this->evaluasi_model->update_evaluasi($id);

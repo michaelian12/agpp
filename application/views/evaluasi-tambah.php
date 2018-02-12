@@ -16,9 +16,11 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
     <!-- Bootstrap core CSS     -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--  JQuery UI CSS  -->
+    <link href="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
     <link href="<?php echo base_url(); ?>assets/css/animate.min.css" rel="stylesheet"/>
@@ -203,10 +205,19 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                 <?php echo form_open('evaluasi-tambah/'.$proyek_item['id_proyek']); ?>
                                 <form>
                                     <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Tanggal Evaluasi</label>
+                                                <input type="text" id="tgl_evaluasi" name="tgl_evaluasi" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" <?php if (!empty($form)) { ?> value="<?php echo $form['tgl_evaluasi']; ?>" <?php } ?> oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Risiko</label>
-                                                <input id="nama_risiko" type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" list="risk_suggestion" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                                <input id="nama_risiko" type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" list="risk_suggestion" <?php if (!empty($form)) { ?> value="<?php echo $form['nama_risiko']; ?>" <?php } ?> oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
                                                 <datalist id="risk_suggestion">
                                                     <?php 
                                                         foreach ($risiko as $risiko_item) { ?>
@@ -239,7 +250,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Penyebab</label>
-                                                <input id="nama_penyebab" type="text" name="nama_penyebab" class="form-control border-input" placeholder="Aturan red line untuk material impor" list="cause_suggestion" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                                <input id="nama_penyebab" type="text" name="nama_penyebab" class="form-control border-input" placeholder="Aturan red line untuk material impor" list="cause_suggestion" <?php if (!empty($form)) { ?> value="<?php echo $form['nama_penyebab']; ?>" <?php } ?> oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
                                                 <datalist id="cause_suggestion">
                                                 </datalist>
                                             </div>
@@ -268,7 +279,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Kontrol</label>
-                                                <input id="nama_kontrol" type="text" name="nama_kontrol" class="form-control border-input" placeholder="Hasil laporan" list="control_suggestion" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                                <input id="nama_kontrol" type="text" name="nama_kontrol" class="form-control border-input" placeholder="Hasil laporan" list="control_suggestion" <?php if (!empty($form)) { ?> value="<?php echo $form['nama_kontrol']; ?>" <?php } ?> oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
                                                 <datalist id="control_suggestion">
                                                 </datalist>
                                             </div>
@@ -503,6 +514,20 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 </body>
 
+    <!--  Date Validation  -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tgl_evaluasi').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat : 'yy-mm-dd',
+                minDate: '<?php echo $proyek_item['tgl_mulai']; ?>',
+                maxDate: '<?php echo $proyek_item['tgl_selesai']; ?>'
+            });
+        });
+    </script>
+
     <!--  Notification Function -->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -683,6 +708,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/external/jquery/jquery.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap-checkbox-radio.js"></script>

@@ -13,16 +13,23 @@ class Laporan_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function get_risiko_query($id)
+	{
+		$query = $this->db->get_where('risiko', array('id_proyek' => $id));
+		return $query->result_array();
+	}
+
 	public function set_laporan($id)
 	{
 		// laporan pekerjaan
-		$tgl_laporan_harian = date('Y-m-d');
+		// $tgl_laporan = date('Y-m-d');
+		$tgl_laporan = $this->input->post('tgl_laporan');
 		$kemajuan = $this->input->post('kemajuan');
 		$id_pekerjaan = $this->input->post('id_pekerjaan');
 
 		for ($i=0; $i < count($this->input->post('id_pekerjaan')); $i++) {
 			$data = array(
-				'tgl_laporan_pekerjaan' => $tgl_laporan_harian,
+				'tgl_laporan_pekerjaan' => $tgl_laporan,
 				'kemajuan' => $kemajuan[$i],
 				'id_pekerjaan' => $id_pekerjaan[$i]
 			);
@@ -31,7 +38,7 @@ class Laporan_model extends CI_Model {
 
 		// laporan harian
 		$data = array(
-			'tgl_laporan_harian' => $tgl_laporan_harian,
+			'tgl_laporan_harian' => $tgl_laporan,
 			'cuaca' => $this->input->post('cuaca'),
 			'kendala' => $this->input->post('kendala'),
 			'efek' => $this->input->post('efek'),
@@ -81,22 +88,26 @@ class Laporan_model extends CI_Model {
 		$id_laporan_pekerjaan = $this->input->post('id_laporan_pekerjaan');
 		$kemajuan = $this->input->post('kemajuan');
 
+		$tgl_laporan = $this->input->post('tgl_laporan');
+
 		for ($i=0; $i < count($this->input->post('kemajuan')) ; $i++) { 
 			$data = array(
+				'tgl_laporan_pekerjaan' => $tgl_laporan,
 				'kemajuan' => $kemajuan[$i]
 			);
 			$this->db->where('id_laporan_pekerjaan', $id_laporan_pekerjaan[$i]);
 			$this->db->update('laporan_pekerjaan', $data);
 		}
 
-		// laporan kendala
+		// laporan harian
 		$data = array(
+			'tgl_laporan_harian' => $tgl_laporan,
 			'cuaca' => $this->input->post('cuaca'),
 			'kendala' => $this->input->post('kendala'),
 			'efek' => $this->input->post('efek'),
 			'penyebab' => $this->input->post('penyebab'),
 			'deteksi' => $this->input->post('deteksi')
-		);;
+		);
 		$this->db->where('id_laporan_harian', $this->input->post('id_laporan_harian'));
 		$this->db->update('laporan_harian', $data);
 	}

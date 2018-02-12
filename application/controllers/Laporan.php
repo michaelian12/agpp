@@ -29,6 +29,7 @@ class Laporan extends CI_Controller {
 		{
 			$data['proyek_item'] = $this->laporan_model->get_proyek($id);
 			$data['pekerjaan'] = $this->laporan_model->get_pekerjaan_query($data['proyek_item']['id_proyek']);
+			$data['risiko'] = $this->laporan_model->get_risiko_query($id);
 			$this->load->view('laporan-tambah', $data);
 		} else {
 			$this->laporan_model->set_laporan($id);
@@ -36,6 +37,34 @@ class Laporan extends CI_Controller {
 			redirect('laporan');
 		}
 	}
+
+	// public function get_penyebab_query()
+	// {
+	// 	$id_risiko = $this->input->post('id_risiko');
+	// 	$risiko = $this->laporan_model->get_risiko($id_risiko);
+
+	// 	$efek = $this->laporan_model->get_efek_query($id_risiko);
+	// 	if (count($efek) > 0) {
+	// 		$option_efek = '';
+	// 		foreach ($efek as $efek_item) {
+	// 			$option_efek .= '<option id="'.$efek_item["id_efek"].'" value="'.$efek_item["nama_efek"].'">';
+	// 		}
+	// 	}
+
+	// 	$penyebab = $this->laporan_model->get_penyebab_query($id_risiko);
+	// 	if (count($penyebab) > 0) {
+	// 		$option_penyebab = '';
+	// 		foreach ($penyebab as $penyebab_item) {
+	// 			$option_penyebab .= '<option id="'.$penyebab_item["id_penyebab"].'" value="'.$penyebab_item["nama_penyebab"].'">';
+	// 		}
+	// 	}
+
+	// 	$option_kontrol = '<option value="'.$risiko["nama_kontrol"].'">';
+
+	// 	echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_efek' => $option_efek, 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
+
+	// 	// echo json_encode(array('return_nilai_s' => $risiko['nilai_s'], 'return_penyebab' => $option_penyebab, 'return_kontrol' => $option_kontrol, 'return_nilai_d' => $risiko['nilai_d']));
+	// }
 
 	// Read
 	public function index()
@@ -73,6 +102,7 @@ class Laporan extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
+		$this->form_validation->set_rules('tgl_laporan', 'Tanggal Laporan', 'required');
 		$this->form_validation->set_rules('kemajuan[]', 'Kemajuan', 'required');
 		$this->form_validation->set_rules('cuaca', 'Cuaca', 'required');
 		$this->form_validation->set_rules('kendala', 'Kendala', 'required');
@@ -85,6 +115,7 @@ class Laporan extends CI_Controller {
 			$data['proyek_item'] = $this->laporan_model->get_proyek($id);
 			$data['laporan_pekerjaan'] = $this->laporan_model->get_laporan_pekerjaan($id, $tgl);
 			$data['laporan_harian_item'] = $this->laporan_model->get_laporan_harian($id, $tgl);
+			$data['risiko'] = $this->laporan_model->get_risiko_query($id);
 			$this->load->view('laporan-lihat', $data);
 		} else {
 			$this->laporan_model->update_laporan();

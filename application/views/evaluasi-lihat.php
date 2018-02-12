@@ -16,9 +16,11 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
     <!-- Bootstrap core CSS     -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--  JQuery UI CSS  -->
+    <link href="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
     <link href="<?php echo base_url(); ?>assets/css/animate.min.css" rel="stylesheet"/>
@@ -169,6 +171,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                             <div class="content">
                                 <?php echo form_open('evaluasi-lihat/'.$evaluasi_item['id_evaluasi']); ?>
                                 <form>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Tanggal Evaluasi</label>
+                                                <input type="text" id="tgl_evaluasi" name="tgl_evaluasi" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" value="<?php echo $evaluasi_item['tgl_evaluasi'] ?>" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
@@ -598,6 +609,20 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 </body>
 
+    <!--  Date Validation  -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tgl_evaluasi').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat : 'yy-mm-dd',
+                minDate: '<?php echo $proyek_item['tgl_mulai']; ?>',
+                maxDate: '<?php echo $proyek_item['tgl_selesai']; ?>'
+            });
+        });
+    </script>
+
     <!--  Notification Function -->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -770,6 +795,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/external/jquery/jquery.js" type="text/javascript"></script>
+    <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap-checkbox-radio.js"></script>

@@ -9,7 +9,6 @@ class Authentication extends CI_Controller {
 		$this->load->model('authentication_model');
 		$this->load->library('session');
 		$this->load->helper('url_helper');
-		// $this->load->library('email');
 		// $this->load->library('encrypt');
 	}
 
@@ -93,14 +92,11 @@ class Authentication extends CI_Controller {
 	{
 		$config = Array(
 	  		'protocol' => 'smtp',
-	  		// 'smtp_host' => 'ssl://smtp.googlemail.com',
 	  		'smtp_host' => 'mail.anantagraha.com',
-	  		// 'smtp_port' => 465,
 	  		'smtp_port' => 587,
 	  		'smtp_user' => 'service-noreply@anantagraha.com', // change it to yours
 	  		'smtp_pass' => 'primaperkasapt', // change it to yours
 	  		'mailtype' => 'html',
-	  		// 'charset' => 'iso-8859-1',
 	  		'charset' => 'utf-8',
 	  		'wordwrap' => TRUE
 		);
@@ -108,7 +104,6 @@ class Authentication extends CI_Controller {
 	    $message = 'Test email';
 	    $this->load->library('email', $config);
 	    $this->email->set_newline("\r\n");
-	    // $this->email->from('michaelianzero@gmail.com', 'Admin'); // change it to yours
 	    $this->email->from('service-noreply@anantagraha.com', 'service-noreply@anantagraha.com'); // change it to yours
 	    $this->email->to($recipient);// change it to yours
 	    $this->email->subject('Setel ulang kata sandi');

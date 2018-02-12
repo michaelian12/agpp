@@ -21,7 +21,7 @@ class Evaluasi_model extends CI_Model {
 	public function get_risiko_query($id)
 	{
 		$query = $this->db->get_where('risiko', array('id_proyek' => $id));
-			return $query->result_array();
+		return $query->result_array();
 	}
 
 	public function get_penyebab($id)
@@ -53,7 +53,7 @@ class Evaluasi_model extends CI_Model {
 		$tgl_evaluasi = date('Y-m-d');
 
 		$data =  array(
-			'tgl_evaluasi' => $tgl_evaluasi,
+			'tgl_evaluasi' => $this->input->post('tgl_evaluasi'),
 			'nama_risiko' => $this->input->post('nama_risiko'),
 			'nilai_s' => $this->input->post('nilai_s'),
 			'nama_penyebab' => $this->input->post('nama_penyebab'),
