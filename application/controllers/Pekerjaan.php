@@ -81,14 +81,7 @@ class Pekerjaan extends CI_Controller {
 	// Delete
 	public function hapus($id)
 	{
-		// $this->pekerjaan_model->delete_pekerjaan($id);
-		if($this->pekerjaan_model->delete_pekerjaan($id))
-		{
-		   	echo 'Email sent.';
-		} else {
-		   	echo 'error log';
-		   	show_error($this->email->print_debugger());
-		}
+		$this->pekerjaan_model->delete_pekerjaan($id);
 		$this->session->set_flashdata('success', 'Data berhasil dihapus');
 		redirect('pekerjaan');
 	}

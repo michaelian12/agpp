@@ -90,10 +90,16 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Pekerjaan</p>
                     </a>
                 </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>master-risiko">
+                        <i class="ti-server"></i>
+                        <p>Data Risiko</p>
+                    </a>
+                </li>
                 <li class="active">
                     <a href="<?php echo base_url(); ?>risiko">
                         <i class="ti-alert"></i>
-                        <p>Risiko</p>
+                        <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
@@ -181,7 +187,18 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><input type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" value="<?php echo $risiko_item['nama_risiko']; ?>" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td>
+                                                        <!-- <input type="text" name="nama_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" value="<?php echo $risiko_item['nama_risiko']; ?>" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required> -->
+                                                        <select name="id_master_risiko" class="form-control border-input" oninvalid="this.setCustomValidity('Mohon pilih item dalam daftar')" oninput="setCustomValidity('')" required>
+                                                        <option value="" disabled> -- Pilih Risiko -- </option>
+                                                        <?php 
+                                                            foreach ($master_risiko as $master_risiko_item) { ?>
+                                                                <option value="<?php echo $master_risiko_item['id_master_risiko']; ?>" <?php if ($risiko_item['id_master_risiko'] == $master_risiko_item['id_master_risiko']) { ?>
+                                                                    selected
+                                                                <?php } ?>><?php echo $master_risiko_item['nama_master_risiko']; ?></option>
+                                                            <?php }
+                                                        ?>
+                                                    </td>
                                                     <td><select name="nilai_s" class="form-control border-input" oninvalid="this.setCustomValidity('Mohon pilih item dalam daftar')" oninput="setCustomValidity('')" required>
                                                         <option value="" disabled> -- Nilai Keparahan -- </option>
                                                         <option value="10"

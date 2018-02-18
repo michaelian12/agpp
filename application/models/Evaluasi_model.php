@@ -20,7 +20,9 @@ class Evaluasi_model extends CI_Model {
 
 	public function get_risiko_query($id)
 	{
-		$query = $this->db->get_where('risiko', array('id_proyek' => $id));
+		$sql = "select * from risiko r join master_risiko mr on r.id_master_risiko = mr.id_master_risiko where r.id_proyek = ".$id;
+		$query = $this->db->query($sql);
+		// $query = $this->db->get_where('risiko', array('id_proyek' => $id));
 		return $query->result_array();
 	}
 

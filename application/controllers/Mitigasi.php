@@ -71,7 +71,7 @@ class Mitigasi extends CI_Controller {
 		if (count($mitigasi) > 0) {
 			$table_row = '';
 			foreach ($mitigasi as $mitigasi_item) {
-				$table_row .= '<tr><td>'.$mitigasi_item["nama_risiko"].'</td><td>'.$mitigasi_item["nama_penyebab"].'</td><td>'.$mitigasi_item["rpn"].'</td><td>'.$mitigasi_item["kategori"].'</td><td>'.$mitigasi_item["nama_mitigasi"].'</td><td><a href="mitigasi-lihat/'.$mitigasi_item["id_mitigasi"].'"><i class="ti-eye"></i></a></td><td><a href="mitigasi-hapus/'.$mitigasi_item["id_mitigasi"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.\')"><i class="ti-trash"></i></a></td></tr>';
+				$table_row .= '<tr><td>'.$mitigasi_item["nama_master_risiko"].'</td><td>'.$mitigasi_item["nama_penyebab"].'</td><td>'.$mitigasi_item["rpn"].'</td><td>'.$mitigasi_item["kategori"].'</td><td>'.$mitigasi_item["nama_mitigasi"].'</td><td><a href="mitigasi-lihat/'.$mitigasi_item["id_mitigasi"].'"><i class="ti-eye"></i></a></td><td><a href="mitigasi-hapus/'.$mitigasi_item["id_mitigasi"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.\')"><i class="ti-trash"></i></a></td></tr>';
 			}
 			echo json_encode($table_row);
 		}

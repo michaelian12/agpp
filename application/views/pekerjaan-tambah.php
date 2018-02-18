@@ -93,9 +93,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo base_url(); ?>master-risiko">
+                        <i class="ti-server"></i>
+                        <p>Data Risiko</p>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo base_url(); ?>risiko">
                         <i class="ti-alert"></i>
-                        <p>Risiko</p>
+                        <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
@@ -221,7 +227,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                             <tbody>
                                                 <tr>
                                                     <td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required></td>
-                                                    <td><input type="number" name="bobot[]" step="0.001" min="0" max="1" class="form-control border-input" placeholder="0,014" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required></td>
+                                                    <td><input type="number" name="bobot[]" step="0.001" min="0" max="100" class="form-control border-input" placeholder="0,014" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required></td>
                                                     <td><input type="text" id="tgl_mulai_pekerjaan" name="tgl_mulai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required></td>
                                                     <td><input type="text" id="tgl_selesai_pekerjaan" name="tgl_selesai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" onkeydown="return false" required></td>
                                                     <td></td>
@@ -293,7 +299,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
             var i = 1;
             $('#tambah_entri').click(function(){
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td><td><input type="number" name="bobot[]" step="0.001" min="0" max="1" class="form-control border-input" placeholder="0,014" required></td><td><input type="text" id="tgl_mulai_pekerjaan'+i+'" name="tgl_mulai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required></td><td><input type="text" id="tgl_selesai_pekerjaan'+i+'" name="tgl_selesai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required></td><td><a type="button" id="'+i+'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="nama_pekerjaan[]" class="form-control border-input" placeholder="Land Scrapping" required></td><td><input type="number" name="bobot[]" step="0.001" min="0" max="100" class="form-control border-input" placeholder="0,014" required></td><td><input type="text" id="tgl_mulai_pekerjaan'+i+'" name="tgl_mulai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required></td><td><input type="text" id="tgl_selesai_pekerjaan'+i+'" name="tgl_selesai_pekerjaan[]" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" required></td><td><a type="button" id="'+i+'" class="btn_remove"><i class="ti-trash"></i></a></td></tr>');
 
                 $('#tgl_mulai_pekerjaan'+i).datepicker({
                     changeMonth: true,

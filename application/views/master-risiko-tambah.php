@@ -87,7 +87,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Klien</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="<?php echo base_url(); ?>proyek">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
@@ -100,7 +100,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Pekerjaan</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="<?php echo base_url(); ?>master-risiko">
                         <i class="ti-server"></i>
                         <p>Data Risiko</p>
@@ -172,58 +172,13 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                 <h4 class="title">Data Proyek</h4>
                             </div>
                             <div class="content">
-                                <?php echo form_open('proyek-tambah'); ?>
+                                <?php echo form_open('master-risiko-tambah'); ?>
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>No. SPP</label>
-                                                <input type="text" name="no_spp" class="form-control border-input" placeholder="01/SPP/NBM-AGPP/II/2017" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nilai Kontrak (Rp.)</label>
-                                                <input type="number" min="0" pattern="[0-9]" name="nilai_kontrak" id="nilai_kontrak" class="form-control border-input" placeholder="10.000.000" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Nama Proyek</label>
-                                                <input type="text" name="nama_proyek" class="form-control border-input" placeholder="Showroom Mitsubishi Medan" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Nama Klien</label>
-                                                <select name="id_klien" class="form-control border-input" oninvalid="this.setCustomValidity('Mohon pilih item dalam daftar')" oninput="setCustomValidity('')" required>
-                                                    <option value="" disabled selected> -- Pilih Klien -- </option>
-                                                    <?php 
-                                                        foreach ($klien as $klien_item) { ?>
-                                                            <option value="<?php echo $klien_item['id_klien']; ?>"><?php echo $klien_item['nama_klien'].' - ('.$klien_item['perusahaan'].')'; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tgl. Mulai</label>
-                                                <input type="text" id="tgl_mulai" name="tgl_mulai" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tgl. Selesai</label>
-                                                <input type="text" id="tgl_selesai" name="tgl_selesai" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
+                                                <label>Nama Risiko</label>
+                                                <input type="text" name="nama_master_risiko" class="form-control border-input" placeholder="Pengiriman material terlambat" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
                                             </div>
                                         </div>
                                     </div>
@@ -258,56 +213,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 
 </body>
-
-    <!--  Date Validation  -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#tgl_mulai').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat : 'yy-mm-dd',
-                minDate: 0,
-                onSelect: function (date) {
-                    var dt2 = $('#tgl_selesai');
-                    var startDate = $(this).datepicker('getDate');
-                    var minDate = $(this).datepicker('getDate');
-                    dt2.datepicker('option', 'minDate', minDate);
-                }
-            });
-            $('#tgl_selesai').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat : 'yy-mm-dd'
-            });
-        });        
-    </script>
-
-    <!--  Number Validation Format  -->
-    <!-- <script type="text/javascript">
-        // Select your input element.
-        var number = document.getElementById('nilai_kontrak');
-
-        number.onkeydown = function(e) {
-            if(!((e.keyCode > 95 && e.keyCode < 106)
-              || (e.keyCode > 47 && e.keyCode < 58) 
-              || e.keyCode == 8)) {
-                demo.initChartist();
-
-                $.notify({
-                    icon: 'ti-info-alt',
-                    message: "Please match the requested format."
-
-                },{
-                    type: 'warning',
-                    timer: 4000
-                });
-
-                return false;
-            }
-            
-        }
-    </script> -->
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js" type="text/javascript"></script>

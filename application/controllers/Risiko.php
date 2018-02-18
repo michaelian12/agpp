@@ -17,7 +17,8 @@ class Risiko extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('nama_risiko', 'Nama Risiko', 'required');
+		// $this->form_validation->set_rules('nama_risiko', 'Nama Risiko', 'required');
+		$this->form_validation->set_rules('id_master_risiko', 'Nama Risiko', 'required');
 		$this->form_validation->set_rules('nilai_s', 'Tingkat Keparahan', 'required');
 		$this->form_validation->set_rules('nama_efek[]', 'Nama Efek', 'required');
 		$this->form_validation->set_rules('nama_penyebab[]', 'Nama Penyebab', 'required');
@@ -29,6 +30,7 @@ class Risiko extends CI_Controller {
 		if ($this->form_validation->run() === FALSE)
 		{
 			$data['proyek_item'] = $this->risiko_model->get_proyek($id);
+			$data['master_risiko'] = $this->risiko_model->get_master_risiko();
 			$this->load->view('risiko-tambah', $data);
 		} else {
 			$id_risiko = $this->risiko_model->set_risiko($id);
@@ -56,7 +58,7 @@ class Risiko extends CI_Controller {
 		if (count($risiko) > 0) {
 			$table_row = '';
 			foreach ($risiko as $risiko_item) {
-				$table_row .= '<tr><td>'.$risiko_item["nama_risiko"].'</td><td>'.$risiko_item["nilai_s"].'</td><td>'.$risiko_item["nama_penyebab"].'</td><td>'.$risiko_item["nilai_o"].'</td><td>'.$risiko_item["nama_kontrol"].'</td><td>'.$risiko_item["nilai_d"].'</td><td>'.$risiko_item["rpn"].'</td><td><a href="risiko-lihat/'.$risiko_item["id_risiko"].'"><i class="ti-eye"></i></a></td><td><a href="risiko-hapus/'.$risiko_item["id_risiko"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.\')"><i class="ti-trash"></i></a></td></tr>';
+				$table_row .= '<tr><td>'.$risiko_item["nama_master_risiko"].'</td><td>'.$risiko_item["nilai_s"].'</td><td>'.$risiko_item["nama_penyebab"].'</td><td>'.$risiko_item["nilai_o"].'</td><td>'.$risiko_item["nama_kontrol"].'</td><td>'.$risiko_item["nilai_d"].'</td><td>'.$risiko_item["rpn"].'</td><td><a href="risiko-lihat/'.$risiko_item["id_risiko"].'"><i class="ti-eye"></i></a></td><td><a href="risiko-hapus/'.$risiko_item["id_risiko"].'" class="btn_remove" onclick="return confirm(\'Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.\')"><i class="ti-trash"></i></a></td></tr>';
 			}
 			echo json_encode($table_row);
 		}
@@ -68,7 +70,8 @@ class Risiko extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('nama_risiko', 'Nama Risiko', 'required');
+		// $this->form_validation->set_rules('nama_risiko', 'Nama Risiko', 'required');
+		$this->form_validation->set_rules('id_master_risiko', 'Nama Risiko', 'required');
 		$this->form_validation->set_rules('nilai_s', 'Tingkat Keparahan', 'required');
 		$this->form_validation->set_rules('nama_efek[]', 'Nama Efek', 'required');
 		$this->form_validation->set_rules('nama_penyebab[]', 'Nama Penyebab', 'required');
@@ -79,6 +82,7 @@ class Risiko extends CI_Controller {
 	
 		if ($this->form_validation->run() === FALSE)
 		{
+			$data['master_risiko'] = $this->risiko_model->get_master_risiko();
 			$data['risiko_item'] = $this->risiko_model->get_risiko($id);
 			$data['efek'] = $this->risiko_model->get_efek($id);
 			$data['penyebab'] = $this->risiko_model->get_penyebab($id);
@@ -95,17 +99,18 @@ class Risiko extends CI_Controller {
 	public function hapus($id)
 	{
 		$this->risiko_model->delete_risiko($id);
+		$this->session->set_flashdata('success', 'Data berhasil dihapus');
 		redirect('risiko');
 	}
 
-	public function hapus_efek($id)
-	{
-		$this->risiko_model->delete_efek($id);
-	}
+	// public function hapus_efek($id)
+	// {
+	// 	$this->risiko_model->delete_efek($id);
+	// }
 
-	public function hapus_penyebab($id)
-	{
-		$this->risiko_model->delete_penyebab($id);
-	}
+	// public function hapus_penyebab($id)
+	// {
+	// 	$this->risiko_model->delete_penyebab($id);
+	// }
 }
 ?>

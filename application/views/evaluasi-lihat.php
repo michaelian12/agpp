@@ -93,9 +93,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo base_url(); ?>master-risiko">
+                        <i class="ti-server"></i>
+                        <p>Data Risiko</p>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo base_url(); ?>risiko">
                         <i class="ti-alert"></i>
-                        <p>Risiko</p>
+                        <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
@@ -175,6 +181,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Tanggal Evaluasi</label>
+                                                <input type="hidden" id="nilai_kritis" value="<?php echo $proyek_item['nilai_kritis']; ?>">
                                                 <input type="text" id="tgl_evaluasi" name="tgl_evaluasi" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" value="<?php echo $evaluasi_item['tgl_evaluasi'] ?>" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
                                             </div>
                                         </div>
@@ -188,7 +195,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                 <datalist id="risk_suggestion">
                                                     <?php 
                                                         foreach ($risiko as $risiko_item) { ?>
-                                                            <option id="<?php echo $risiko_item['id_risiko']; ?>" value="<?php echo $risiko_item['nama_risiko']; ?>">
+                                                            <option id="<?php echo $risiko_item['id_risiko']; ?>" value="<?php echo $risiko_item['nama_master_risiko']; ?>">
                                                     <?php } ?>
                                                 </datalist>
                                             </div>

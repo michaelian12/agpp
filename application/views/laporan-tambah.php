@@ -93,9 +93,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo base_url(); ?>master-risiko">
+                        <i class="ti-server"></i>
+                        <p>Data Risiko</p>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo base_url(); ?>risiko">
                         <i class="ti-alert"></i>
-                        <p>Risiko</p>
+                        <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>
@@ -194,7 +200,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                             </div>
                             <div class="content">
                                 <?php echo form_open('laporan-tambah/'.$proyek_item['id_proyek']); ?>
-                                <form name="tambah_pekerjaan" id="tambah_pekerjaan">
+                                <form>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -245,7 +251,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                                 <datalist id="risk_suggestion">
                                                     <?php 
                                                         foreach ($risiko as $risiko_item) { ?>
-                                                            <option id="<?php echo $risiko_item['id_risiko']; ?>" value="<?php echo $risiko_item['nama_risiko']; ?>">
+                                                            <option id="<?php echo $risiko_item['id_risiko']; ?>" value="<?php echo $risiko_item['nama_master_risiko']; ?>">
                                                     <?php } ?>
                                                 </datalist>
                                             </div>
@@ -278,18 +284,17 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Deteksi</label>
-                                                <!-- <input type="text" name="deteksi" class="form-control border-input" placeholder="Hasil pengawasan lapangan" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required> -->
 
                                                 <input id="deteksi" type="text" name="deteksi" class="form-control border-input" placeholder="Hasil laporan" list="control_suggestion" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
                                                 <datalist id="control_suggestion">
                                                 </datalist>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>

@@ -22,8 +22,7 @@ class Laporan extends CI_Controller {
 		$this->form_validation->set_rules('kendala', 'Kendala', 'required');
 		$this->form_validation->set_rules('efek', 'Efek', 'required');
 		$this->form_validation->set_rules('penyebab', 'Penyebab', 'required');
-		$this->form_validation->set_rules('deteksi', 'Deteksi', 'required');
-
+		// $this->form_validation->set_rules('deteksi', 'Deteksi', 'required');
 	
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -108,7 +107,7 @@ class Laporan extends CI_Controller {
 		$this->form_validation->set_rules('kendala', 'Kendala', 'required');
 		$this->form_validation->set_rules('efek', 'Efek', 'required');
 		$this->form_validation->set_rules('penyebab', 'Penyebab', 'required');
-		$this->form_validation->set_rules('deteksi', 'Deteksi', 'required');
+		// $this->form_validation->set_rules('deteksi', 'Deteksi', 'required');
 	
 		if ($this->form_validation->run() === FALSE)
 		{

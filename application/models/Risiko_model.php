@@ -52,10 +52,11 @@ class Risiko_model extends CI_Model {
 	public function set_risiko($id)
 	{
 		$data =  array(
-			'nama_risiko' => $this->input->post('nama_risiko'),
+			// 'nama_risiko' => $this->input->post('nama_risiko'),
 			'nilai_s' => $this->input->post('nilai_s'),
 			'nama_kontrol' => $this->input->post('nama_kontrol'),
 			'nilai_d' => $this->input->post('nilai_d'),
+			'id_master_risiko' => $this->input->post('id_master_risiko'),
 			'id_proyek' => $id
 		);
 
@@ -107,9 +108,15 @@ class Risiko_model extends CI_Model {
 		}
 	}
 
+	public function get_master_risiko()
+	{
+		$query = $this->db->get('master_risiko');
+		return $query->result_array();
+	}
+
 	public function get_risiko_query($id)
 	{
-		$sql = 'select r.nama_risiko, r.nilai_s, p.nama_penyebab, p.nilai_o, r.nama_kontrol, r.nilai_d, p.rpn, r.id_risiko from risiko r join penyebab p on r.id_risiko = p.id_risiko where r.id_proyek = '.$id.' order by p.rpn desc';
+		$sql = 'select mr.nama_master_risiko, r.nilai_s, p.nama_penyebab, p.nilai_o, r.nama_kontrol, r.nilai_d, p.rpn, r.id_risiko from risiko r join master_risiko mr on r.id_master_risiko = mr.id_master_risiko join penyebab p on r.id_risiko = p.id_risiko where r.id_proyek = '.$id.' order by p.rpn desc';
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -142,10 +149,11 @@ class Risiko_model extends CI_Model {
 	{
 		// risiko
 		$data =  array(
-			'nama_risiko' => $this->input->post('nama_risiko'),
+			// 'nama_risiko' => $this->input->post('nama_risiko'),
 			'nilai_s' => $this->input->post('nilai_s'),
 			'nama_kontrol' => $this->input->post('nama_kontrol'),
-			'nilai_d' => $this->input->post('nilai_d')
+			'nilai_d' => $this->input->post('nilai_d'),
+			'id_master_risiko' => $this->input->post('id_master_risiko')
 		);
 
 		$this->db->where('id_risiko', $id);

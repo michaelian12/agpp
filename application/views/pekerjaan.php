@@ -90,9 +90,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo base_url(); ?>master-risiko">
+                        <i class="ti-server"></i>
+                        <p>Data Risiko</p>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo base_url(); ?>risiko">
                         <i class="ti-alert"></i>
-                        <p>Risiko</p>
+                        <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li>

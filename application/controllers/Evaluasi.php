@@ -168,6 +168,7 @@ class Evaluasi extends CI_Controller {
 		{
 			$data['evaluasi_item'] = $this->evaluasi_model->get_evaluasi($id);
 			$data['proyek_item'] = $this->evaluasi_model->get_proyek($data['evaluasi_item']['id_proyek']);
+			$data['risiko'] = $this->evaluasi_model->get_risiko_query($data['proyek_item']['id_proyek']);
 			$this->load->view('evaluasi-lihat', $data);
 		} else {
 			$this->evaluasi_model->update_evaluasi($id);

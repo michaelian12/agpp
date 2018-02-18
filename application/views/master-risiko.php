@@ -1,7 +1,6 @@
 <?php  
 // check if session is not empty
 if (!empty($this->session->userdata('id_pengguna'))) {
-    echo validation_errors();
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,11 +15,9 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
+
     <!-- Bootstrap core CSS     -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!--  JQuery UI CSS  -->
-    <link href="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
     <link href="<?php echo base_url(); ?>assets/css/animate.min.css" rel="stylesheet"/>
@@ -38,15 +35,6 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     
     <!--  JavaScript  -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
-    
-    <!--  Hide Input Number Spin Button   -->
-    <style type="text/css">
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-    </style>
 
 </head>
 <body>
@@ -87,8 +75,8 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Klien</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="<?php echo base_url(); ?>proyek">
+                <li>
+                    <a href="#">
                         <i class="ti-agenda"></i>
                         <p>Proyek</p>
                     </a>
@@ -100,7 +88,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <p>Pekerjaan</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="<?php echo base_url(); ?>master-risiko">
                         <i class="ti-server"></i>
                         <p>Data Risiko</p>
@@ -146,14 +134,14 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="proyek">Proyek</a>
+                    <a class="navbar-brand" href="#">Data Master Risiko</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-						<li>
+                        <li>
                             <a href="<?php echo base_url(); ?>keluar">
-								<i class="ti-power-off"></i>
-								<p>Keluar</p>
+                                <i class="ti-power-off"></i>
+                                <p>Keluar</p>
                             </a>
                         </li>
                     </ul>
@@ -164,86 +152,48 @@ if (!empty($this->session->userdata('id_pengguna'))) {
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Data Proyek</h4>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <h4 class="title">Daftar Master Risiko</h4>
+                                        <p class="category">Kelola data master risiko</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <a href="master-risiko-tambah" class="btn btn-info btn-fill btn-wd" style="float: right;">+ Master Risiko</a>
+                                    </div>
+                                </div>
+                                <br>
                             </div>
-                            <div class="content">
-                                <?php echo form_open('proyek-tambah'); ?>
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>No. SPP</label>
-                                                <input type="text" name="no_spp" class="form-control border-input" placeholder="01/SPP/NBM-AGPP/II/2017" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nilai Kontrak (Rp.)</label>
-                                                <input type="number" min="0" pattern="[0-9]" name="nilai_kontrak" id="nilai_kontrak" class="form-control border-input" placeholder="10.000.000" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Nama Proyek</label>
-                                                <input type="text" name="nama_proyek" class="form-control border-input" placeholder="Showroom Mitsubishi Medan" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Nama Klien</label>
-                                                <select name="id_klien" class="form-control border-input" oninvalid="this.setCustomValidity('Mohon pilih item dalam daftar')" oninput="setCustomValidity('')" required>
-                                                    <option value="" disabled selected> -- Pilih Klien -- </option>
-                                                    <?php 
-                                                        foreach ($klien as $klien_item) { ?>
-                                                            <option value="<?php echo $klien_item['id_klien']; ?>"><?php echo $klien_item['nama_klien'].' - ('.$klien_item['perusahaan'].')'; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tgl. Mulai</label>
-                                                <input type="text" id="tgl_mulai" name="tgl_mulai" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tgl. Selesai</label>
-                                                <input type="text" id="tgl_selesai" name="tgl_selesai" class="form-control border-input" placeholder="2017-11-28" onkeydown="return false" oninvalid="this.setCustomValidity('Mohon isi kolom ini')" oninput="setCustomValidity('')" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-                                </form>
-                                <?php echo form_close(); ?>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th>No.</th>
+                                    	<th>Nama Risiko</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            $nomor = 1;
+                                            for ($i=0; $i < count($master_risiko) ; $i++) { ?>
+                                                <tr>
+                                                    <td><?php echo $nomor; ?></td>
+                                                    <td><?php echo $master_risiko[$i]['nama_master_risiko']; ?></td>
+                                                    <td><a href="master-risiko-lihat/<?php echo $master_risiko[$i]['id_master_risiko']?>"><i class="ti-eye"></i></a></td>
+                                                    <td><a href="master-risiko-hapus/<?php echo $master_risiko[$i]['id_master_risiko']?>" onclick="return confirm('Anda yakin ingin menghapus data ini? Semua data yang berkaitan dengan data ini akan ikut terhapus.')"><i class="ti-trash"></i></a></td>
+                                                </tr>
+                                        <?php 
+                                                $nomor++;
+                                            } ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
-
 
         <footer class="footer">
             <div class="container-fluid">
@@ -256,64 +206,31 @@ if (!empty($this->session->userdata('id_pengguna'))) {
     </div>
 </div>
 
-
 </body>
 
-    <!--  Date Validation  -->
+    <?php if ($success = $this->session->flashdata('success')) { ?>
+    <!--  Success Message  -->
     <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#tgl_mulai').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat : 'yy-mm-dd',
-                minDate: 0,
-                onSelect: function (date) {
-                    var dt2 = $('#tgl_selesai');
-                    var startDate = $(this).datepicker('getDate');
-                    var minDate = $(this).datepicker('getDate');
-                    dt2.datepicker('option', 'minDate', minDate);
-                }
-            });
-            $('#tgl_selesai').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat : 'yy-mm-dd'
-            });
-        });        
-    </script>
-
-    <!--  Number Validation Format  -->
-    <!-- <script type="text/javascript">
-        // Select your input element.
-        var number = document.getElementById('nilai_kontrak');
-
-        number.onkeydown = function(e) {
-            if(!((e.keyCode > 95 && e.keyCode < 106)
-              || (e.keyCode > 47 && e.keyCode < 58) 
-              || e.keyCode == 8)) {
-                demo.initChartist();
-
+        $(document).ready(function() {
+            function show_message() {
                 $.notify({
                     icon: 'ti-info-alt',
-                    message: "Please match the requested format."
-
+                    message: '<?php echo $success; ?>'
                 },{
-                    type: 'warning',
-                    timer: 4000
+                    type: 'success',
+                    timer: 200
                 });
-
-                return false;
+               return false;
             }
-            
-        }
-    </script> -->
+
+            show_message();
+        });
+    </script>
+    <?php } ?>
 
     <!--   Core JS Files   -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/external/jquery/jquery.js" type="text/javascript"></script>
-    <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap-checkbox-radio.js"></script>
@@ -329,6 +246,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="<?php echo base_url(); ?>assets/js/demo.js"></script>
+
 
 </html>
 <?php } else {

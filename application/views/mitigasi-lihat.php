@@ -91,9 +91,15 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo base_url(); ?>master-risiko">
+                        <i class="ti-server"></i>
+                        <p>Data Risiko</p>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo base_url(); ?>risiko">
                         <i class="ti-alert"></i>
-                        <p>Risiko</p>
+                        <p>Identifikasi Risiko</p>
                     </a>
                 </li>
                 <li class="active">
@@ -173,7 +179,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Risiko</label>
-                                                <input type="text" name="nama_risiko" class="form-control border-input" value="<?php echo $mitigasi_item['nama_risiko']; ?>" readonly>
+                                                <input type="text" name="nama_master_risiko" class="form-control border-input" value="<?php echo $mitigasi_item['nama_master_risiko']; ?>" readonly>
                                             </div>
                                         </div>
                                     </div>
