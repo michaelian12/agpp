@@ -146,7 +146,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="proyek">Proyek</a>
+                    <a class="navbar-brand" href="proyek">Data Master Risiko</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -169,7 +169,7 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Data Proyek</h4>
+                                <h4 class="title">Data Master Risiko</h4>
                             </div>
                             <div class="content">
                                 <?php echo form_open('master-risiko-lihat/'.$master_risiko_item['id_master_risiko']); ?>
@@ -183,8 +183,16 @@ if (!empty($this->session->userdata('id_pengguna'))) {
                                         </div>
                                     </div>
 
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Simpan</button>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-block btn-info btn-fill btn-wd">Perbaharui</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" value="Batal" onclick="window.location.href='<?php echo base_url(); ?>klien'" class="btn btn-default btn-block btn-wd" />
+                                        </div>
                                     </div>
 
                                     <div class="clearfix"></div>
